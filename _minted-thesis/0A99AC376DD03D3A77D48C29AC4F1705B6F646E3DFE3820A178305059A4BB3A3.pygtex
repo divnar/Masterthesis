@@ -1,0 +1,22 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+	\PYG{c+c1}{\PYGZsh{} implementation concept derived from}
+	\PYG{c+c1}{\PYGZsh{} hannah.models.embedded\PYGZus{}vision.models and}
+	\PYG{c+c1}{\PYGZsh{} hannah.models.resnet.models.resnet}
+	
+	\PYG{n}{exits} \PYG{o}{=} \PYG{p}{[]}
+	
+	\PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range} \PYG{n}{IntScalarParameter}\PYG{p}{(}
+	\PYG{n+nb}{min}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{,}
+	\PYG{n+nb}{max}\PYG{o}{=}\PYG{l+m+mi}{8}\PYG{p}{,}
+	\PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}num\PYGZus{}internal\PYGZus{}blocks\PYGZsq{}}\PYG{p}{)}\PYG{o}{.}\PYG{n}{max}\PYG{p}{:}
+	\PYG{n}{int\PYGZus{}layer} \PYG{o}{=} \PYG{n}{capsule\PYGZus{}net}\PYG{o}{.}\PYG{n}{conv\PYGZus{}relu}\PYG{p}{(}\PYG{n}{layer\PYGZus{}input}\PYG{o}{=}\PYG{n}{layer}\PYG{p}{,}
+	\PYG{n}{out\PYGZus{}channels}\PYG{o}{=}\PYG{n}{out\PYGZus{}channels}\PYG{o}{.}\PYG{n}{new}\PYG{p}{(),}
+	\PYG{n}{kernel\PYGZus{}size}\PYG{o}{=}\PYG{n}{kernel\PYGZus{}size}\PYG{o}{.}\PYG{n}{new}\PYG{p}{(),}
+	\PYG{n}{stride}\PYG{o}{=}\PYG{n}{stride}\PYG{o}{.}\PYG{n}{new}\PYG{p}{(),}
+	\PYG{n}{groups}\PYG{o}{=}\PYG{n}{groups}\PYG{o}{.}\PYG{n}{new}\PYG{p}{())}
+	
+	\PYG{n}{exits}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n}{int\PYGZus{}layer}\PYG{p}{)}
+	\PYG{n}{layer} \PYG{o}{=} \PYG{n}{int\PYGZus{}layer}
+	
+	\PYG{n}{out} \PYG{o}{=} \PYG{n}{ChoiceOp}\PYG{p}{(}\PYG{o}{*}\PYG{n}{exits}\PYG{p}{,} \PYG{n}{switch}\PYG{o}{=}\PYG{n}{num\PYGZus{}internal\PYGZus{}blocks}\PYG{p}{)()}
+\end{Verbatim}

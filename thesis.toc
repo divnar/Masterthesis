@@ -1,0 +1,35 @@
+\babel@toc {british}{}\relax 
+\contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Background}{4}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Related Work}{4}{section.2.1}%
+\contentsline {section}{\numberline {2.2}The Target Hardware}{4}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Quantisation}{4}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Motivation}{4}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Quantisation-Aware Training}{5}{subsection.2.3.2}%
+\contentsline {subsubsection}{\nonumberline The Forward Pass}{5}{subsubsection*.3}%
+\contentsline {subsubsection}{\nonumberline The Backward Pass}{6}{subsubsection*.5}%
+\contentsline {subsection}{\numberline {2.3.3}UltraTrail QAT}{6}{subsection.2.3.3}%
+\contentsline {section}{\numberline {2.4}The Previously existing Software Framework}{7}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}HANNAH}{7}{subsection.2.4.1}%
+\contentsline {subsection}{\numberline {2.4.2}The NAS Sub-Framework}{7}{subsection.2.4.2}%
+\contentsline {subsubsection}{\nonumberline Defining Search Spaces}{7}{subsubsection*.7}%
+\contentsline {subsubsection}{\nonumberline Constraining Search Spaces}{8}{subsubsection*.9}%
+\contentsline {subsection}{\numberline {2.4.3}Hidden Markov Models and The Viterbi Algorithm}{9}{subsection.2.4.3}%
+\contentsline {section}{\numberline {2.5}Conclusion}{9}{section.2.5}%
+\contentsline {chapter}{\numberline {3}Methods and Tools}{10}{chapter.3}%
+\contentsline {section}{\numberline {3.1}The UltraTrailNet class}{10}{section.3.1}%
+\contentsline {section}{\numberline {3.2}UltraTrail Constraints}{13}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Fixed $\mathsf {CONV\mbox {-}BatchNorm\mbox {-}ReLU}$ Blocks}{14}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Channel Dimensions}{14}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Handling of Padding}{15}{subsection.3.2.3}%
+\contentsline {subsection}{\numberline {3.2.4}Handling of Depthwise Layers}{15}{subsection.3.2.4}%
+\contentsline {subsection}{\numberline {3.2.5}Implementing UltraTrail QAT}{16}{subsection.3.2.5}%
+\contentsline {subsubsection}{\nonumberline What is a custom operator?}{16}{subsubsection*.11}%
+\contentsline {subsubsection}{\nonumberline Creating a custom quantise operator}{16}{subsubsection*.13}%
+\contentsline {subsection}{\numberline {3.2.6}Significance of UltraTrailNet}{16}{subsection.3.2.6}%
+\contentsline {section}{\numberline {3.3}Designing and Constructing Search Spaces}{16}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Integrating HMM into the NAS Framework}{16}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Conclusion}{16}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Result Exploration and Analysis}{17}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Conclusion}{18}{chapter.5}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

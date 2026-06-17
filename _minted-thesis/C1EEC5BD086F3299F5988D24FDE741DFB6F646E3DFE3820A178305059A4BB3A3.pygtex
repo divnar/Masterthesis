@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+		\PYG{n}{in\PYGZus{}channels} \PYG{o}{=} \PYG{n}{layer\PYGZus{}input}\PYG{o}{.}\PYG{n}{shape}\PYG{p}{()[}\PYG{l+m+mi}{1}\PYG{p}{]}
+		
+		\PYG{n}{groups} \PYG{o}{=} \PYG{n}{in\PYGZus{}channels}
+		\PYG{n}{out\PYGZus{}channels} \PYG{o}{=} \PYG{n}{in\PYGZus{}channels}
+\end{Verbatim}

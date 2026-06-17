@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+		\PYG{c+c1}{\PYGZsh{} import at the top of ultra\PYGZus{}trail.py:	}
+		\PYG{k+kn}{from} \PYG{n+nn}{hannah.nas.ultra\PYGZus{}trail.qat} \PYG{k+kn}{import} \PYG{n}{UltraTrailSTEQuantize}
+		
+		\PYG{c+c1}{\PYGZsh{} method within UltraTrailNet class:}
+		\PYG{k}{def} \PYG{n+nf}{\PYGZus{}quantize}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n+nb}{input}\PYG{p}{):}
+		\PYG{k}{return} \PYG{n}{UltraTrailSTEQuantize}\PYG{p}{()(}\PYG{n+nb}{input}\PYG{p}{)}
+\end{Verbatim}

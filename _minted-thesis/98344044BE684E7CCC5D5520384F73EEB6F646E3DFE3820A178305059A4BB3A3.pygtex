@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+	\PYG{n}{out\PYGZus{}channels} \PYG{o}{=} \PYG{n}{IntScalarParameter}\PYG{p}{(}\PYG{n+nb}{min}\PYG{o}{=}\PYG{l+m+mi}{32}\PYG{p}{,} \PYG{n+nb}{max}\PYG{o}{=}\PYG{l+m+mi}{256}\PYG{p}{,} \PYG{n}{step\PYGZus{}size}\PYG{o}{=}\PYG{l+m+mi}{16}\PYG{p}{,}
+	\PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}out\PYGZus{}channels\PYGZsq{}}\PYG{p}{)}
+\end{Verbatim}

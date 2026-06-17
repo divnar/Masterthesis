@@ -1,0 +1,286 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{bernardo20}{article}{}
+      \name{author}{5}{}{%
+        {{hash=2fa9c0f6a980cca5e24d6c543040cce2}{%
+           family={Bernardo},
+           familyi={B\bibinitperiod},
+           given={Paul\bibnamedelima Palomero},
+           giveni={P\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=eac0abfdfac91098246395fd03dbbc02}{%
+           family={Gerum},
+           familyi={G\bibinitperiod},
+           given={Christoph},
+           giveni={C\bibinitperiod}}}%
+        {{hash=dcbcdb9646085554df0417003e76ee89}{%
+           family={Frischknecht},
+           familyi={F\bibinitperiod},
+           given={Adrian},
+           giveni={A\bibinitperiod}}}%
+        {{hash=b75104cf154490da0e41315e371615db}{%
+           family={Lubeck},
+           familyi={L\bibinitperiod},
+           given={Konstantin},
+           giveni={K\bibinitperiod}}}%
+        {{hash=61b0a1a362ad8774b9230644fec9f028}{%
+           family={Bringmann},
+           familyi={B\bibinitperiod},
+           given={Oliver},
+           giveni={O\bibinitperiod}}}%
+      }
+      \list{publisher}{2}{%
+        {Institute of Electrical}%
+        {Electronics Engineers}%
+      }
+      \strng{namehash}{c5f1c02322502952d803934501353102}
+      \strng{fullhash}{6c0ca6722854336114f8954c548f8820}
+      \strng{bibnamehash}{c5f1c02322502952d803934501353102}
+      \strng{authorbibnamehash}{c5f1c02322502952d803934501353102}
+      \strng{authornamehash}{c5f1c02322502952d803934501353102}
+      \strng{authorfullhash}{6c0ca6722854336114f8954c548f8820}
+      \field{extraname}{1}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0278-0070}
+      \field{journaltitle}{IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems}
+      \field{number}{11}
+      \field{title}{UltraTrail: A Configurable Ultralow-Power {TC-ResNet} {AI} Accelerator for Efficient Keyword Spotting}
+      \field{volume}{39}
+      \field{year}{2020}
+      \field{pages}{4240\bibrangedash 4251}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1109/TCAD.2020.3012320
+      \endverb
+    \endentry
+    \entry{bernardo25}{article}{}
+      \name{author}{4}{}{%
+        {{hash=2fa9c0f6a980cca5e24d6c543040cce2}{%
+           family={Bernardo},
+           familyi={B\bibinitperiod},
+           given={Paul\bibnamedelima Palomero},
+           giveni={P\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=bd5914c26c659afb20ea995bda08d238}{%
+           family={Schmid},
+           familyi={S\bibinitperiod},
+           given={Patrick},
+           giveni={P\bibinitperiod}}}%
+        {{hash=eac0abfdfac91098246395fd03dbbc02}{%
+           family={Gerum},
+           familyi={G\bibinitperiod},
+           given={Christoph},
+           giveni={C\bibinitperiod}}}%
+        {{hash=61b0a1a362ad8774b9230644fec9f028}{%
+           family={Bringmann},
+           familyi={B\bibinitperiod},
+           given={Oliver},
+           giveni={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{c5f1c02322502952d803934501353102}
+      \strng{fullhash}{c808a1d1aed754cb13948933a12b647f}
+      \strng{bibnamehash}{c5f1c02322502952d803934501353102}
+      \strng{authorbibnamehash}{c5f1c02322502952d803934501353102}
+      \strng{authornamehash}{c5f1c02322502952d803934501353102}
+      \strng{authorfullhash}{c808a1d1aed754cb13948933a12b647f}
+      \field{extraname}{2}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{EdgeSys '25}
+      \field{month}{03}
+      \field{title}{Compiler-aware AI Hardware Design for Edge Devices}
+      \field{year}{2025}
+      \field{pages}{31\bibrangedash 36}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1145/3721888.3722095
+      \endverb
+    \endentry
+    \entry{paul25}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=5dd8f729432078d4475585bfcf6c8d8e}{%
+           family={Palomero\bibnamedelima Bernardo},
+           familyi={P\bibinitperiod\bibinitdelim B\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{5dd8f729432078d4475585bfcf6c8d8e}
+      \strng{fullhash}{5dd8f729432078d4475585bfcf6c8d8e}
+      \strng{bibnamehash}{5dd8f729432078d4475585bfcf6c8d8e}
+      \strng{authorbibnamehash}{5dd8f729432078d4475585bfcf6c8d8e}
+      \strng{authornamehash}{5dd8f729432078d4475585bfcf6c8d8e}
+      \strng{authorfullhash}{5dd8f729432078d4475585bfcf6c8d8e}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{howpublished}{personal communication}
+      \field{year}{2025}
+    \endentry
+    \entry{qat_survey}{inproceedings}{}
+      \name{author}{1}{}{%
+        {{hash=0eb08049c69f6c6bd9af2bca0f0b79f8}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Jiaqi},
+           giveni={J\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{0eb08049c69f6c6bd9af2bca0f0b79f8}
+      \strng{fullhash}{0eb08049c69f6c6bd9af2bca0f0b79f8}
+      \strng{bibnamehash}{0eb08049c69f6c6bd9af2bca0f0b79f8}
+      \strng{authorbibnamehash}{0eb08049c69f6c6bd9af2bca0f0b79f8}
+      \strng{authornamehash}{0eb08049c69f6c6bd9af2bca0f0b79f8}
+      \strng{authorfullhash}{0eb08049c69f6c6bd9af2bca0f0b79f8}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 2025 International Symposium on Artificial Intelligence and Computational Social Sciences}
+      \field{isbn}{9798400721007}
+      \field{series}{AICSS '25}
+      \field{title}{Survey of Quantization-Aware Training (QAT) Applications in Deep Learning Quantization}
+      \field{year}{2025}
+      \field{pages}{431\bibrangedash 442}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1145/3776759.3776826
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1145/3776759.3776826
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1145/3776759.3776826
+      \endverb
+      \keyw{Deep Learning,Model Compression,Neural Network Quantization,PTQ,QAT,Quantization Strategies}
+    \endentry
+    \entry{jacob_qat}{inproceedings}{}
+      \name{author}{8}{}{%
+        {{hash=73f11c7544252601f7e8c5f614c660f2}{%
+           family={Jacob},
+           familyi={J\bibinitperiod},
+           given={Benoit},
+           giveni={B\bibinitperiod}}}%
+        {{hash=aa58f2ae95227046f2fbba114f0fb625}{%
+           family={Kligys},
+           familyi={K\bibinitperiod},
+           given={Skirmantas},
+           giveni={S\bibinitperiod}}}%
+        {{hash=31960f03389184b7f052f5b197cc9fdf}{%
+           family={Chen},
+           familyi={C\bibinitperiod},
+           given={Bo},
+           giveni={B\bibinitperiod}}}%
+        {{hash=d767e8e4d733bcf728bcdf2c193462f7}{%
+           family={Zhu},
+           familyi={Z\bibinitperiod},
+           given={Menglong},
+           giveni={M\bibinitperiod}}}%
+        {{hash=436cfd289182e9d6b0a46d79b8e91b6e}{%
+           family={Tang},
+           familyi={T\bibinitperiod},
+           given={Matthew},
+           giveni={M\bibinitperiod}}}%
+        {{hash=315c4166fc1f7cb66324a7f0d82827cd}{%
+           family={Howard},
+           familyi={H\bibinitperiod},
+           given={Andrew},
+           giveni={A\bibinitperiod}}}%
+        {{hash=c707ec5b5997dc408a14a34a8380166c}{%
+           family={Adam},
+           familyi={A\bibinitperiod},
+           given={Hartwig},
+           giveni={H\bibinitperiod}}}%
+        {{hash=6cbb997a11c6922af719c32863261918}{%
+           family={Kalenichenko},
+           familyi={K\bibinitperiod},
+           given={Dmitry},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{be1e8607db7344f1c8e395537c88d55a}
+      \strng{fullhash}{3ad38e526037fc692f33aef3160b0293}
+      \strng{bibnamehash}{be1e8607db7344f1c8e395537c88d55a}
+      \strng{authorbibnamehash}{be1e8607db7344f1c8e395537c88d55a}
+      \strng{authornamehash}{be1e8607db7344f1c8e395537c88d55a}
+      \strng{authorfullhash}{3ad38e526037fc692f33aef3160b0293}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{month}{06}
+      \field{title}{Quantization and Training of Neural Networks for Efficient Integer-Arithmetic-Only Inference}
+      \field{year}{2018}
+      \field{pages}{2704\bibrangedash 2713}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1109/CVPR.2018.00286
+      \endverb
+    \endentry
+    \entry{pytorch_ptq}{misc}{}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://docs.pytorch.org/{T}ensor{R}{T}/ts/ptq.html}}
+      \field{note}{[Accessed 10-06-2026]}
+      \field{title}{{P}ost {T}raining {Q}uantization ({P}{T}{Q}) \&\#x2014; {T}orch-{T}ensor{R}{T} --- docs.pytorch.org}
+    \endentry
+    \entry{ekutesSearchSpaces}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://ekut-es.github.io/hannah/neural-architecture-search/nas/search\_spaces/}}
+      \field{note}{[Accessed 24-04-2026]}
+      \field{title}{{S}earch {S}paces - {H}{A}{N}{N}{A}{H} --- ekut-es.github.io}
+    \endentry
+    \entry{geeksBN}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.geeksforgeeks.org/deep-learning/what-is-batch-normalization-in-deep-learning/}}
+      \field{note}{[Accessed 07-06-2026]}
+      \field{title}{{W}hat is {B}atch {N}ormalization {I}n {D}eep {L}earning? - {G}eeksfor{G}eeks --- geeksforgeeks.org}
+      \field{year}{2025}
+    \endentry
+    \entry{torchAAP1d}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://docs.pytorch.org/docs/2.12/generated/torch.nn.{A}daptive{A}vg{P}ool1d.html\#torch.nn.{A}daptive{A}vg{P}ool1d}}
+      \field{note}{[Accessed 07-06-2026]}
+      \field{title}{{A}daptive{A}vg{P}ool1d \&\#x2014; {P}y{T}orch 2.12 documentation --- docs.pytorch.org}
+    \endentry
+    \entry{torchAAP2d}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://docs.pytorch.org/docs/2.12/generated/torch.nn.{A}daptive{A}vg{P}ool2d.html\#torch.nn.{A}daptive{A}vg{P}ool2d}}
+      \field{note}{[Accessed 07-06-2026]}
+      \field{title}{{A}daptive{A}vg{P}ool2d \&\#x2014; {P}y{T}orch 2.12 documentation --- docs.pytorch.org}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

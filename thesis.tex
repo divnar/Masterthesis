@@ -1,0 +1,752 @@
+\documentclass[11pt,a4paper, open=any]{scrbook}
+
+% ------------------------------------------------
+% PAGE LAYOUT
+% ------------------------------------------------
+\usepackage[a4paper,
+            top=2.5cm,
+            bottom=2.5cm,
+            left=3cm,
+            right=3cm]{geometry}
+
+% ------------------------------------------------
+% LANGUAGE & ENCODING
+% ------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[british]{babel}
+
+% ------------------------------------------------
+% MODERN TYPOGRAPHY
+% ------------------------------------------------
+\usepackage{microtype}
+\usepackage{libertinus} 
+
+\usepackage{setspace}
+\setstretch{1.08}
+
+% ------------------------------------------------
+% COLOURS
+% ------------------------------------------------
+\usepackage{xcolor}
+\definecolor{thesisblue}{RGB}{87,155,223}
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{linkbluegray}{RGB}{110,125,150}
+
+% ------------------------------------------------
+% KOMA-SCRIPT SETTINGS (modern spacing)
+% ------------------------------------------------
+  \KOMAoptions{
+  	parskip=never,
+  	headings=normal
+  }
+  
+  \setlength{\parindent}{0pt}
+  \setlength{\parskip}{0.4\baselineskip}
+
+% ------------------------------------------------
+% BEAUTIFUL HEADINGS (modern CS style)
+% ------------------------------------------------
+\setkomafont{chapter}{\color{thesisblue}\bfseries\Huge}
+\setkomafont{section}{\color{thesisblue}\bfseries\Large}
+\setkomafont{subsection}{\color{thesisblue}\bfseries\large}
+\setkomafont{subsubsection}{\color{thesisblue}\bfseries\normalsize}
+
+% TOC entries in black
+\RedeclareSectionCommand[tocentryformat=\color{black}]{chapter}
+\RedeclareSectionCommand[tocentryformat=\color{black}]{section}
+\RedeclareSectionCommand[tocentryformat=\color{black}]{subsection}
+\RedeclareSectionCommand[tocentryformat=\color{black}]{subsubsection}
+
+
+% ------------------------------------------------
+% GRAPHICS & TABLES
+% ------------------------------------------------
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{tabularx}
+\usepackage{float}
+
+\captionsetup{
+  font=small,
+  labelfont=bf
+}
+
+% ------------------------------------------------
+% ENUMERATION
+% ------------------------------------------------
+\usepackage[inline]{enumitem}
+
+% ------------------------------------------------
+% TEXT FRAMING
+% ------------------------------------------------
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{theorems}
+
+%\newtcolorbox{thesisbox}{
+%	colback=thesisblue!4,
+%	colframe=thesisblue,
+%	boxrule=0.8pt,
+%	arc=2mm,
+%	left=6pt,
+%	right=6pt,
+%	top=6pt,
+%	bottom=6pt
+%}
+
+\newcounter{constraint}[chapter]
+\renewcommand{\theconstraint}{\thechapter.\arabic{constraint}}
+
+\newtcolorbox{constraintboxbase}[1]{%
+	enhanced,
+	before skip=16pt,
+	after skip=16pt,
+	colback=thesisblue!4,
+	colframe=thesisblue,
+	colbacktitle=thesisblue!25,
+	coltitle=black,
+	boxrule=0.8pt,
+	arc=2mm,
+	fonttitle=\bfseries\sffamily,
+	left=6pt,
+	right=6pt,
+	top=6pt,
+	bottom=6pt,
+	title={Constraint~\theconstraint: #1},
+}
+
+\newenvironment{constraintbox}[2]{%
+	\refstepcounter{constraint}%
+	\begin{constraintboxbase}{#1}\label{constr:#2}%
+	}{%
+	\end{constraintboxbase}%
+}
+% ------------------------------------------------
+% MATHS
+% ------------------------------------------------
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools, nccmath}
+
+\DeclarePairedDelimiter{\nint}\lfloor\rceil
+
+\DeclarePairedDelimiter{\abs}\lvert\rvert
+
+\usepackage{xfrac}
+
+% ------------------------------------------------
+% PYTHON CODE (beautiful listings)
+% ------------------------------------------------
+
+\usepackage{minted}
+
+%\setminted{
+%  bgcolor=codebg,
+%  fontsize=\small,
+%  linenos,
+%  breaklines,
+%  frame=single
+%}
+
+\setminted{
+	bgcolor=codebg,
+	fontsize=\small,
+	%breaklines,
+	%frame=single,
+	framesep=2mm,
+	tabsize=2,
+	fontsize=\footnotesize
+}
+
+
+\newcommand{\py}[1]{\mintinline{python}{#1}}
+
+% ------------------------------------------------
+% HYPERREF (matching colors)
+% ------------------------------------------------
+\usepackage{hyperref}
+
+\hypersetup{
+	colorlinks=false,
+	pdfborder={0 0 0.6},
+	linkbordercolor={0.43 0.49 0.7},
+	citebordercolor={0.43 0.49 0.7},
+	urlbordercolor={0.43 0.49 0.7}
+}
+% ------------------------------------------------
+% BIBLIOGRAPHY 
+% ------------------------------------------------
+\usepackage[
+  backend=biber,
+  style=numeric,
+  sorting=none,
+  doi=false,
+  isbn=false,
+  url=false
+]{biblatex}
+
+\addbibresource{references.bib}
+
+% --- citation formatting [1: 6-8]
+\DeclareFieldFormat{postnote}{#1}
+\renewcommand*{\postnotedelim}{\addcolon\space}
+
+% ------------------------------------------------
+% COPYRIGHT 
+% ------------------------------------------------
+\usepackage{ccicons}
+
+% ------------------------------------------------
+% PERSONAL COMMUNICATION CITATIONS
+% ------------------------------------------------
+\DeclareCiteCommand{\pcite}
+  {}
+  {%
+    \ifentrytype{misc}
+      {\printnames{labelname}\addspace
+       \mkbibparens{personal communication, \printdate}}
+      {\usebibmacro{cite}}
+  }
+  {}
+  {}
+
+% hide personal communication entries from bibliography
+\defbibcheck{pc}{
+  \iffieldequalstr{howpublished}{personal communication}
+    {\skipentry}
+    {}
+}
+
+\setmintedinline{bgcolor=codebg}
+\usepackage[T1]{fontenc} 
+
+% ------------------------------------------------
+% TITLE INFO 
+% ------------------------------------------------
+\title{Hardware-Aware Neural Architecture Search for Video Capsule Endoscopy}
+\author{Divya Schäfer}
+\date{\today}
+
+% ------------------------------------------------
+\begin{document}
+	
+% ------------------------------------------------
+% TITLE PAGE (WSI / Computer Science)
+% ------------------------------------------------
+
+\begin{titlepage}
+	\begin{center}
+		
+		{\LARGE University of T\"ubingen}\\[0.3cm]
+		{\large Faculty of Science}\\
+		{\large Wilhelm-Schickard Institute for Computer Science (WSI)}\\[3.5cm]
+		
+		{\huge Master's Thesis in Computer Science}\\[1.8cm]
+		
+		{\Huge\bfseries Hardware-Aware Neural Architecture\\[0.35em] Search for Capsule Endoscopy}\\[1.5cm]
+		
+		{\Large Divya Schäfer}\\[0.5cm]
+		
+		{\large \today}\\[2cm]
+		
+		{\small\bfseries Reviewers}\\[0.3cm]
+		
+		\parbox{7cm}{
+			\begin{center}
+				{\large Prof. Dr. Oliver Bringmann}\\
+				(Head of the Embedded Systems Chair)\\[0.5em]
+				{\footnotesize
+					Wilhelm-Schickard Institute for Computer Science\\
+					University of T\"ubingen}
+		\end{center}}
+		\hfill
+		\parbox{7cm}{
+			\begin{center}
+				{\large Prof. Dr.-Ing. Thomas Küstner}\\
+				(Head of the MIDAS Laboratory)\\[0.5em]
+				{\footnotesize
+					Department of Radiology\\
+					University Hospital of T\"ubingen}
+			\end{center}
+		}\\[1.2cm]
+		
+		{\small\bfseries Supervisor}\\[0.1cm]
+		
+		\parbox{14cm}{
+			\begin{center}
+			Moritz Reiber\\[0.5em]
+				{\footnotesize
+					Wilhelm-Schickard Institute for Computer Science\\
+					University of T\"ubingen}
+		\end{center}}
+		
+	\end{center}
+	
+\vfill
+
+
+\end{titlepage}
+
+%\maketitle
+\tableofcontents
+
+% ------------------------------------------------
+\chapter{Introduction}
+
+\chapter{Background}\label{ch:2}
+
+\section{Related Work}
+
+\section{The Target Hardware}
+The target platform deploys an UltraTrail low-power neural network accelerator developed for edge devices by Paul Palomero Bernardo and his colleagues at the University of Tübingen, Germany. \cite{bernardo20}, \cite{bernardo25}. With the aim of streamlining computation across a range of temporal convolutional and residual networks, the design of the accelerator is based on a fixed workflow made up of a convolutional or linear layer, optionally followed by additional operations consisting of batch normalisation, a ReLU activation function and global average pooling, in that order \cite[6]{bernardo20}.
+
+The computations pertaining to the convolution or linear operators are performed by a MAC (Multiply-Accumulate) array of dimension $DIM^2$, such that: 
+
+\begin{equation}\label{eq_dim}
+	DIM \in \{2^k \,|\, k \in \mathbb{N}_{0\leqslant k \leqslant 4} \}
+\end{equation}
+
+holds true. Thus, the set of valid values for $DIM$ is $\{1,2,4,8,16\}$.
+
+The feature maps are unrolled and each in-channel drawn from a feature memory unit (FMEM) is multiplied by its corresponding weight accessed from the weight memory (WMEM) and added to its respective intermediate sum, which is then updated and stored in the LMEM (local memory unit). The value for each unrolled \texttt{out-channel} is thus produced by summing up the product of each \texttt{in-channel} with the weight stored for the corresponding \texttt{(in-channel, out-channel)} pair stored in the two-dimensional MAC array. The post-convolutional operations (batch-normalisation, ReLU and average pooling) are executed by an Output Processing Unit (OPU) \cite[6-8]{bernardo20}, \pcite{paul25}. %A distributed memory ensemble consisting of  a weight memory unit (WMEM), a bias memory (BMEM) and feature memory units completes the architecture \cite[6-8]{bernardo20}, \pcite{paul25}.
+
+A crucial mechanism employed by the UltraTrail accelerator to ensure efficient computation is quantisation, which we turn our attention to in the next section.
+
+
+\section{Quantisation}
+\subsection{Motivation}
+Edge devices, such as the endoscopy capsule, need to make complex computations in time-constrained circumstances and with access to limited memory capacity. Quantisation is a mechanism through which computationally expensive floating point inputs are converted into integers, so as to enable efficient computation with minimal loss of accuracy.
+
+Of the available quantisation techniques, two are most prominent and commonly used: Post-Training Quantisation (PTQ) and Quantisation-Aware Training (QAT) \cite[431]{qat_survey}, \cite{jacob_qat}. 
+PTQ is applied at inference time to convert (typically 32-bit) floating point values to integers (usually of 8-bits) \cite{pytorch_ptq}. However, applying quantisation exclusively at inference time can lead to a significant loss of accuracy, if the weights computed during training have only seen continuous floating point values. QAT addresses this inadequacy by applying a \textit{fake quantiser} on the inputs of such operations that will be quantised to integers using PTQ. We will focus on QAT in this thesis, since it is this quantisation technique that we implemented and that is relevant to NAS. In the following section we shall see what a fake quantiser is, how QAT is applied and why it helps prevent accuracy degradation caused by quantisation during inference.
+
+\subsection{Quantisation-Aware Training}\label{sec:qat}
+The goal of QAT is to train a model and update its weights under circumstances that mimic quantisation at inference time, while minimising the effect of quantisation on prediction accuracy. The central piece of QAT is a fake quantisation module, which consists of two major operations:
+
+\begin{enumerate*}[label=(\roman*)]
+	\item \texttt{quantise}, and
+	\item \texttt{dequantise}
+	
+\end{enumerate*}.
+
+These two operations are applied in the forward pass, while in the backward pass, \textit{Straight Through Estimation} (STE) is applied, which means that the input is allowed to pass through without any effect on the gradient of the function. In this section, we will look at QAT at a general level, while in the next section we shall turn our attention to the specific UltraTrail-compatible version of QAT.
+
+\subsubsection{The Forward Pass}\label{subsec:fwd}
+The first operation that is applied during the forward pass is \texttt{quantise}, and it depends on four variables: the original, unquantised input $x \in \mathbb{R}$, the scaling factor $s \in \mathbb{R}$, the zero-point $z \in \mathbb{R}$, as well as the target number of bits, $n \in \mathbb{N}$. The input is centred by subtracting the zero-point from it and then scaled by $s$. The resulting value is rounded.
+
+\begin{equation}
+	r = \nint[\bigg]{\frac{(x - z)}{s}}
+\end{equation}
+
+In order to prevent outliers from distorting the mapping of quantised values, the new integer values are clipped to within a range permitted by $n$ bits, i.e. between $-2^{n-1}$ and $2^{n-1} - 1$.
+
+\begin{equation}
+	q = \text{min}(\text{max}(r, -2^{n-1}), 2^{n-1}-1)
+\end{equation}
+
+After quantisation, the resulting integer is converted back to a float value via the \texttt{dequantise} operation.
+
+\begin{equation}
+	\hat{x} = q \cdot s + z
+\end{equation}
+
+Essentially, \texttt{dequantise} reverses the scaling by multiplying $q$ by $s$ and then adding back the zero-point, $z$\cite[433]{qat_survey}. But it does not reverse the rounding and clipping operations. Thus, in general, $\hat{x}  \neq x$ holds. This incomplete reversal of the \texttt{quantise} operation applied to quantised inputs results in a new set of float values that are discrete and clipped within a limited range determined by the number of bits, $n$. Since the model will have to work with discrete values (integers) at inference time, the aim of QAT is to discretise inputs during training so that model weights are optimised to make predictions based on such inputs, while minimising any degradation of accuracy by still using floats.
+
+A further piece of complexity is added in the case of networks that use batch-normalisation. At inference time, normalisation is `folded' into the computation of the convolution or linear layer, which incudes quantisation. This should be simulated during training by scaling the layer's weights and biases by the batch mean and variance. \cite[2709]{jacob_qat}.
+
+\subsubsection{The Backward Pass}\label{subsec:bckwd}
+We noted in the previous subsection (\ref{subsec:fwd}) that during training, QAT applies the scaling, rounding and clipping the inputs. However, since the rounding and clipping operations are not differentiable, the identity function is applied to the inputs instead of differentiating them. Let $\mathcal{I}$ represent the identity function and $x$ be any input. Then, it follows that:
+
+\begin{equation}
+	\frac{\partial{\mathcal{I}(x)}}
+	{\partial{x}} = 1
+\end{equation}
+
+The upstream gradients are multiplied by 1 and hence are passed to the next node of the computation graph unchanged.
+
+\subsection{UltraTrail QAT}
+The UltraTrail requires a specific, streamlined architecture based on \texttt{Conv-BN-Relu} blocks for compatibility. Based on this requirement, Palomero Bernardo et al. specify the precise workflow that fake-quantisation in the forward pass needs to follow:
+
+\begin{enumerate}
+	\item First, the weights fed to the convolution or linear operator must be quantised.
+	\item The bias is quantised and added to the output of the convolution.
+	\item Finally, the output of the activation function that is applied at the end of the \texttt{Conv-BN-Relu} layer is quantised.
+\end{enumerate}
+
+For the UltraTrail quantiser, the zero-point $z$ is taken to be 0, and can thus be left out of the computation. The scaling variable $s$ is specified to be $\sfrac{1}{2^{n-1}}$. Taken together, the quantiser operator proposed by Palomero Bernardo et al. can be expressed as follows:
+
+\begin{align*}
+	r = \nint[\bigg]{\frac{x}{\sfrac{1}{2^{n-1}}}}
+	= \nint[\big]{x \cdot 2^{n-1}}
+\end{align*}
+
+\begin{equation}
+   q = \text{min}(\text{max}(r, -2^{n-1}), 2^{n-1}-1)
+\end{equation}
+
+Finally, the dequantise operation is applied to $q$:
+
+\begin{equation}
+	\hat{x} = \frac{q}{2^{n-1}}
+\end{equation}
+
+In the backward pass, STE is employed to ensure a smooth flow of gradients.
+
+\section{The Previously existing Software Framework}
+\subsection{HANNAH}
+HANNAH (Hardware Accelerator and Neural Network searcH) is a Python-based coding framework for hardware accelerator design and hardware-aware neural networks developed at the Chair of Embedded Systems at the University of Tübingen, Germany. HANNAH contains a sub-framework for supporting Neural Architecture Searches. In this section, a few of the most salient aspects of the NAS sub-framework as well as other relevant portions of HANNAH will be briefly described. The tools and code discussed in this section have been programmed previously by members of the Chair of Embedded Systems, and not by the author of this thesis.
+
+\subsection{The NAS Sub-Framework}
+\subsubsection{Defining Search Spaces}
+A Neural Architecture Search begins with creating a \textbf{search space}. A search space is a Directed Acyclic Graph consisting of nodes that represent input or weight tensors as well as operations conducted on these tensors such as 2D-Convolution, ReLU or quantization. The directed edges between these nodes represent the flow of data. \cite{ekutesSearchSpaces}. Functionally, the construction of search spaces enables us to define the range of possible values the hyperparameters of the target neural networks may assume. Specifically, these hyperparameters include the number of layers in the network, possible kernel sizes, stride lengths and channel dimensions. 
+
+HANNAH's NAS framework supports the definition of valid hyperparameter values for search spaces via various kinds of parameter expressions. Two of the most important of these are \py{IntScalarParameter} and \py{CatagoricalParameter}. The former is used to define ranges of integer values and has the following signature:
+
+\begin{minted}{python}
+	IntScalarParameter(
+	min: Union[int, IntScalarParameter],
+	max: Union[int, IntScalarParameter],
+	step_size: int = 1,
+	name: Optional[str] = "",
+	rng: Optional[Union[np.random.Generator, int]] = None
+	)
+\end{minted}
+Typically, IntScalarParameters are used to define hyperparameters that have a large number of possible integer values within a given range, such as channel shapes. An example usage would be as follows:
+
+\begin{minted}{python}
+	out_channels = IntScalarParameter(min=32, max=256, step_size=16,
+	name='out_channels')
+\end{minted}
+
+The parameter expression \py{CatagoricalParameter}, on the other hand, is used to define a discrete number of valid choices for a given parameter. Its signature is as follows:
+
+\begin{minted}{python}
+	CategoricalParameter(
+	choices: Sequence[Any],
+	name: Optional[str] = "",
+	rng: Optional[Union[np.random.Generator, int]] = None
+	)
+\end{minted}
+Typical use cases for \py{CatagoricalParameter} include the definition of valid values for \py{kernel_size} and \py{stride} or \py{groups}. For instance, values allowed for \py{kernel_size} may be defined as follows:
+
+\begin{minted}{python}
+	kernel_size = CategoricalParameter(name='kernel_size', choices=[1, 3, 5])
+\end{minted}
+
+The parameterisation tools described thus far enable the definition of node-level hyperparameters such as kernel size, stride and number of out-channels. However, it is often desirable to render graph-level structures as searchable parameters as well. For instance, we may want our search space to include networks with varying numbers of layers or we may wish to alternate the choice of operations at certain layers. In HANNAH, creating branches of the search graph itself can be implemented using the \py{ChoiceOp}. This is a node that defines a choice of two or operations, exactly one of which will be chosen per network at execution time. This allows for the creation of alternate paths in the search space graph \cite{ekutesSearchSpaces}. An example use case is varying the number of layers in the search space. An example realisation is as follows:
+
+\begin{minted}{python}
+	# implementation concept derived from 
+	# hannah.models.embedded_vision.models and   
+	# hannah.models.resnet.models.resnet
+	
+	exits = []
+	
+	for i in range IntScalarParameter(
+	min=3,
+	max=8, 
+	name='num_internal_blocks').max:
+	int_layer = capsule_net.conv_relu(layer_input=layer,
+	out_channels=out_channels.new(),
+	kernel_size=kernel_size.new(),
+	stride=stride.new(),
+	groups=groups.new())
+	
+	exits.append(int_layer)
+	layer = int_layer
+	
+	out = ChoiceOp(*exits, switch=num_internal_blocks)()
+\end{minted}
+
+\subsubsection{Constraining Search Spaces}\label{subsec:con}
+Even carefully designed search spaces may allow for the creation of networks with parameters that could lead to incorrect or inefficient behaviour, or that may be incompatible with the target hardware platform. Weeding out such networks after search completion is cumbersome, computationally wasteful and error-prone. Instead, we need a mechanism to build constraints into our search space, so that every network explored conforms to our requirements.
+
+HANNAH's NAS framework provides a random-walk constraint solver that enables us to do exactly this. The \py{init} method, which defines the construction of an object belonging to the\\ \py{RandomWalkConstraintSolver} class, is as follows:
+
+\begin{minted}{python}
+	class RandomWalkConstraintSolver:
+	def __init__(self, max_iterations=5000) -> None:
+	self.max_iterations = max_iterations
+	self.constraints = None
+	self.solution = None
+\end{minted}
+
+The random-walk constraint solver is a greedy solver that uses random jumps to improve its search space exploration. It thus employs a simple solving mechanism that may not be suitable for very complex constraint spaces, but is usually sufficient for our purposes.
+
+Constraints can be defined using the \py{cond()} method for the hyperparameters of every operator decorated with \py{@parametrize}, such as \py{Conv1d}, \py{Conv2d} and \py{Linear}. For instance, the following code snippet shows how a search space can be constrained so as to ensure that only valid kernel sizes are chosen at every layer of all networks sampled during a NAS.
+
+\begin{minted}{python}
+	# instantiate parameterised operator
+	conv = Conv2d(stride=stride, dilation=dilation, groups=groups)
+	
+	# define constraint on the operator using cond() method 
+	conv.cond(kernel_size <= input_shape)
+\end{minted}
+
+All the constraints pertaining to the same operator are collected into a list and passed on to the \py{RandomWalkConstraintSolver}, which then attempts to find a solution that satisfies all these constraints.
+
+
+\subsection{Hidden Markov Models and The Viterbi Algorithm}
+
+\section{Conclusion}
+
+
+\chapter{Methods and Tools}
+
+\section{The UltraTrailNet class}\label{sec:utn}
+Our purpose in programming the \py{UltraTrailNet} class is to provide pre-fabricated blocks of code that can be customised within a constrained space to instantiate layers of a NAS search space. We used the constraint solving system described in the previous chapter (Chapter \ref{ch:2}) to implement constraints that ensure adherence to the requirements of the target hardware platform, as well as to proscribe incorrect network behaviour. 
+
+The constructor (\py{init} method) of the \py{UltraTrailNet} class is as follows:
+
+\begin{minted}{python}
+	DIMS = {1,2,4,8,16} # MAC-array dimension = 2^k, k <= 4
+	
+	class UltraTrailNet:
+	def __init__(self, initial_input, hardware_dim=8):
+	self.initial_input = initial_input
+	self.hardware_dim = hardware_dim
+	assert hardware_dim in DIMS, "hardware_dim must be in DIMS = {1,2,4,8,16}"	
+\end{minted}
+
+As can be seen, an \py{UltraTrailNet} instance can be defined with an initial input (\py{initial_input}) and a hardware dimension (\py{hardware_dim}). The former enables us to enforce conditions specific to the input layer. For example:
+
+\begin{minted}{python}
+	is_original_input = layer_input is self.initial_input
+	if is_original_input:
+	groups = 1
+\end{minted}
+
+The other argument \py{hardware_dim} represents a single row or column dimension of a square MAC (Multiply-and-Accumulate) array. This is necessary for compatibility with the target hardware platform. The requirements of the target hardware and the implementation of constraints required for compliance with it will be discussed in greater detail in the next chapter.
+
+The \py{UltraTrailNet} class also contains the following methods:\py{adaptive_avg_pooling}, \py{linear}, \py{conv_relu}, \py{ depthwise_conv_relu} and\\ \py{depthwise_separable_conv_relu}.
+
+
+\begin{itemize}[
+	label={},
+	parsep=0pt,
+	partopsep=0pt,
+	itemsep=16pt
+	]
+	\item \py{_quantize}: This method is intended for internal use and calls the \py{ULtraTrailSTEQuantize()} class, which inherits from the \py{Requantize} class of \py{hannah.nas.functional_operators.py} and implements a fake quantiser.
+	
+	\begin{minted}{python}
+		# import at the top of ultra_trail.py:	
+		from hannah.nas.ultra_trail.qat import UltraTrailSTEQuantize
+		
+		# method within UltraTrailNet class:
+		def _quantize(self, input):
+		return UltraTrailSTEQuantize()(input)
+	\end{minted}
+
+	
+	\item \py{_conv}: Also intended for internal use, this method forms the central node through which all convolution operations must pass, since it implements the constraints necessary for correct network design as well as compliance with the target AI accelerator (see Section \ref{sec:con}). It also calls either the \py{Conv1d} or the \py{Conv2d} classes from \py{hannah.nas.functional_operators} based on the value passed for the argument \py{conv_dim}. If \py{_conv} is called with \py{conv_dim=1}, \py{Conv1d} is called, else \py{Conv2d} is called. The default value of \py{conv_dim} is 2. The \py{_conv} method also takes in a number of other arguments that are used to parameterise the convolution, such as \py{kernel_size}, \py{stride} and \py{groups}. The full signature of the \py{_conv} method is as follows:
+	
+	\begin{minted}{python}
+		def _conv(self,
+		layer_input,
+		out_channels,
+		kernel_size,
+		stride,
+		groups=1,
+		dilation=1,
+		conv_dim=2,
+		depthwise=False):
+	\end{minted}
+	
+	\item \py{batch_norm}: As a network trains over multiple layers, its input distribution tends to adapt more strongly to the training dataset and it vagaries, even while the conditional distribution of the input with respect to the true output remains unchanged. By adjusting the input values of each batch to its respective mean and variance, batch normalisation prevents overfitting of the model to the training dataset and helps aid faster convergence towards the target function \cite{geeksBN}. Currently, \py{UltraTrailNet} is equipped with a basic implementation of batch normalisation that calls the \py{BatchNorm} class from \py{hannah.nas.functional_operators}:
+	
+	\begin{minted}{python}
+		@scope
+		def batch_norm(self, layer_input):
+		# https://stackoverflow.com/questions/4488744/ 
+		# pytorch-nn-functional-batch-norm-for-2d-input
+		n_channels = layer_input.shape()[1]
+		running_mu = Tensor(name='running_mean', shape=(n_channels,),
+		axis=('C',))
+		running_std = Tensor(name='running_std', shape=(n_channels,),
+		axis=('C',))
+		return BatchNorm()(layer_input, running_mu, running_std)
+	\end{minted}
+	
+	
+	This implementation is sufficient for the purposes of approximating the effects of batch normalisation during NAS. However, it does not adhere to the constraints imposed by the target AI architecture \cite[3-4]{bernardo20}. Implementing a hardware-compliant version would be complex and require introducing fairly significant modifications to HANNAH, yet would make minimal difference to the overall efficacy of NAS. We therefore arrived at the conclusion that it would be more efficient to forgo the implementation of a hardware-aware batch normalisation method within \py{UltraTrailNet} for the purposes of this thesis.
+	
+	\item \py{relu}: This method calls the \py{Relu} class from \py{hannah.nas.functional_operators} and applies the \texttt{ReLU} activation to the input. Mathematically, \texttt{ReLU} maps any input less than zero to zero, while in all other cases, the input is mapped to itself.
+	
+	\begin{equation}
+		\text{ReLU}(x) = 
+		\begin{cases}
+			0, & \text{if } x < 0\\
+			x, & \text{otherwise}
+		\end{cases}
+	\end{equation}
+	
+	The purpose of activation functions, in general, is to help a model learn non-linear functions. We use the \texttt{ReLU} activation in \py{UltraTrailNet} for the hidden (internal) layers because of its compatibility with the target AI accelerator.
+	
+	\item \py{adaptive_avg_pooling}: This method uses \py{AdaptiveAvgPooling} from \py{functional_operators.py}, which serves as a flattening layer. It does so by calling \py{torch.nn.functional}'s methods for adaptive average pooling with an \py{output_size} of $(1,1)$. This is read by \py{torch.nn.functional} as an output size of 1 in the case of \py{adaptive_avg_pooling1d} (\cite{torchAAP1d}) or as $(1,1)$  in the case of \py{adaptive_avg_pooling2d} \cite{torchAAP2d}. The output produced by \py{adaptive_avg_pooling} is an array composed of one output unit (or pixel) per input feature map (or \texttt{in-channel}).
+	
+	
+	\item \py{linear}: This method applies the \py{Linear} class from \py{torch.nn.functional} to implement a linear operator, which is a special kind of convolution with \py{kernel_size=1} and \py{stride=1}. In image classification CNNs, the last layer is typically a fully-connected or linear layer, and although the method \py{linear} can be inserted anywhere in a network, it has been programmed specifically with this use-case in mind. The arguments of \py{linear} include a boolean flag \py{is_last}, with a default value of \py{True}, and a warning is issued in case this flag is set to \py{False}.
+	
+	\begin{minted}{python}
+		if not is_last:
+		warnings.warn("WARNING: Either a linear layer is not the\
+		last layer or the is_last flag is incorrectly set.")
+	\end{minted}
+	
+	As we shall see in the following section, knowing the position of a layer is essential for the correct application of constraints, both in the case of regular convolutional layers as well as for linear layers.
+	
+	\item \py{conv_relu}: This is a block construction method, whose signature is as follows:
+	
+	\begin{minted}{python}
+		@scope
+		def conv_relu(
+		self,
+		layer_input,
+		out_channels,
+		kernel_size,
+		stride,
+		groups,
+		dilation=1,
+		conv_dim=2,
+		bn=False,
+		depthwise=False):
+	\end{minted}
+	
+	As a block constructor, \py{conv_relu} calls other \py{UltraTrailNet} methods that are responsible for implementing atomic operations. First, it calls the \py{_conv} method, passing on all its own arguments to \py{_conv}, except for the boolean flag \py{bn}. Calling \py{_conv} ensures that all necessary parameter constraints are imposed on the layer. If \py{bn=True}, it calls the \py{batch_norm} method to insert a batch normalisation operator immediately following the convolution operation, and then finally, it calls \py{relu} to apply the \texttt{ReLU} activation on the output of \py{batch_norm}, in case \py{bn=True} or otherwise to the output of \py{_conv} itself.
+	
+		\item \py{depthwise_conv_relu}: This method constructs a depthwise convolution layer, which is a convolution layer in which the dimensions of both the \texttt{in-channels} as well as the \texttt{out-channels} must equal the number of groups. The \py{depthwise_conv_relu} method calls  \py{_conv} with \py{depthwise=True}, and the \py{_conv} method enforces the definitional constraint governing depthwise layers as follows: 
+	
+	\begin{constraintbox}{Depthwise Layers}{eq_dw}
+		$|\text{channels}_{in}| = |\text{channels}_{out}| = |\text{groups}|$
+	\end{constraintbox}	
+	
+	This constraint is enforced within the dedicated method \py{depthwise_conv_relu} as follows:
+	
+	\begin{minted}{python}
+		in_channels = layer_input.shape()[1]
+		
+		groups = in_channels
+		out_channels = in_channels
+	\end{minted}
+	
+	After fixing the values of \py{in_channels}, \py{out_channels} and groups, \py{depthwise_conv_relu} calls the \py{_conv}, so that all other constraints that must apply to all convolution layers is applied to the depthwise layer as well.
+	
+	\item \py{depthwise_separable_conv_relu}: Depthwise-separable layers are compound layers composed of one depthwise convolution layer followed by a piecewise convolution layer, which is a $1\times 1$ convolutional layer with \py{kernel_size=1}, \py{stride=1} and \py{groups=1}. Taken together, depthwise-separable convolution combines the benefits of a layer in which each output pixel is influenced by one whole input feature map with those of an additional layer in which each output feature is influenced by exactly one corresponding input pixel from each feature map. At the same time, it is computationally cheaper than most other grouped convolutions. In \py{UltraTrailNet}, the method \py{depthwise_separable_conv_relu} calls \py{depthwise_conv_relu} for the first, depthwise layer and following that, it calls \py{conv_relu} for the second, pointwise layer with the arguments \py{kernel_size=1}, \py{stride=1} and \py{groups=1}.
+\end{itemize}
+
+As is clear from the above description of the various methods of the \py{UltraTrailNet} class, pre-fabricated blocks like \py{conv_relu} and \py{depthwise_conv_relu} call the \py{conv} method, which applies the constraints necessary for compatibility with the target AI accelerator. The \py{linear} method, on the other hand, applies constraints on its own. In the next section, we shall examine the constraints necessary for compliance with the UltraTrail AI accelerator as well as their implementation in \py{UltraTrailNet} in greater detail.
+
+
+\section{UltraTrail Constraints}\label{sec:con}
+Designing software for deployment on specific target platforms necessitates ensuring adherence to the constraints imposed by the target hardware. In the present context, we wish to design neural architectures via NAS that are guaranteed to conform to the constraints and specifications of the target platform. Rather than running searches over spaces that include all sorts of architectures\textemdash  many of which may not conform to the specifications of the target hardware\textemdash our goal should be to ensure that searches are conducted within a constrained design space of architectures that conform to the constraints imposed by the target hardware platform.
+
+\subsection{Fixed $\mathsf{CONV\mbox{-}BatchNorm\mbox{-}ReLU}$ Blocks}\label{constraint_fixed_blocks}
+The need for fixed blocks consisting of a convolution operator followed by batch normalisation and finally applying a ReLU activation ($\mathsf{CONV\mbox{-}BatchNorm\mbox{-}ReLU}$) follows directly from the fixed workflow design of the UltraTrail target hardware. 
+
+We can summarise this constraint as follows:
+
+\begin{constraintbox}{Fixed Layers}{fix}
+	Each convolutional layer must consist of fixed $\mathsf{CONV\mbox{-}BatchNorm\mbox{-}ReLU}$ blocks.
+\end{constraintbox}
+
+In section \ref{sec:utn}, we have seen that the \py{UltraTrailNet} class contains a \py{conv_relu} method that implements such a block.
+
+\subsection{Channel Dimensions}\label{constraint_dim}
+The number of \texttt{in-channels} to and \texttt{out-channels} from every layer must each be multiples of $DIM$, where $DIM$ is the number of MAC-units in a single row or column of the UltraTrail AI Accelerator's lone MAC-array. This constraint follows from the fact that the MAC-Array iteratively proceses $DIM$ number of unrolled \texttt{in-channels} to compute the output of $DIM$ unrolled \texttt{out-channels} at a time.
+
+This constraint is implemented within the \mintinline[]{python}|_conv| method \mintinline[]{python}|UltraTrailNet| class.
+
+Thus, for each layer's outgoing channels, we have:
+
+\begin{constraintbox}{Out-Channel Dimensions}{out}
+	The number of \texttt{out-channels} from each layer must be a multiple of $DIM$.
+\end{constraintbox}
+
+The above constraint is implemented as follows:\\
+
+\mintinline{python}|conv.cond(out_channels % self.hardware_dim == 0)|
+
+%\begin{minted}{python}
+%	conv.cond(out_channels % self.hardware_dim == 0)
+%\end{minted}
+
+
+And similarly for \texttt{in\_channels}:
+
+
+\begin{constraintbox}{In-Channel Dimensions}{in}
+	The number of \texttt{in-channels} to each layer must be a multiple of $DIM$.
+\end{constraintbox}
+
+Once we ensure that the number of \texttt{out-channels} from layer $l$ is a multiple of $DIM$, the number of \texttt{in-channels} going into layer $l+1$ is automatically constrained, since the out-channels of $l$ are usually fed as \texttt{in-channels} to $l+1$ (unless $l$ is the final layer of a network or sub-network). We nevertheless explicitly enforce the dimensionality constraint on \texttt{in-channels} as well: 
+
+
+\begin{minted}{python}
+	in_channels = layer_input.shape()[1]
+	
+	if not is_original_input:
+	conv.cond(in_channels % self.hardware_dim == 0)
+\end{minted}
+
+
+There are two justifications for this explicit enforcement. The first is that it would enable a seamless extension of the UltraTrailNet logic to include residual layers with skip connections. Secondly, it acts as an additional sanity check at negligible computational cost, given that \py{assert} statements do not function as desired within such symbolic search spaces that that have yet been instantiated with concrete values.
+
+Note that the original input to the network, identified with the boolean \mintinline{python}|is_orginal_input|, is excluded from the enforcement of this constraint, since the number of channels in the input layer in the case of image inputs is typically 3. 
+
+
+\subsection{Handling of Padding}
+The UltraTrail AI accelerator supports binary mode selection for padding: either padding is not enabled (\texttt{padding = 0}) or padding is enabled (\texttt{padding = 1}). In the latter case, as long as the kernel fits completely within an input channel, all the units of the MAC arrays are used for computation. On the other hand, on time-steps where certain input pixels are not covered by the kernel, the number of MAC units in use is reduced accordingly. This implicitly implements padding with zeroes, while saving on energy use. The following operational constraint for our software platform thus applies:
+
+\begin{constraintbox}{Padding}{pad}
+	Padding $\in \{0, 1\}$ is permitted, such that \texttt{padding=0} means that no padding is applied and \texttt{padding=1} means that zero-padding is applied. 
+\end{constraintbox}
+
+
+\subsection{Handling of Depthwise Layers}
+We have discussed depthwise and depthwise-separable convolution layers and the methods devoted to their implementation in the previous chapter (see Chapter \ref{ch:2}, Section \ref{sec:ultra}). In this section, we look at how these layers are realised such that hardware-compatibility is maintained.
+
+The target UltraTrail accelerator realises depthwise layers by iterating over the diagonal of the MAC-array until all \texttt{in-channels} and \texttt{out-channels} have been processed. The feasibility and operational correctness of this approach follows from the square-shaped arrangement of MAC-units in the MAC-Array, as well as from the fact that the previously discussed constraints regarding channel dimensions being multiples of $DIM$ (see Constraint \ref{constr:out}, Constraint \ref{constr:in}) holds in the case of depthwise layers as well. Furthermore, because of the hardware-imposed dimensionality constraints (\ref{constr:out}, \ref{constr:in}) and the definitional constraint of depthwise layers (see Constraint \ref{constr:eq_dw}), it follows that for depthwise layers, the number of groups must be a multiple of $DIM$ as well. Within the \py{_conv} method, this constraint is enforced for depthwise layers as follows:
+
+\begin{minted}{python}
+	if depthwise:
+	conv.cond(groups % self.hardware_dim == 0)	
+\end{minted} 
+
+Here we encounter another instance of an additional or redundant constraint acting as a sanity check. We already ensure that \texttt{in\_channels = out\_channels} are multiples of $DIM$, so setting \py{groups} as equal to \py{in_channels} should automatically ensure that \texttt{|groups|} is a multiple of $DIM$. But the constraint enforced via \py{conv.cond()} acts as a computationally cheap \py{assert} statement.
+
+\subsection{Implementing UltraTrail QAT}
+Another significant aspect of realising a hardware-aware NAS framework is the implementation of QAT, which as we noted in Chapter \ref{ch:2} is essential to effectively train networks that will use quantised inputs at inference time. For this, we implemented a \textit{custom operator} to act as ou quantiser. This quantiser is then called by a class \py{UltraTrailSTEQuantise} that inherits from the callable class \py{Requantize} from \py{hannah.nas.functional_operators}. \py{UltraTrailSTEQuantise} is in turn called by the \py{UltraTrailNet} method \py{_quantize} (see section \ref{sec:utn}). 
+
+\subsubsection{What is a custom operator?}
+If we want Pytorch to treat a compound operation as a single node in the computation graph, we need to define it as a custom operator. A compound operator is composed of multiple unitary torch operations, which Pytorch would normally trace through and treat each component operator as a separate node. But we want our quantiser to be recognised as a single, integrated operator and be represented as such in the training logs. Creating a custom quantiser operator fulfils this requirement.
+
+\subsubsection{Creating a custom quantise operator} 
+
+
+\subsection{Significance of UltraTrailNet}
+By using HANNAH's in-built \py{RandomWalkConstraintSolver}, we are able to apply constraints so that all search space layers constructed as members of the \py{UltraTrailNet} class are automatically guaranteed to adhere to these constraints. This, in turn, ensures that all models produced by a NAS, whose networks are instantiated as objects of the \py{UltraTrailNet} class are compatible with the UltraTrail AI accelerator.
+
+
+\section{Designing and Constructing Search Spaces}
+
+\section{Integrating HMM into the NAS Framework}
+
+\section{Conclusion}
+
+\chapter{Result Exploration and Analysis}
+
+\chapter{Conclusion}
+
+%This is a normal citation \cite{bernardo20}.
+%
+%This is a page citation \cite[6--8]{bernardo20}.
+%
+%This is a personal communication:
+%\pcite{mycomm2024}.
+
+% ------------------------------------------------
+\
+% bibliography (personal comm hidden)
+\printbibliography[check=pc]
+
+\end{document}

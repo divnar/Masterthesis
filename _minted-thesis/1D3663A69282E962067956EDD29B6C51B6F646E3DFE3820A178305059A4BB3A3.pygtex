@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+	\PYG{c+c1}{\PYGZsh{} instantiate parameterised operator}
+	\PYG{n}{conv} \PYG{o}{=} \PYG{n}{Conv2d}\PYG{p}{(}\PYG{n}{stride}\PYG{o}{=}\PYG{n}{stride}\PYG{p}{,} \PYG{n}{dilation}\PYG{o}{=}\PYG{n}{dilation}\PYG{p}{,} \PYG{n}{groups}\PYG{o}{=}\PYG{n}{groups}\PYG{p}{)}
+	
+	\PYG{c+c1}{\PYGZsh{} define constraint on the operator using cond() method}
+	\PYG{n}{conv}\PYG{o}{.}\PYG{n}{cond}\PYG{p}{(}\PYG{n}{kernel\PYGZus{}size} \PYG{o}{\PYGZlt{}=} \PYG{n}{input\PYGZus{}shape}\PYG{p}{)}
+\end{Verbatim}
