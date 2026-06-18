@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+	\PYG{k}{def} \PYG{n+nf}{backward}\PYG{p}{(}\PYG{n}{ctx}\PYG{p}{,} \PYG{n}{grad}\PYG{p}{):}
+	\PYG{k}{return} \PYG{n}{grad}\PYG{p}{,} \PYG{k+kc}{None}
+	
+	\PYG{n}{torch}\PYG{o}{.}\PYG{n}{library}\PYG{o}{.}\PYG{n}{register\PYGZus{}autograd}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}ekut::quantize\PYGZdq{}}\PYG{p}{,} \PYG{n}{backward}\PYG{p}{,} \PYG{n}{setup\PYGZus{}context}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{)}
+\end{Verbatim}

@@ -312,7 +312,7 @@ The feature maps are unrolled and each in-channel drawn from a feature memory un
 A crucial mechanism employed by the UltraTrail accelerator to ensure efficient computation is quantisation, which we turn our attention to in the next section.
 
 
-\section{Quantisation}
+\section{Quantisation}\label{sec:quant}
 \subsection{Motivation}
 Edge devices, such as the endoscopy capsule, need to make complex computations in time-constrained circumstances and with access to limited memory capacity. Quantisation is a mechanism through which computationally expensive floating point inputs are converted into integers, so as to enable efficient computation with minimal loss of accuracy.
 
@@ -363,7 +363,7 @@ We noted in the previous subsection (\ref{subsec:fwd}) that during training, QAT
 
 The upstream gradients are multiplied by 1 and hence are passed to the next node of the computation graph unchanged.
 
-\subsection{UltraTrail QAT}
+\subsection{UltraTrail QAT}\label{subsec:ut_qat}
 The UltraTrail requires a specific, streamlined architecture based on \texttt{Conv-BN-Relu} blocks for compatibility. Based on this requirement, Palomero Bernardo et al. specify the precise workflow that fake-quantisation in the forward pass needs to follow:
 
 \begin{enumerate}
@@ -372,7 +372,7 @@ The UltraTrail requires a specific, streamlined architecture based on \texttt{Co
 	\item Finally, the output of the activation function that is applied at the end of the \texttt{Conv-BN-Relu} layer is quantised.
 \end{enumerate}
 
-For the UltraTrail quantiser, the zero-point $z$ is taken to be 0, and can thus be left out of the computation. The scaling variable $s$ is specified to be $\sfrac{1}{2^{n-1}}$. Taken together, the quantiser operator proposed by Palomero Bernardo et al. can be expressed as follows:
+For the UltraTrail quantiser, the zero-point $z$ is taken to be 0, and can thus be left out of the computation. The scaling variable $s$ is specified to be $\sfrac{1}{2^{n-1}}$. Taken together, the quantiser operator proposed by Palomero Bernardo et al. can be expressed as follows \cite[3]{bernardo20}:
 
 \begin{align*}
 	r = \nint[\bigg]{\frac{x}{\sfrac{1}{2^{n-1}}}}
@@ -715,13 +715,79 @@ The target UltraTrail accelerator realises depthwise layers by iterating over th
 Here we encounter another instance of an additional or redundant constraint acting as a sanity check. We already ensure that \texttt{in\_channels = out\_channels} are multiples of $DIM$, so setting \py{groups} as equal to \py{in_channels} should automatically ensure that \texttt{|groups|} is a multiple of $DIM$. But the constraint enforced via \py{conv.cond()} acts as a computationally cheap \py{assert} statement.
 
 \subsection{Implementing UltraTrail QAT}
-Another significant aspect of realising a hardware-aware NAS framework is the implementation of QAT, which as we noted in Chapter \ref{ch:2} is essential to effectively train networks that will use quantised inputs at inference time. For this, we implemented a \textit{custom operator} to act as ou quantiser. This quantiser is then called by a class \py{UltraTrailSTEQuantise} that inherits from the callable class \py{Requantize} from \py{hannah.nas.functional_operators}. \py{UltraTrailSTEQuantise} is in turn called by the \py{UltraTrailNet} method \py{_quantize} (see section \ref{sec:utn}). 
+Another significant aspect of realising a hardware-aware NAS framework is the implementation of QAT, which as we noted in Chapter \ref{ch:2} is essential to effectively train networks that will use quantised inputs at inference time. For this, we implemented a \textit{custom operator} to act as our quantiser. 
 
 \subsubsection{What is a custom operator?}
-If we want Pytorch to treat a compound operation as a single node in the computation graph, we need to define it as a custom operator. A compound operator is composed of multiple unitary torch operations, which Pytorch would normally trace through and treat each component operator as a separate node. But we want our quantiser to be recognised as a single, integrated operator and be represented as such in the training logs. Creating a custom quantiser operator fulfils this requirement.
+If we want Pytorch to treat a compound operation as a single node in the computation graph, we need to define it as a custom operator. A compound operator is composed of multiple unitary \py{torch} operations, which Pytorch would normally trace through while executing \py{torch.compile}, treating each component operator as a separate node. But we want our quantiser to be recognised as a single, opaque operator and be represented as such in the training logs. Creating a custom quantiser operator fulfils this requirement \cite{torch_custom}.
 
 \subsubsection{Creating a custom quantise operator} 
+Pytorch offers a package called \py{torch.library} that contains tools for creating and testing custom operators \cite{torch_lib}. We need to implement a function that computes the QAT forward pass as described in \ref{subsec:ut_qat}, and wrap this function into a custom operator so that Pytorch treats it as a unitary operator and does not trace inside it. \py{torch.library} offers a wrapper method \py{torch.library.custom_op} that serves this purpose.
 
+\begin{minted}{python}
+	import torch.library
+	import torch
+	
+	@torch.library.custom_op(name="ekut::quantize", mutates_args=())
+	def quantize(x: torch.Tensor, num_bits: int) -> torch.Tensor:
+	scale = 2 ** (num_bits - 1)
+	scaled_val = torch.round(x * scale)
+	q_min = -2 ** (num_bits - 1)
+	q_max = (2 ** (num_bits - 1)) - 1
+	clamped_val = torch.clamp(scaled_val, q_min, q_max)
+	
+	return clamped_val / scale
+\end{minted}
+
+The argument \py{name} passed to the wrapper consists of a namespace (\texttt{ekut}) followed by the function name (\texttt{quantize}). The \py{name} serves as an identifier for pytorch packages such as \py{torch.fx} and \py{torch.export}. The second argument \py{mutates_args} is is a list of arguments that the function directly mutates. In our case, this is an empty list, since we do not reassign a value to the input \py{x}, and \py{num_bits} is used to compute the scale, but is not mutated itself \cite{torch_custom}.
+
+Next, we need to register a \textit{fake tensor} implementation for our new custom operator. This defines the effect of the operator on an empty, abstract tensor with regard to attributes such as \py{shape} and \py{dtype} so that \py{torch.export} can correctly trace through the operator , \cite{leimao_custom}.
+
+\begin{minted}{python}
+	@quantize.register_fake
+	def _(x: torch.Tensor, num_bits: int) -> torch.Tensor:
+	return torch.zeros_like(x)
+\end{minted}
+
+Finally, we need a function that defines the custom operator's behaviour in the backward pass, and register this function using \py{torch.library.register_autograd}. In order to realise STE, the \py{backward} function simply returns the upstream gradient  \py{grad} unchanged for the input \py{x} that is passed to the \py{quantize} function. \py{None} is returned as the gradient of \py{quantize}'s second argument, \py{num_bits}.  
+
+\begin{minted}{python}
+	def backward(ctx, grad):
+	return grad, None
+	
+	torch.library.register_autograd("ekut::quantize", backward, setup_context=None)
+\end{minted}
+
+In implementing STE, the backward pass is in no way dependent on what is computed in the forward pass. Therefore, \py{setup_context} is \py{None} and the \py{ctx} argument of the backward function remains unused.
+
+\subsubsection{Wiring up UltraTrail QAT}
+In \py{hannah.nas.ultra_trail.qat}, we create a new class \py{UltraTrailQuantiser} that inherits from \py{nn.Module}
+and returns the custom quantiser in its forward method.
+
+\begin{minted}{python}
+class UltraTrailQuantizer(nn.Module):
+def __init__(self, num_bits=8):
+super().__init__()
+self.num_bits = num_bits
+
+def forward(self, input):
+return torch.ops.ekut.quantize(input, self.num_bits)
+\end{minted} 
+
+Additionally, we create a class \py{UltraTrailSTEQuantize} that inherits from \py{Requantize} in\\ \py{hannah.nas.functional_operators}, which in turn inherits from \py{Op}. \py{UltraTrailSTEQuantize} is initialised with  \py{UltraTrailQuantizer()} and \py{Requantize} calls \py{self.quantize} in its forward method:
+
+\begin{minted}{python}
+	class UltraTrailSTEQuantize(Requantize):
+	def __init__(self):
+	super().__init__()
+	self.quantize = UltraTrailQuantizer()
+\end{minted}
+
+\begin{minted}{python}
+	def _forward_implementation(self, *operands):
+		return self.quantize(operands[0])
+\end{minted}
+
+Finally, \py{UltraTrailSTEQuantize} is called by \py{UltraTrailNet}'s \py{_quantize} method (see \ref{sec:utn}).
 
 \subsection{Significance of UltraTrailNet}
 By using HANNAH's in-built \py{RandomWalkConstraintSolver}, we are able to apply constraints so that all search space layers constructed as members of the \py{UltraTrailNet} class are automatically guaranteed to adhere to these constraints. This, in turn, ensures that all models produced by a NAS, whose networks are instantiated as objects of the \py{UltraTrailNet} class are compatible with the UltraTrail AI accelerator.

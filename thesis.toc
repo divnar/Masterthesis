@@ -26,10 +26,11 @@
 \contentsline {subsection}{\numberline {3.2.5}Implementing UltraTrail QAT}{16}{subsection.3.2.5}%
 \contentsline {subsubsection}{\nonumberline What is a custom operator?}{16}{subsubsection*.11}%
 \contentsline {subsubsection}{\nonumberline Creating a custom quantise operator}{16}{subsubsection*.13}%
-\contentsline {subsection}{\numberline {3.2.6}Significance of UltraTrailNet}{16}{subsection.3.2.6}%
-\contentsline {section}{\numberline {3.3}Designing and Constructing Search Spaces}{16}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Integrating HMM into the NAS Framework}{16}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Conclusion}{16}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Result Exploration and Analysis}{17}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Conclusion}{18}{chapter.5}%
+\contentsline {subsubsection}{\nonumberline Wiring up UltraTrail QAT}{17}{subsubsection*.15}%
+\contentsline {subsection}{\numberline {3.2.6}Significance of UltraTrailNet}{18}{subsection.3.2.6}%
+\contentsline {section}{\numberline {3.3}Designing and Constructing Search Spaces}{18}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Integrating HMM into the NAS Framework}{18}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Conclusion}{18}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Result Exploration and Analysis}{19}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Conclusion}{20}{chapter.5}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

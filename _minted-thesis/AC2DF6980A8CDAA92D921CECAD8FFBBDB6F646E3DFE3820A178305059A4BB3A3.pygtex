@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+	\PYG{k}{def} \PYG{n+nf}{\PYGZus{}forward\PYGZus{}implementation}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{o}{*}\PYG{n}{operands}\PYG{p}{):}
+		\PYG{k}{return} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{quantize}\PYG{p}{(}\PYG{n}{operands}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{])}
+\end{Verbatim}
