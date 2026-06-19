@@ -255,6 +255,65 @@
       \field{note}{[Accessed 24-04-2026]}
       \field{title}{{S}earch {S}paces - {H}{A}{N}{N}{A}{H} --- ekut-es.github.io}
     \endentry
+    \entry{werner23}{inbook}{}
+      \name{author}{5}{}{%
+        {{hash=b1258645b8de9db51a640697d525be7b}{%
+           family={Werner},
+           familyi={W\bibinitperiod},
+           given={Julia},
+           giveni={J\bibinitperiod}}}%
+        {{hash=eac0abfdfac91098246395fd03dbbc02}{%
+           family={Gerum},
+           familyi={G\bibinitperiod},
+           given={Christoph},
+           giveni={C\bibinitperiod}}}%
+        {{hash=a10f00c5c4a491cc24c455b35ffb6d84}{%
+           family={Reiber},
+           familyi={R\bibinitperiod},
+           given={Moritz},
+           giveni={M\bibinitperiod}}}%
+        {{hash=7296607af7bd1f28c529bbd8f0e5564e}{%
+           family={Nick},
+           familyi={N\bibinitperiod},
+           given={Jörg},
+           giveni={J\bibinitperiod}}}%
+        {{hash=61b0a1a362ad8774b9230644fec9f028}{%
+           family={Bringmann},
+           familyi={B\bibinitperiod},
+           given={Oliver},
+           giveni={O\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Nature Switzerland}%
+      }
+      \strng{namehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
+      \strng{fullhash}{f6767567140e4bbdcb89c16c5f396b3c}
+      \strng{bibnamehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
+      \strng{authorbibnamehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
+      \strng{authornamehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
+      \strng{authorfullhash}{f6767567140e4bbdcb89c16c5f396b3c}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Machine Learning in Medical Imaging}
+      \field{isbn}{9783031456763}
+      \field{issn}{1611-3349}
+      \field{month}{10}
+      \field{title}{Precise Localization Within the GI Tract by Combining Classification of CNNs and Time-Series Analysis of HMMs}
+      \field{year}{2023}
+      \field{pages}{174\bibrangedash 183}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1007/978-3-031-45676-3_18
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1007/978-3-031-45676-3_18
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1007/978-3-031-45676-3_18
+      \endverb
+    \endentry
     \entry{geeksBN}{misc}{}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
@@ -289,8 +348,8 @@
       \field{title}{{C}ustom {P}ython {O}perators \&\#x2014; {P}y{T}orch {T}utorials 2.12.0+cu130 documentation --- docs.pytorch.org}
     \endentry
     \entry{torch_lib}{misc}{}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://docs.pytorch.org/docs/2.12/library.html\#torch.library.custom\_op}}
       \field{note}{[Accessed 18-06-2026]}

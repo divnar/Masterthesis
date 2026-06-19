@@ -120,6 +120,10 @@
 	}{%
 	\end{constraintboxbase}%
 }
+
+\usepackage{amsthm}
+
+\newtheorem{definition}{Definition}[chapter]
 % ------------------------------------------------
 % MATHS
 % ------------------------------------------------
@@ -486,6 +490,46 @@ All the constraints pertaining to the same operator are collected into a list an
 
 
 \subsection{Hidden Markov Models and The Viterbi Algorithm}
+Recent work by Werner et al. \cite{werner23} has proposed using Hidden Markov Models (HMM) in combination with the Viterbi algorithm to improve CNN prediction of organs labels based on capsule endoscopy images. The classification of capsule endoscopy images should ordinarily obey the order in which the endoscopy capsule moves through the GI tract. Thus, images of the oesophagus should ordinarily appear first, followed by images of the stomach, then of the small intestine (small bowel) and finally, of the large intestine (colon). But CNNs make predictions based on each image they see, and they have no concept of order or temporality. This inability of CNNs to recognise temporal order is a frequent cause of noise in capsule endoscopy image prediction. This is where HMMs can help.
+
+\subsubsection{What is an HMM?}
+An HMM is a finite state machine that can be defined as follows:
+
+\begin{definition}\label{def:hmm}
+	An HMM is a 4-tuple
+	\[
+		M = \{H,A,B,\pi\}
+	\] with:\\
+	H: a finite, non-empty set of hidden states\\
+	A: a matrix such that element $a_{ij} \in A$ is the transition probability from $h_i\in H$ to $h_j \in H$\\
+	B: a sequence of emission probabilities such that  $b_i(o_t)$ is the probability of the hidden state being $h_i \in H$ given observation $o_t$\\
+	$\pi$: A sequence of initial probabilities such that $\pi_i$ is the probability of $h_i \in H$ being the initial state
+\end{definition}
+
+In simpler terms an HMM is a probabilistic finite-state machine that represents the relationship between unknown, independent hidden states and known, dependent observations. Given an HMM and a sequence of dependent observations, we should be able to compute the most likely sequence of hidden states.
+
+\subsubsection{The Viterbi Algorithm}
+Computing the most likely sequence of hidden states naïvely is computationally expensive. But using the Viterbi algorithm makes the computation much more efficient. This algorithm may be divided into three phases: \begin{enumerate*}
+	\item initialisation \item forward computation, and \item backward computation (retracing).
+\end{enumerate*}
+
+During initialisation, 
+
+Assume the following mapping of organs to integer labels:
+
+\begin{align*}
+	\text{oesophagus} \leftrightarrow 0\\
+	\text{stomach} \leftrightarrow 1\\
+	\text{small intestine} \leftrightarrow 2\\
+	\text{large intestine} \leftrightarrow 3
+\end{align*}
+
+Based on this mapping, assume the following series of CNN organ predictions:
+
+\begin{align*}
+	0,1,1,0,1,2,1,1,1,1,2,1,1,2,2,2 ...
+\end{align*}
+
 
 \section{Conclusion}
 
