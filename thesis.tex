@@ -77,6 +77,17 @@
 \usepackage[inline]{enumitem}
 
 % ------------------------------------------------
+% ALGORITHMS
+% ------------------------------------------------
+\usepackage[algoruled,vlined]{algorithm2e}
+\SetAlCapNameFnt{\color{thesisblue}\bfseries}
+\SetAlCapFnt{\bfseries}
+
+\renewcommand{\thealgocf}{\thechapter.\arabic{algocf}}
+\SetKwComment{Comment}{/* }{ */}
+
+\usepackage{setspace}
+% ------------------------------------------------
 % TEXT FRAMING
 % ------------------------------------------------
 \usepackage[most]{tcolorbox}
@@ -124,6 +135,36 @@
 \usepackage{amsthm}
 
 \newtheorem{definition}{Definition}[chapter]
+
+\newcounter{algorithm}[chapter]
+\renewcommand{\thealgorithm}{\thechapter.\arabic{algorithm}}
+
+\newtcolorbox{algorithmboxbase}[1]{%
+	enhanced,
+	breakable,
+	
+	colback=thesisblue!4,
+	colframe=thesisblue,
+	colbacktitle=thesisblue!25,
+	coltitle=black,
+	
+	boxrule=0.8pt,
+	arc=2mm,
+	
+	fonttitle=\bfseries\sffamily,
+	
+	before skip=12pt,
+	after skip=12pt,
+	
+	title={Algorithm~\thealgorithm: #1}
+}
+
+\newenvironment{algorithmbox}[2]{%
+	\refstepcounter{algorithm}%
+	\begin{algorithmboxbase}{#1}\label{alg:#2}
+	}{%
+	\end{algorithmboxbase}
+}
 % ------------------------------------------------
 % MATHS
 % ------------------------------------------------
@@ -136,6 +177,9 @@
 \DeclarePairedDelimiter{\abs}\lvert\rvert
 
 \usepackage{xfrac}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
 
 % ------------------------------------------------
 % PYTHON CODE (beautiful listings)
@@ -509,11 +553,73 @@ An HMM is a finite state machine that can be defined as follows:
 In simpler terms an HMM is a probabilistic finite-state machine that represents the relationship between unknown, independent hidden states and known, dependent observations. Given an HMM and a sequence of dependent observations, we should be able to compute the most likely sequence of hidden states.
 
 \subsubsection{The Viterbi Algorithm}
-Computing the most likely sequence of hidden states naïvely is computationally expensive. But using the Viterbi algorithm makes the computation much more efficient. This algorithm may be divided into three phases: \begin{enumerate*}
-	\item initialisation \item forward computation, and \item backward computation (retracing).
+Computing the most likely sequence of hidden states naïvely is computationally expensive. But the Viterbi algorithm makes this computation much more efficient. Furthermore, the algorithm can be made computationally more stable and economical if we work in logarithmic space \cite{blog_viterbi}. We thus replace multiplying probabilities with adding their logarithms instead. The Viterbi algorithm may be divided into three phases: \begin{enumerate*}
+	\item initialisation \item forward computation, and \item backward computation (retracing). The algorithm is presented below in pseudocode (adapted from \cite{blog_viterbi}).
 \end{enumerate*}
 
-During initialisation, 
+
+\begin{spacing}{1.1}
+  \begin{algorithm}[H]
+	\caption{Logarithmic Viterbi Decoder}
+	\label{alg:viterbi}
+	\KwIn{\\$Y$: observations,\\ logP: priors\\ logA: transition matrix\\ logB: emission matrix \vspace{1em}}
+	\KwOut{\\Most likely sequence of hidden states}
+	%\vspace{1em}
+	
+	
+	$N\gets |\text{logP}|$\\
+	$M\gets |Y|$\\
+	logT1 $\gets N\times M\text{matrix}$ \tcp{Store probabilities of likely path}
+	bestStates $\gets$ $N\times M$ matrix\\
+	result $\gets$ sequence of length $M$
+	%\vspace*{1em}
+
+	\tcp{Initialisation}
+	\For{$1\leq i \leq N$}
+		{logT1[$i$, 1] $\gets$ logP[$i$] + logB[$i, Y[1]]$}
+	\vspace*{1em}	
+
+	\tcp{Forward Phase (Recursion)}
+	\For {$2 \leq i \leq M$}{
+		\For{$1 \leq j \leq N$}{
+		 %\vspace*{0.25em}
+        	bestStates[$j,i$] $\gets \argmax_{1 \leq k \leq N}$
+        	(
+        		logT1[$k, i-1$] + logA[$k,j$]
+        	)\\
+          logT1[$j,i$] $\gets \max_{1 \leq k \leq N}$ 
+          (
+          	logT1[$k,i-1$] + logA[$k,j$]
+          ) + logB[$j, Y[i]$]
+        }
+    }
+    %\vspace*{1em}
+    \tcp{Backward phase (retracing)}
+    \For{M $\geq i \geq 2$}
+    	{
+    		\If{$i = M$}
+    		{result[M] $\gets \argmax_{1 \leq k \leq N}\text{logT1}[k,M]$}
+    		\Else{
+    			currentState $\gets$ result[$i$]\\
+    			result[$i-1$] $\gets$ bestStates[currentState, $i$]
+    		}
+    	}
+    	
+    \Return{result}
+  \end{algorithm}
+\end{spacing}
+
+%\[
+%T =
+%\begin{bmatrix}
+%	s_{00} & s_{01} & \cdots & s_{0m} \\
+%	s_{10} & s_{11} & \cdots & s_{1} \\
+%	\vdots & \vdots & \ddots & \vdots \\
+%	s_{n0} & s_{n1} & \cdots & s_{nm}
+%\end{bmatrix}
+%\]
+
+In the final phase, use the transition matrix computed in the forward phase to compute the sequence of states that best accounts for our observation sequence.
 
 Assume the following mapping of organs to integer labels:
 
@@ -526,9 +632,10 @@ Assume the following mapping of organs to integer labels:
 
 Based on this mapping, assume the following series of CNN organ predictions:
 
-\begin{align*}
-	0,1,1,0,1,2,1,1,1,1,2,1,1,2,2,2 ...
-\end{align*}
+
+	\[
+		0,1,1,0,1,2,1,1,1,1,2,1,1,2,2,2 ...
+	\]
 
 
 \section{Conclusion}

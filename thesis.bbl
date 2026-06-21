@@ -314,6 +314,14 @@
       \verb http://dx.doi.org/10.1007/978-3-031-45676-3_18
       \endverb
     \endentry
+    \entry{blog_viterbi}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://crawlingrobotfortress.blogspot.com/2016/07/python-recipe-for-numerically-stable.html}}
+      \field{note}{[Accessed 20-06-2026]}
+      \field{title}{{N}umerically stable {V}iterbi algorithm in {P}ython for hidden markov model state inference --- crawlingrobotfortress.blogspot.com}
+    \endentry
     \entry{geeksBN}{misc}{}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
@@ -332,16 +340,16 @@
       \field{title}{{A}daptive{A}vg{P}ool1d \&\#x2014; {P}y{T}orch 2.12 documentation --- docs.pytorch.org}
     \endentry
     \entry{torchAAP2d}{misc}{}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://docs.pytorch.org/docs/2.12/generated/torch.nn.{A}daptive{A}vg{P}ool2d.html\#torch.nn.{A}daptive{A}vg{P}ool2d}}
       \field{note}{[Accessed 07-06-2026]}
       \field{title}{{A}daptive{A}vg{P}ool2d \&\#x2014; {P}y{T}orch 2.12 documentation --- docs.pytorch.org}
     \endentry
     \entry{torch_custom}{misc}{}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://docs.pytorch.org/tutorials/advanced/python\_custom\_ops.html\#python-custom-ops-tutorial}}
       \field{note}{[Accessed 18-06-2026]}
