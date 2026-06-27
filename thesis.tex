@@ -638,7 +638,7 @@ Based on this mapping, assume the following hypothetical sequence $s$ of CNN org
 We assign our HMM a transition matrix with a miniscule probability of moving to a previous state, so as to make this virtually impossible. For instance, moving from the stomach to the small intestine should be all but impossible. We also bias it towards staying in the same state, by assigning a high probability $p_\text{self}$ of a self-transition. The probability of moving to the next state may then be set to $1-p_\text{self}$. We also set the prior of state 0 at the starting time-step to be 1, meaning that we always start with the oesophagus. Assume also, that we have computed a suitable emission matrix. Then, when $s$ is passed to our HMM, it might output the following revised sequence:
 
 	\[
-		s^\prime = \big[0,0,0,1,1,1,1,1,1,1,1,1,1,1,1\big] \big[0,0,0,0,0,1,1,1,1,1,1,1,1,1,2\big]
+		s^\prime = \big[0,0,0,1,1,1,1,1,1,1,1,1,1,1,1\big] 
 	\]
 	
 There is no guarantee that $s^\prime$ is closer to the true predictions than $s$ is. For instance, the true sequence of predictions could have been $\big[0,0,0,0,0,1,1,1,1,1,1,1,1,1,2\big]$. But the predictions produced by the HMM are nevertheless biologically more plausible, less noisy and more likely to be accurate. Predictions \textit{within} a window frame are guaranteed to be a monotonically rising function when plotted against time-steps in ascending order. However, this monotonicity can be broken during transitions from one window to the next, as the HMM has no memory of predictions it made in a previous window.
