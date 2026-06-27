@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.9.21)  21 JUN 2026 22:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.9.21)  27 JUN 2026 21:21
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1767,7 +1767,7 @@ Class scrbook Warning: \float@addtolists detected!
 ]
 chapter 2.
 LaTeX Font Info:    Font shape `T1/LibertinusSans-TLF/b/n' will be
-(Font)              scaled to size 14.4pt on input line 345.
+(Font)              scaled to size 14.4pt on input line 347.
 LaTeX Font Info:    Trying to load font information for T1+LibertinusMono-TLF o
 n input line 358.
 
@@ -1790,12 +1790,12 @@ Package microtype Info: Character `guilsinglright ' is missing
 (microtype)             Ignoring protrusion settings for this character.
 LaTeX Font Info:    Font shape `T1/LibertinusSans-TLF/b/n' will be
 (Font)              scaled to size 12.0pt on input line 364.
-LaTeX Font Info:    Font shape `T1/LibertinusSerif-TLF/m/it' will be
-(Font)              scaled to size 10.95pt on input line 368.
  [4
 
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertinus-type1/lbts_tll2u3.enc
 }]
+LaTeX Font Info:    Font shape `T1/LibertinusSerif-TLF/m/it' will be
+(Font)              scaled to size 10.95pt on input line 368.
 LaTeX Font Info:    Font shape `T1/LibertinusSerif-TLF/m/n' will be
 (Font)              scaled to size 8.0pt on input line 391.
 LaTeX Font Info:    Font shape `T1/LibertinusSerif-TLF/m/n' will be
@@ -1830,10 +1830,15 @@ LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <3.83249> not available
 
 [6]
 LaTeX Font Info:    Font shape `T1/LibertinusSerif-TLF/b/n' will be
-(Font)              scaled to size 10.95pt on input line 448.
+(Font)              scaled to size 10.95pt on input line 456.
+
+Underfull \vbox (badness 4899) has occurred while \output is active []
+
+ [7]
 \openout5 = `thesis.pyg'.
 
- (./_minted-thesis/default.pygstyle)
+
+(./_minted-thesis/default.pygstyle)
 (./_minted-thesis/277A4CC865C8659576D3BE7E063C014FB6F646E3DFE3820A178305059A4BB
 3A3.pygtex
 LaTeX Font Info:    Font shape `T1/LibertinusMono-TLF/m/n' will be
@@ -1896,8 +1901,7 @@ Package microtype Info: Character `texttrademark ' is missing
 
 
 (./_minted-thesis/037AA28A97FF1BAFDE9C1BF8A19D57EDB6F646E3DFE3820A178305059A4BB
-3A3.pygtex) [7{/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertinus-type1/l
-bts_bn2i3n.enc}]
+3A3.pygtex)
 \openout5 = `thesis.pyg'.
 
 
@@ -1932,7 +1936,8 @@ bts_bn2i3n.enc}]
 
 
 (./_minted-thesis/C6A98F5F39DB47F057BF8902B322D5D5B6F646E3DFE3820A178305059A4BB
-3A3.pygtex)
+3A3.pygtex) [8{/usr/share/texlive/texmf-dist/fonts/enc/dvips/libertinus-type1/l
+bts_bn2i3n.enc}]
 \openout4 = `thesis.pyg'.
 
 
@@ -1963,7 +1968,7 @@ Package microtype Info: Character `guilsinglright ' is missing
 3A3.pygtex)
 \openout4 = `thesis.pyg'.
 
- [8]
+
 (./_minted-thesis/D1E4C26DB1368B3B4CC5F5B8B3E39AE3B6F646E3DFE3820A178305059A4BB
 3A3.pygtex)
 \openout5 = `thesis.pyg'.
@@ -1993,14 +1998,18 @@ Package microtype Info: Character `guilsinglright ' is missing
 3A3.pygtex)
 \openout4 = `thesis.pyg'.
 
-
+ [9]
 (./_minted-thesis/1D3663A69282E962067956EDD29B6C51B6F646E3DFE3820A178305059A4BB
 3A3.pygtex)
 \openout5 = `thesis.pyg'.
 
 
 (./_minted-thesis/9A5282EE6F681488B892B6FF9652BEC7B6F646E3DFE3820A178305059A4BB
-3A3.pygtex) [9] [10] [11]
+3A3.pygtex) [10]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [11]
+[12]
 chapter 3.
 \openout5 = `thesis.pyg'.
 
@@ -2097,7 +2106,7 @@ chapter 3.
 
 (./_minted-thesis/4A8DD476F3AA3B98B0D23116C719CBAFB6F646E3DFE3820A178305059A4BB
 3A3.pygtex)
-Overfull \hbox (2.28477pt too wide) in paragraph at lines 680--681
+Overfull \hbox (2.28477pt too wide) in paragraph at lines 687--688
 [][][][][][][]\T1/LibertinusSerif-TLF/m/n/10.95 (-20) : This method is in-ten-d
 ed for in-ternal use and calls the [][][][][][]
  []
@@ -2107,10 +2116,10 @@ ed for in-ternal use and calls the [][][][][][]
 
 (./_minted-thesis/AE0261DC774957B2C82C60F41BFF4D31B6F646E3DFE3820A178305059A4BB
 3A3.pygtex)
-Overfull \vbox (0.22928pt too high) detected at line 689
+Overfull \vbox (0.22928pt too high) detected at line 696
  []
 
-[12
+[13
 
 ]
 \openout5 = `thesis.pyg'.
@@ -2237,7 +2246,7 @@ Overfull \vbox (0.22928pt too high) detected at line 689
 
 
 (./_minted-thesis/3D216C5AD43F0935EB157CE7F342EB96B6F646E3DFE3820A178305059A4BB
-3A3.pygtex) [13]
+3A3.pygtex) [14]
 \openout5 = `thesis.pyg'.
 
 
@@ -2288,13 +2297,13 @@ Overfull \vbox (0.22928pt too high) detected at line 689
 
 (./_minted-thesis/D4F0659B97AB24CE9CAA156BC38B1B75B6F646E3DFE3820A178305059A4BB
 3A3.pygtex)
-Overfull \hbox (25.40317pt too wide) in paragraph at lines 736--737
+Overfull \hbox (25.40317pt too wide) in paragraph at lines 743--744
 [][][][][][][]\T1/LibertinusSerif-TLF/m/n/10.95 (-20) : This method uses [][][]
 [][][] from [][][][][][],
  []
 
 
-Overfull \hbox (9.5051pt too wide) in paragraph at lines 736--737
+Overfull \hbox (9.5051pt too wide) in paragraph at lines 743--744
 \T1/LibertinusSerif-TLF/m/n/10.95 (-20) ad-apt-ive av-er-age pool-ing with an [
 ][][][][][] of $\OT1/cmr/m/n/10.95 (1\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 1
 )$\T1/LibertinusSerif-TLF/m/n/10.95 (-20) . This is read by [][][][][][]
@@ -2424,7 +2433,7 @@ Overfull \hbox (9.5051pt too wide) in paragraph at lines 736--737
 
 
 (./_minted-thesis/D4216A455346A9A48B289E71CE93A1E2B6F646E3DFE3820A178305059A4BB
-3A3.pygtex) [14]
+3A3.pygtex) [15]
 \openout5 = `thesis.pyg'.
 
 
@@ -2535,13 +2544,13 @@ Overfull \hbox (9.5051pt too wide) in paragraph at lines 736--737
 
 (./_minted-thesis/34B742AFA06E20C6FE8C248017E45692B6F646E3DFE3820A178305059A4BB
 3A3.pygtex)
-Overfull \hbox (8.20242pt too wide) in paragraph at lines 785--786
+Overfull \hbox (8.20242pt too wide) in paragraph at lines 792--793
 \T1/LibertinusSerif-TLF/m/n/10.95 (-20) calls [][][][][][] for the first, depth
 -wise layer and fol-low-ing that, it calls [][][][][][]
  []
 
 
-Overfull \hbox (5.26819pt too wide) in paragraph at lines 785--786
+Overfull \hbox (5.26819pt too wide) in paragraph at lines 792--793
 \T1/LibertinusSerif-TLF/m/n/10.95 (-20) for the second, point-wise layer with t
 he ar-gu-ments [][][][][][], [][][][][][] and [][][][][][]. 
  []
@@ -2575,14 +2584,14 @@ he ar-gu-ments [][][][][][], [][][][][][] and [][][][][][].
 
 
 (./_minted-thesis/F114ABF8A8F404AE3EF7317A1DA6D8DFB6F646E3DFE3820A178305059A4BB
-3A3.pygtex) [15]
+3A3.pygtex) [16]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 794.
+(hyperref)                removing `math shift' on input line 801.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 794.
+(hyperref)                removing `math shift' on input line 801.
 
 \openout5 = `thesis.pyg'.
 
@@ -2604,7 +2613,7 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 
 (./_minted-thesis/F114ABF8A8F404AE3EF7317A1DA6D8DFB6F646E3DFE3820A178305059A4BB
 3A3.pygtex)
-Underfull \hbox (badness 10000) in paragraph at lines 816--817
+Underfull \hbox (badness 10000) in paragraph at lines 823--824
 
  []
 
@@ -2615,7 +2624,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 816--817
 3A3.pygtex)
 \openout4 = `thesis.pyg'.
 
- [16]
+ [17]
 (./_minted-thesis/98F3DAAD8BEF88AFFD259A7C2836585DB6F646E3DFE3820A178305059A4BB
 3A3.pygtex)
 \openout5 = `thesis.pyg'.
@@ -2629,7 +2638,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 816--817
 (./_minted-thesis/71CDFE7FD4EA8B7154EF1555CF7DB966B6F646E3DFE3820A178305059A4BB
 3A3.pygtex)
 
-LaTeX Warning: Reference `sec:ultra' on page 17 undefined on input line 857.
+LaTeX Warning: Reference `sec:ultra' on page 18 undefined on input line 864.
 
 \openout5 = `thesis.pyg'.
 
@@ -2660,7 +2669,7 @@ LaTeX Warning: Reference `sec:ultra' on page 17 undefined on input line 857.
 
 
 (./_minted-thesis/7974E7AD4633A7426FC13B3CF80DA175B6F646E3DFE3820A178305059A4BB
-3A3.pygtex) [17]
+3A3.pygtex) [18]
 \openout5 = `thesis.pyg'.
 
 
@@ -2740,7 +2749,7 @@ LaTeX Warning: Reference `sec:ultra' on page 17 undefined on input line 857.
 
 
 (./_minted-thesis/2FD2D895840B4795AF4ED4ACABBE1B84B6F646E3DFE3820A178305059A4BB
-3A3.pygtex) [18]
+3A3.pygtex) [19]
 \openout4 = `thesis.pyg'.
 
 
@@ -2905,24 +2914,24 @@ LaTeX Warning: Reference `sec:ultra' on page 17 undefined on input line 857.
 
 
 (./_minted-thesis/F114ABF8A8F404AE3EF7317A1DA6D8DFB6F646E3DFE3820A178305059A4BB
-3A3.pygtex) [19] [20]
+3A3.pygtex) [20] [21]
 chapter 4.
-[21
-
-]
-chapter 5.
 [22
 
 ]
-Overfull \hbox (26.916pt too wide) in paragraph at lines 967--967
+chapter 5.
+[23
+
+]
+Overfull \hbox (26.916pt too wide) in paragraph at lines 984--984
 []\T1/LibertinusSerif-TLF/m/it/10.95 (-20) Custom Py-thon Op-er-at-ors &#x2014;
  Py-T-orch Tu-tori-als 2.12.0+cu130 doc-u-ment-a-tion --- docs.pytorch.org\T1/L
 ibertinusSerif-TLF/m/n/10.95 (-20) .
  []
 
-[23
+[24
 
-] [24] (./thesis.aux)
+] [25] (./thesis.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2020/03/25>
@@ -2944,11 +2953,11 @@ Package logreq Info: Writing requests to 'thesis.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 50764 strings out of 474222
- 1100113 string characters out of 5748733
- 2075005 words of memory out of 5000000
- 71373 multiletter control sequences out of 15000+600000
- 715213 words of font info for 306 fonts, out of 8000000 for 9000
+ 50789 strings out of 474222
+ 1100941 string characters out of 5748733
+ 2075181 words of memory out of 5000000
+ 71390 multiletter control sequences out of 15000+600000
+ 716121 words of font info for 311 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  108i,19n,117p,10901b,2457s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/libertinus-type1/Libertinus
@@ -2973,10 +2982,10 @@ lic/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/s
 ymbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/sy
 mbols/msbm10.pfb>
-Output written on thesis.pdf (24 pages, 697174 bytes).
+Output written on thesis.pdf (25 pages, 706163 bytes).
 PDF statistics:
- 540 PDF objects out of 1000 (max. 8388607)
- 442 compressed objects within 5 object streams
+ 563 PDF objects out of 1000 (max. 8388607)
+ 464 compressed objects within 5 object streams
  110 named destinations out of 1000 (max. 500000)
- 83829 words of extra memory for PDF output out of 89155 (max. 10000000)
+ 85901 words of extra memory for PDF output out of 89155 (max. 10000000)
 

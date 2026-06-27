@@ -247,6 +247,65 @@
       \field{note}{[Accessed 10-06-2026]}
       \field{title}{{P}ost {T}raining {Q}uantization ({P}{T}{Q}) \&\#x2014; {T}orch-{T}ensor{R}{T} --- docs.pytorch.org}
     \endentry
+    \entry{ri_dataset}{article}{}
+      \name{author}{7}{}{%
+        {{hash=9ad9b51be96fc6f1cecd1d3712020972}{%
+           family={Charoen},
+           familyi={C\bibinitperiod},
+           given={Amber},
+           giveni={A\bibinitperiod}}}%
+        {{hash=6207cc65caf659127e4e531e980facae}{%
+           family={Guo},
+           familyi={G\bibinitperiod},
+           given={Averill},
+           giveni={A\bibinitperiod}}}%
+        {{hash=749859920a964a735ce82ae1b2f832f0}{%
+           family={Fangsaard},
+           familyi={F\bibinitperiod},
+           given={Panisara},
+           giveni={P\bibinitperiod}}}%
+        {{hash=0b08a840fb392bab04bad32191a83df8}{%
+           family={Taweechainaruemitr},
+           familyi={T\bibinitperiod},
+           given={Supakorn},
+           giveni={S\bibinitperiod}}}%
+        {{hash=b522b37f19622fc14d35dd560669a4c4}{%
+           family={Wiwatwattana},
+           familyi={W\bibinitperiod},
+           given={Nuwee},
+           giveni={N\bibinitperiod}}}%
+        {{hash=885833d869a342ad2d5ccdb418a00a69}{%
+           family={Charoenpong},
+           familyi={C\bibinitperiod},
+           given={Theekapun},
+           giveni={T\bibinitperiod}}}%
+        {{hash=a88755c710d19cd7d62b07f559508091}{%
+           family={Rich},
+           familyi={R\bibinitperiod},
+           given={Harlan\bibnamedelima G.},
+           giveni={H\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+      }
+      \strng{namehash}{68f856b12e716e716474e13a627ce1b0}
+      \strng{fullhash}{9d79bf24ee593c9db7439e3bc1a6d1ba}
+      \strng{bibnamehash}{68f856b12e716e716474e13a627ce1b0}
+      \strng{authorbibnamehash}{68f856b12e716e716474e13a627ce1b0}
+      \strng{authornamehash}{68f856b12e716e716474e13a627ce1b0}
+      \strng{authorfullhash}{9d79bf24ee593c9db7439e3bc1a6d1ba}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Scientific Data}
+      \field{number}{1}
+      \field{title}{Rhode Island gastroenterology video capsule endoscopy data set}
+      \field{volume}{9}
+      \field{year}{2022}
+      \field{pages}{602}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1038/s41597-022-01726-3
+      \endverb
+    \endentry
     \entry{ekutesSearchSpaces}{misc}{}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
@@ -292,6 +351,7 @@
       \strng{authorbibnamehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
       \strng{authornamehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
       \strng{authorfullhash}{f6767567140e4bbdcb89c16c5f396b3c}
+      \field{extraname}{1}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
@@ -322,9 +382,72 @@
       \field{note}{[Accessed 20-06-2026]}
       \field{title}{{N}umerically stable {V}iterbi algorithm in {P}ython for hidden markov model state inference --- crawlingrobotfortress.blogspot.com}
     \endentry
+    \entry{werner25}{misc}{}
+      \name{author}{7}{}{%
+        {{hash=b1258645b8de9db51a640697d525be7b}{%
+           family={Werner},
+           familyi={W\bibinitperiod},
+           given={Julia},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ea9303ed41c64d47b988d2248709e6ec}{%
+           family={Bause},
+           familyi={B\bibinitperiod},
+           given={Oliver},
+           giveni={O\bibinitperiod}}}%
+        {{hash=bdec77bc903e3a994fcee6b20c33d53e}{%
+           family={Oexle},
+           familyi={O\bibinitperiod},
+           given={Julius},
+           giveni={J\bibinitperiod}}}%
+        {{hash=c6ec0d74b129445a427e49830a616fcc}{%
+           family={Floch},
+           familyi={F\bibinitperiod},
+           given={Maxime\bibnamedelima Le},
+           giveni={M\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=4baa39463a97ee9dadd9c97a1311e5fd}{%
+           family={Brinkmann},
+           familyi={B\bibinitperiod},
+           given={Franz},
+           giveni={F\bibinitperiod}}}%
+        {{hash=cc760d0052036670b732631496379091}{%
+           family={Hampe},
+           familyi={H\bibinitperiod},
+           given={Jochen},
+           giveni={J\bibinitperiod}}}%
+        {{hash=61b0a1a362ad8774b9230644fec9f028}{%
+           family={Bringmann},
+           familyi={B\bibinitperiod},
+           given={Oliver},
+           giveni={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
+      \strng{fullhash}{540ef003683174223916aa1715134e02}
+      \strng{bibnamehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
+      \strng{authorbibnamehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
+      \strng{authornamehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
+      \strng{authorfullhash}{540ef003683174223916aa1715134e02}
+      \field{extraname}{2}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.CV}
+      \field{eprinttype}{arXiv}
+      \field{title}{Seeing More with Less: Video Capsule Endoscopy with Multi-Task Learning}
+      \field{year}{2025}
+      \verb{eprint}
+      \verb 2507.23479
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2507.23479
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2507.23479
+      \endverb
+    \endentry
     \entry{geeksBN}{misc}{}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.geeksforgeeks.org/deep-learning/what-is-batch-normalization-in-deep-learning/}}
       \field{note}{[Accessed 07-06-2026]}
@@ -332,8 +455,8 @@
       \field{year}{2025}
     \endentry
     \entry{torchAAP1d}{misc}{}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://docs.pytorch.org/docs/2.12/generated/torch.nn.{A}daptive{A}vg{P}ool1d.html\#torch.nn.{A}daptive{A}vg{P}ool1d}}
       \field{note}{[Accessed 07-06-2026]}
@@ -384,6 +507,62 @@
       \field{howpublished}{\url{https://leimao.github.io/blog/{P}y{T}orch-{C}ustom-{O}peration/}}
       \field{note}{[Accessed 18-06-2026]}
       \field{title}{{P}y{T}orch {C}ustom {O}peration --- leimao.github.io}
+    \endentry
+    \entry{bause25}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=ea9303ed41c64d47b988d2248709e6ec}{%
+           family={Bause},
+           familyi={B\bibinitperiod},
+           given={Oliver},
+           giveni={O\bibinitperiod}}}%
+        {{hash=b1258645b8de9db51a640697d525be7b}{%
+           family={Werner},
+           familyi={W\bibinitperiod},
+           given={Julia},
+           giveni={J\bibinitperiod}}}%
+        {{hash=5dd8f729432078d4475585bfcf6c8d8e}{%
+           family={Palomero\bibnamedelima Bernardo},
+           familyi={P\bibinitperiod\bibinitdelim B\bibinitperiod},
+           given={Paul},
+           giveni={P\bibinitperiod}}}%
+        {{hash=61b0a1a362ad8774b9230644fec9f028}{%
+           family={Bringmann},
+           familyi={B\bibinitperiod},
+           given={Oliver},
+           giveni={O\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Okinawa, Japan}%
+      }
+      \list{publisher}{1}{%
+        {Springer-Verlag}%
+      }
+      \strng{namehash}{84e749c97f8587884f2fbbf8143e87ac}
+      \strng{fullhash}{d3e1cb2ee3f6d850cf0e212b03e0640e}
+      \strng{bibnamehash}{84e749c97f8587884f2fbbf8143e87ac}
+      \strng{authorbibnamehash}{84e749c97f8587884f2fbbf8143e87ac}
+      \strng{authornamehash}{84e749c97f8587884f2fbbf8143e87ac}
+      \strng{authorfullhash}{d3e1cb2ee3f6d850cf0e212b03e0640e}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Neural Information Processing: 32nd International Conference, ICONIP 2025, Nov. 20–24, 2025, Proceedings, Part II}
+      \field{isbn}{978-981-95-4377-9}
+      \field{title}{Smart Video Capsule Endoscopy: Raw Image-Based Localization for Enhanced GI Tract Investigation}
+      \field{year}{2025}
+      \field{pages}{33\bibrangedash 47}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1007/978-981-95-4378-6_3
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1007/978-981-95-4378-6_3
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1007/978-981-95-4378-6_3
+      \endverb
+      \keyw{Wireless Capsule Endoscopy,Bayer Image Classification,Smart Edge Devices}
     \endentry
   \enddatalist
 \endrefsection

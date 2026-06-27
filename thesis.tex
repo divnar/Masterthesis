@@ -338,11 +338,11 @@
 \tableofcontents
 
 % ------------------------------------------------
-\chapter{Introduction}
+\chapter{Introduction}\label{ch:intro}
 
 \chapter{Background}\label{ch:2}
+In this chapter, we examine the extant research on neural networks for capsule endoscopy, as well as existing tools and methodologies that have been developed to enhance the efficiency and accuracy of these networks in the specific context of edge devices such as the endoscopy capsule. We begin with a brief look at the relevant academic literature before moving on to an examination of the currently available hardware and software tools and techniques.
 
-\section{Related Work}
 
 \section{The Target Hardware}
 The target platform deploys an UltraTrail low-power neural network accelerator developed for edge devices by Paul Palomero Bernardo and his colleagues at the University of Tübingen, Germany. \cite{bernardo20}, \cite{bernardo25}. With the aim of streamlining computation across a range of temporal convolutional and residual networks, the design of the accelerator is based on a fixed workflow made up of a convolutional or linear layer, optionally followed by additional operations consisting of batch normalisation, a ReLU activation function and global average pooling, in that order \cite[6]{bernardo20}.
@@ -439,6 +439,14 @@ Finally, the dequantise operation is applied to $q$:
 
 In the backward pass, STE is employed to ensure a smooth flow of gradients.
 
+\section{The Rhode Island Dataset}
+We have already been introduced to capsule endoscopy as well as to the basics of neural networks in the Chapter \ref{ch:intro}. We have seen that the efficient use of the limited battery capacity of the endoscopy capsule is key to ensuring that high-quality images of the entire small intestine can be captured during the VCE procedure. Neural networks can aid in identifying landmarks in the progress of the capsule through the GI tract, which in turn enables the isolation of key regions that need to be scrutinised by medical experts, particularly the small intestine. The Rhode Island dataset has been specifically curated by Charoen et al. for the purpose of GI tract localisation of capsule endoscopy images \cite{ri_dataset}.
+
+This is a large dataset consisting of over 5 million image frames extracted from a total of 424 capsule endoscopy videos. A single video corresponds to a procedure conducted on a de-identified patient, and images extracted from it are collected together as a single study folder \cite[2-4]{ri_dataset}. We shall henceforth refer to such a set of image frames collected from a single capsule endoscopy procedure conducted on a patient as a `study'. Within each study, image frames are sorted into sub-folders labelled according to the four organs of the GI tract (oesophagus, stomach, small intestine and large intestine).
+
+Furthermore, 80\% of the 424 studies, totalling,339 studies, were set aside by Charoen et al. as training/validation data, with the remaining 20\% (totalling 85 studies) being reserved for the test set. Since the number of images of the oesophagus in the original training/validation set was relatively small, the the image set corresponding to the other organs was downsampled by Charoen et al. to maintain a representative balance between the various image classes. While the image frames of the training/validation set are randomised, test set samples are left as they are, i.e. sorted per study as well as maintaining the order in which they were filmed \cite[4]{ri_dataset}. The training vs. validation splits that we used in our experiments will be discussed in more detail in the next chapter.
+
+
 \section{The Previously existing Software Framework}
 \subsection{HANNAH}
 HANNAH (Hardware Accelerator and Neural Network searcH) is a Python-based coding framework for hardware accelerator design and hardware-aware neural networks developed at the Chair of Embedded Systems at the University of Tübingen, Germany. HANNAH contains a sub-framework for supporting Neural Architecture Searches. In this section, a few of the most salient aspects of the NAS sub-framework as well as other relevant portions of HANNAH will be briefly described. The tools and code discussed in this section have been programmed previously by members of the Chair of Embedded Systems, and not by the author of this thesis.
@@ -533,10 +541,10 @@ Constraints can be defined using the \py{cond()} method for the hyperparameters 
 All the constraints pertaining to the same operator are collected into a list and passed on to the \py{RandomWalkConstraintSolver}, which then attempts to find a solution that satisfies all these constraints.
 
 
-\subsection{Hidden Markov Models and The Viterbi Algorithm}
+\section{Hidden Markov Models and The Viterbi Algorithm}
 Recent work by Werner et al. \cite{werner23} has proposed using Hidden Markov Models (HMM) in combination with the Viterbi algorithm to improve CNN prediction of organs labels based on capsule endoscopy images. The classification of capsule endoscopy images should ordinarily obey the order in which the endoscopy capsule moves through the GI tract. Thus, images of the oesophagus should ordinarily appear first, followed by images of the stomach, then of the small intestine (small bowel) and finally, of the large intestine (colon). But CNNs make predictions based on each image they see, and they have no concept of order or temporality. This inability of CNNs to recognise temporal order is a frequent cause of noise in capsule endoscopy image prediction. This is where HMMs can help.
 
-\subsubsection{What is an HMM?}
+\subsection{What is an HMM?}
 An HMM is a finite state machine that can be defined as follows:
 
 \begin{definition}\label{def:hmm}
@@ -552,19 +560,16 @@ An HMM is a finite state machine that can be defined as follows:
 
 In simpler terms an HMM is a probabilistic finite-state machine that represents the relationship between unknown, independent hidden states and known, dependent observations. Given an HMM and a sequence of dependent observations, we should be able to compute the most likely sequence of hidden states.
 
-\subsubsection{The Viterbi Algorithm}
-Computing the most likely sequence of hidden states naïvely is computationally expensive. But the Viterbi algorithm makes this computation much more efficient. Furthermore, the algorithm can be made computationally more stable and economical if we work in logarithmic space \cite{blog_viterbi}. We thus replace multiplying probabilities with adding their logarithms instead. The Viterbi algorithm may be divided into three phases: \begin{enumerate*}
-	\item initialisation \item forward computation, and \item backward computation (retracing). The algorithm is presented below in pseudocode (adapted from \cite{blog_viterbi}).
-\end{enumerate*}
-
+\subsection{The Viterbi Algorithm}
+Computing the most likely sequence of hidden states naïvely is computationally expensive. But the Viterbi algorithm makes this computation much more efficient. Furthermore, the algorithm can be made computationally more stable and economical if we work in logarithmic space \cite{blog_viterbi}, since this allows us to replace multiplying probabilities with adding their logarithms instead. The algorithm is presented below in pseudocode (adapted from \cite{blog_viterbi}).
 
 \begin{spacing}{1.1}
   \begin{algorithm}[H]
 	\caption{Logarithmic Viterbi Decoder}
 	\label{alg:viterbi}
-	\KwIn{\\$Y$: observations,\\ logP: priors\\ logA: transition matrix\\ logB: emission matrix \vspace{1em}}
+	\KwIn{\\$Y$: observations, logP: priors, logA: transition matrix, logB: emission matrix}
 	\KwOut{\\Most likely sequence of hidden states}
-	%\vspace{1em}
+	\vspace{1em}
 	
 	
 	$N\gets |\text{logP}|$\\
@@ -572,14 +577,14 @@ Computing the most likely sequence of hidden states naïvely is computationally 
 	logT1 $\gets N\times M\text{matrix}$ \tcp{Store probabilities of likely path}
 	bestStates $\gets$ $N\times M$ matrix\\
 	result $\gets$ sequence of length $M$
-	%\vspace*{1em}
+	\vspace*{1em}
 
 	\tcp{Initialisation}
 	\For{$1\leq i \leq N$}
 		{logT1[$i$, 1] $\gets$ logP[$i$] + logB[$i, Y[1]]$}
 	\vspace*{1em}	
 
-	\tcp{Forward Phase (Recursion)}
+	\tcp{Forward phase (Recursion)}
 	\For {$2 \leq i \leq M$}{
 		\For{$1 \leq j \leq N$}{
 		 %\vspace*{0.25em}
@@ -593,8 +598,8 @@ Computing the most likely sequence of hidden states naïvely is computationally 
           ) + logB[$j, Y[i]$]
         }
     }
-    %\vspace*{1em}
-    \tcp{Backward phase (retracing)}
+    \vspace*{1em}
+    \tcp{Backward phase (Retracing)}
     \For{M $\geq i \geq 2$}
     	{
     		\If{$i = M$}
@@ -609,17 +614,10 @@ Computing the most likely sequence of hidden states naïvely is computationally 
   \end{algorithm}
 \end{spacing}
 
-%\[
-%T =
-%\begin{bmatrix}
-%	s_{00} & s_{01} & \cdots & s_{0m} \\
-%	s_{10} & s_{11} & \cdots & s_{1} \\
-%	\vdots & \vdots & \ddots & \vdots \\
-%	s_{n0} & s_{n1} & \cdots & s_{nm}
-%\end{bmatrix}
-%\]
+A typical study (images from a single patient) in the Rhode Island dataset often contains thousands of images. Feeding the entire image set as the observation sequence would defeat the very purpose of image prediction, which is to detect when the capsule device enters the patient's small intestine so that images do not need to be transferred at a high frame-rate before this time. To solve this problem, Werner et al. propose feeding a sliding window of images as the input observation sequence to the HMM, thus economising on memory, energy consumption and delay in the detection of the small intestine. An appropriate window size is one that maximises accuracy while minimising energy consumption and reducing delay \cite[43]{werner25}.
 
-In the final phase, use the transition matrix computed in the forward phase to compute the sequence of states that best accounts for our observation sequence.
+
+The mechanism by which using an HMM with predictions computed using the sliding-window  version of the Viterbi algorithm can be demonstrated with the help of a toy example.
 
 Assume the following mapping of organs to integer labels:
 
@@ -630,16 +628,25 @@ Assume the following mapping of organs to integer labels:
 	\text{large intestine} \leftrightarrow 3
 \end{align*}
 
-Based on this mapping, assume the following series of CNN organ predictions:
+Based on this mapping, assume the following hypothetical sequence $s$ of CNN organ predictions given a window size of 15:
 
 
 	\[
-		0,1,1,0,1,2,1,1,1,1,2,1,1,2,2,2 ...
+		s = \big[0,0,1,0,0,1,0,1,1,1,2,1,1,2,2\big]
 	\]
+	
+We assign our HMM a transition matrix with a miniscule probability of moving to a previous state, so as to make this virtually impossible. For instance, moving from the stomach to the small intestine should be all but impossible. We also bias it towards staying in the same state, by assigning a high probability $p_\text{self}$ of a self-transition. The probability of moving to the next state may then be set to $1-p_\text{self}$. We also set the prior of state 0 at the starting time-step to be 1, meaning that we always start with the oesophagus. Assume also, that we have computed a suitable emission matrix. Then, when $s$ is passed to our HMM, it might output the following revised sequence:
 
+	\[
+		s^\prime = \big[0,0,0,1,1,1,1,1,1,1,1,1,1,1,1\big] \big[0,0,0,0,0,1,1,1,1,1,1,1,1,1,2\big]
+	\]
+	
+There is no guarantee that $s^\prime$ is closer to the true predictions than $s$ is. For instance, the true sequence of predictions could have been $\big[0,0,0,0,0,1,1,1,1,1,1,1,1,1,2\big]$. But the predictions produced by the HMM are nevertheless biologically more plausible, less noisy and more likely to be accurate. Predictions \textit{within} a window frame are guaranteed to be a monotonically rising function when plotted against time-steps in ascending order. However, this monotonicity can be broken during transitions from one window to the next, as the HMM has no memory of predictions it made in a previous window.
+
+\section{Current Capsule Endoscopy Models}
 
 \section{Conclusion}
-
+In this chapter, we examined existing research, tools and concepts related to the topic of neural architectures for capsule endoscopy. The tools include hardware, specifically the UltraTrail AI accelerator, as well as the HANNAH software framework. Key concepts include QAT and HMMs in combination with the Viterbi Algorithm, which research by Werner et al. has shown to be useful in improving the accuracy of predictions produced by a CNN.
 
 \chapter{Methods and Tools}
 
@@ -941,10 +948,20 @@ Additionally, we create a class \py{UltraTrailSTEQuantize} that inherits from \p
 Finally, \py{UltraTrailSTEQuantize} is called by \py{UltraTrailNet}'s \py{_quantize} method (see \ref{sec:utn}).
 
 \subsection{Significance of UltraTrailNet}
-By using HANNAH's in-built \py{RandomWalkConstraintSolver}, we are able to apply constraints so that all search space layers constructed as members of the \py{UltraTrailNet} class are automatically guaranteed to adhere to these constraints. This, in turn, ensures that all models produced by a NAS, whose networks are instantiated as objects of the \py{UltraTrailNet} class are compatible with the UltraTrail AI accelerator.
+By using HANNAH's in-built \py{RandomWalkConstraintSolver}, we are able to apply constraints so that all search space layers constructed as members of the \py{UltraTrailNet} class are automatically guaranteed to adhere to these constraints. Ultra-Trail compatible QAT is also automatically applied in all convolution and linear layers. This, in turn, ensures that all models produced by a NAS, whose networks are instantiated as objects of the \py{UltraTrailNet} class are compatible with the UltraTrail AI accelerator.
+
+\section{Search Space Design and Strategy}
+Now that we have the tools ready, we can begin the task of constructing search spaces and evolving search strategies. We begin by examining the best available model proposed by Bause et al. \cite{bause25}. 
+
+%1. Drafting an initial search space strategy based on earlier models
+%
+%2. Constructing the search space
+%
+%3. Choose search hyperparameters
+%
+%4. After search, refine search space strategy and design based on results
 
 
-\section{Designing and Constructing Search Spaces}
 
 \section{Integrating HMM into the NAS Framework}
 
