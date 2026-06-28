@@ -8,6 +8,13 @@
             bottom=2.5cm,
             left=3cm,
             right=3cm]{geometry}
+            
+% ------------------------------------------------
+% TABLES
+% ------------------------------------------------
+\usepackage{booktabs}
+\usepackage{array}
+
 
 % ------------------------------------------------
 % LANGUAGE & ENCODING
@@ -27,7 +34,7 @@
 % ------------------------------------------------
 % COLOURS
 % ------------------------------------------------
-\usepackage{xcolor}
+\usepackage[table]{xcolor}
 \definecolor{thesisblue}{RGB}{87,155,223}
 \definecolor{codebg}{RGB}{245,245,245}
 \definecolor{linkbluegray}{RGB}{110,125,150}
@@ -644,9 +651,30 @@ We assign our HMM a transition matrix with a miniscule probability of moving to 
 There is no guarantee that $s^\prime$ is closer to the true predictions than $s$ is. For instance, the true sequence of predictions could have been $\big[0,0,0,0,0,1,1,1,1,1,1,1,1,1,2\big]$. But the predictions produced by the HMM are nevertheless biologically more plausible, less noisy and more likely to be accurate. Predictions \textit{within} a window frame are guaranteed to be a monotonically rising function when plotted against time-steps in ascending order. However, this monotonicity can be broken during transitions from one window to the next, as the HMM has no memory of predictions it made in a previous window.
 
 \section{Current Capsule Endoscopy Models}
+Since this thesis is concerned specifically with NAS for capsule endoscopy organ classification using the Rhode Island dataset, we restrict our discussion in this section to models designed for this purpose and using the same dataset. In the very paper that published the RI dataset, Charoen et al. trained and tested the ResNet V2 model and the trained model achieved an accuracy of 97.1\% \cite[4]{ri_dataset}.
+
+However, it must be noted that ResNet V2 is a very heavy model with around 56 million parameters and is thus unsuitable for a low-energy edge device such as the endoscopy capsule. Werner et al. proposed using HMMs to improve CNN accuracy and tested the MobileNetV3-Small model, which has around 1 million parameters. This model achieved an accuracy of 96.95\% on its own and 98.04\% with an HMM attachment using a window size of 300. 
+
+The endoscopy capsule is fitted with a camera that, like most digital cameras, is equipped with a Bayer filter. Images captured by such a camera need to be converted to RGB format before being fed as inputs to a CNN.  Bause et al. propose using raw Bayer (RGGB format) images as inputs to the CNN instead, thus saving on the energy and memory required for the conversion of RGGB images to RGB images. The raw Bayer images can instead be converted to RGB images outside the capsule, so that they can be properly evaluated and analysed by qualified medical professionals. Furthermore, Bause et al. propose a modified version of the capsule endoscopy model put forward by Palomero Bernardo et al. \cite{bernardo25}. In the modified version, the input is reshaped to a dimension of $320\times 40$ with 8 channels. The first convolutional layer downsamples this input to $40 \times 40$ with 8 out-channels by applying an $8\times 1$ kernel with a stride of 8. To the best of our knowledge, this is the best performing model so far. Performance metrics of the models discussed in this section are presented below in tabular form.
+
+
+\begin{center}
+  \arrayrulecolor{thesisblue}
+  \begin{tabular}{ccccccc}
+  	\toprule
+  	\rowcolor{thesisblue!10}
+  	Model & Input & \# Parameters & \% Accuracy & \% Recall & \% Precision & \% F1-Score\\
+  	\midrule
+   ResNet V2 \cite{ri_dataset} & RGB & 56M & 97.1 & 97.93 & 99.39 & 98.65\\
+   MobileNetV3 \cite{werner23} & RGB & 1M & 96.95 & - & - & -\\
+   MobileNetV3 \cite{bause25} & RGB & 1M & 97.14 & 95.74 & 87.25 & 90.89\\
+   MobileNetV3 \cite{bause25} & RGGB & 1M & 96.20 & 94.30 & 83.92 & 88.12\\	
+  	\bottomrule
+  \end{tabular}
+\end{center}
 
 \section{Conclusion}
-In this chapter, we examined existing research, tools and concepts related to the topic of neural architectures for capsule endoscopy. The tools include hardware, specifically the UltraTrail AI accelerator, as well as the HANNAH software framework. Key concepts include QAT and HMMs in combination with the Viterbi Algorithm, which research by Werner et al. has shown to be useful in improving the accuracy of predictions produced by a CNN.
+In this chapter, we examined existing research, tools and concepts related to the topic of neural architectures for capsule endoscopy. The tools include hardware, specifically the UltraTrail AI accelerator, as well as the HANNAH software framework. Key concepts include QAT and HMMs in combination with the Viterbi Algorithm, which research by Werner et al. has shown to be useful in improving the accuracy of predictions produced by a CNN. In the next chapter, we build on these tools and techniques to build a framework that will enable efficient neural architecture searches for UltraTrail-based edge devices, as well as develop methods and strategies for conducting NAS specifically for capsule endoscopy.
 
 \chapter{Methods and Tools}
 

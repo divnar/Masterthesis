@@ -445,69 +445,6 @@
       \verb https://arxiv.org/abs/2507.23479
       \endverb
     \endentry
-    \entry{geeksBN}{misc}{}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://www.geeksforgeeks.org/deep-learning/what-is-batch-normalization-in-deep-learning/}}
-      \field{note}{[Accessed 07-06-2026]}
-      \field{title}{{W}hat is {B}atch {N}ormalization {I}n {D}eep {L}earning? - {G}eeksfor{G}eeks --- geeksforgeeks.org}
-      \field{year}{2025}
-    \endentry
-    \entry{torchAAP1d}{misc}{}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://docs.pytorch.org/docs/2.12/generated/torch.nn.{A}daptive{A}vg{P}ool1d.html\#torch.nn.{A}daptive{A}vg{P}ool1d}}
-      \field{note}{[Accessed 07-06-2026]}
-      \field{title}{{A}daptive{A}vg{P}ool1d \&\#x2014; {P}y{T}orch 2.12 documentation --- docs.pytorch.org}
-    \endentry
-    \entry{torchAAP2d}{misc}{}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://docs.pytorch.org/docs/2.12/generated/torch.nn.{A}daptive{A}vg{P}ool2d.html\#torch.nn.{A}daptive{A}vg{P}ool2d}}
-      \field{note}{[Accessed 07-06-2026]}
-      \field{title}{{A}daptive{A}vg{P}ool2d \&\#x2014; {P}y{T}orch 2.12 documentation --- docs.pytorch.org}
-    \endentry
-    \entry{torch_custom}{misc}{}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://docs.pytorch.org/tutorials/advanced/python\_custom\_ops.html\#python-custom-ops-tutorial}}
-      \field{note}{[Accessed 18-06-2026]}
-      \field{title}{{C}ustom {P}ython {O}perators \&\#x2014; {P}y{T}orch {T}utorials 2.12.0+cu130 documentation --- docs.pytorch.org}
-    \endentry
-    \entry{torch_lib}{misc}{}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://docs.pytorch.org/docs/2.12/library.html\#torch.library.custom\_op}}
-      \field{note}{[Accessed 18-06-2026]}
-      \field{title}{torch.library \&\#x2014; {P}y{T}orch 2.12 documentation --- docs.pytorch.org}
-    \endentry
-    \entry{leimao_custom}{misc}{}
-      \name{author}{1}{}{%
-        {{hash=35f1a7bc88916938dc7eb55fae761594}{%
-           family={Mao},
-           familyi={M\bibinitperiod},
-           given={Lei},
-           giveni={L\bibinitperiod}}}%
-      }
-      \strng{namehash}{35f1a7bc88916938dc7eb55fae761594}
-      \strng{fullhash}{35f1a7bc88916938dc7eb55fae761594}
-      \strng{bibnamehash}{35f1a7bc88916938dc7eb55fae761594}
-      \strng{authorbibnamehash}{35f1a7bc88916938dc7eb55fae761594}
-      \strng{authornamehash}{35f1a7bc88916938dc7eb55fae761594}
-      \strng{authorfullhash}{35f1a7bc88916938dc7eb55fae761594}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://leimao.github.io/blog/{P}y{T}orch-{C}ustom-{O}peration/}}
-      \field{note}{[Accessed 18-06-2026]}
-      \field{title}{{P}y{T}orch {C}ustom {O}peration --- leimao.github.io}
-    \endentry
     \entry{bause25}{inproceedings}{}
       \name{author}{4}{}{%
         {{hash=ea9303ed41c64d47b988d2248709e6ec}{%
@@ -563,6 +500,69 @@
       \verb https://doi.org/10.1007/978-981-95-4378-6_3
       \endverb
       \keyw{Wireless Capsule Endoscopy,Bayer Image Classification,Smart Edge Devices}
+    \endentry
+    \entry{geeksBN}{misc}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.geeksforgeeks.org/deep-learning/what-is-batch-normalization-in-deep-learning/}}
+      \field{note}{[Accessed 07-06-2026]}
+      \field{title}{{W}hat is {B}atch {N}ormalization {I}n {D}eep {L}earning? - {G}eeksfor{G}eeks --- geeksforgeeks.org}
+      \field{year}{2025}
+    \endentry
+    \entry{torchAAP1d}{misc}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://docs.pytorch.org/docs/2.12/generated/torch.nn.{A}daptive{A}vg{P}ool1d.html\#torch.nn.{A}daptive{A}vg{P}ool1d}}
+      \field{note}{[Accessed 07-06-2026]}
+      \field{title}{{A}daptive{A}vg{P}ool1d \&\#x2014; {P}y{T}orch 2.12 documentation --- docs.pytorch.org}
+    \endentry
+    \entry{torchAAP2d}{misc}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://docs.pytorch.org/docs/2.12/generated/torch.nn.{A}daptive{A}vg{P}ool2d.html\#torch.nn.{A}daptive{A}vg{P}ool2d}}
+      \field{note}{[Accessed 07-06-2026]}
+      \field{title}{{A}daptive{A}vg{P}ool2d \&\#x2014; {P}y{T}orch 2.12 documentation --- docs.pytorch.org}
+    \endentry
+    \entry{torch_custom}{misc}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://docs.pytorch.org/tutorials/advanced/python\_custom\_ops.html\#python-custom-ops-tutorial}}
+      \field{note}{[Accessed 18-06-2026]}
+      \field{title}{{C}ustom {P}ython {O}perators \&\#x2014; {P}y{T}orch {T}utorials 2.12.0+cu130 documentation --- docs.pytorch.org}
+    \endentry
+    \entry{torch_lib}{misc}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://docs.pytorch.org/docs/2.12/library.html\#torch.library.custom\_op}}
+      \field{note}{[Accessed 18-06-2026]}
+      \field{title}{torch.library \&\#x2014; {P}y{T}orch 2.12 documentation --- docs.pytorch.org}
+    \endentry
+    \entry{leimao_custom}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=35f1a7bc88916938dc7eb55fae761594}{%
+           family={Mao},
+           familyi={M\bibinitperiod},
+           given={Lei},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{35f1a7bc88916938dc7eb55fae761594}
+      \strng{fullhash}{35f1a7bc88916938dc7eb55fae761594}
+      \strng{bibnamehash}{35f1a7bc88916938dc7eb55fae761594}
+      \strng{authorbibnamehash}{35f1a7bc88916938dc7eb55fae761594}
+      \strng{authornamehash}{35f1a7bc88916938dc7eb55fae761594}
+      \strng{authorfullhash}{35f1a7bc88916938dc7eb55fae761594}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://leimao.github.io/blog/{P}y{T}orch-{C}ustom-{O}peration/}}
+      \field{note}{[Accessed 18-06-2026]}
+      \field{title}{{P}y{T}orch {C}ustom {O}peration --- leimao.github.io}
     \endentry
   \enddatalist
 \endrefsection
