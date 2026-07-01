@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+		\PYG{k}{if} \PYG{o+ow}{not} \PYG{n}{is\PYGZus{}last}\PYG{p}{:}
+			\PYG{n}{warnings}\PYG{o}{.}\PYG{n}{warn}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}WARNING: Either a linear layer is not the}\PYG{l+s+se}{\PYGZbs{}}
+\PYG{l+s+s2}{			last layer or the is\PYGZus{}last flag is incorrectly set.\PYGZdq{}}\PYG{p}{)}
+\end{Verbatim}

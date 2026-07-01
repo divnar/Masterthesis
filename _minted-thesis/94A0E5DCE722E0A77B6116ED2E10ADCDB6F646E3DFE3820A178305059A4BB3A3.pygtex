@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+	\PYG{k}{if} \PYG{n}{depthwise}\PYG{p}{:}
+		\PYG{n}{conv}\PYG{o}{.}\PYG{n}{cond}\PYG{p}{(}\PYG{n}{groups} \PYG{o}{\PYGZpc{}} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{hardware\PYGZus{}dim} \PYG{o}{==} \PYG{l+m+mi}{0}\PYG{p}{)}	
+\end{Verbatim}

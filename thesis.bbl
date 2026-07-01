@@ -74,6 +74,66 @@
       \verb 10.1109/TCAD.2020.3012320
       \endverb
     \endentry
+    \entry{werner23}{inbook}{}
+      \name{author}{5}{}{%
+        {{hash=b1258645b8de9db51a640697d525be7b}{%
+           family={Werner},
+           familyi={W\bibinitperiod},
+           given={Julia},
+           giveni={J\bibinitperiod}}}%
+        {{hash=eac0abfdfac91098246395fd03dbbc02}{%
+           family={Gerum},
+           familyi={G\bibinitperiod},
+           given={Christoph},
+           giveni={C\bibinitperiod}}}%
+        {{hash=a10f00c5c4a491cc24c455b35ffb6d84}{%
+           family={Reiber},
+           familyi={R\bibinitperiod},
+           given={Moritz},
+           giveni={M\bibinitperiod}}}%
+        {{hash=7296607af7bd1f28c529bbd8f0e5564e}{%
+           family={Nick},
+           familyi={N\bibinitperiod},
+           given={Jörg},
+           giveni={J\bibinitperiod}}}%
+        {{hash=61b0a1a362ad8774b9230644fec9f028}{%
+           family={Bringmann},
+           familyi={B\bibinitperiod},
+           given={Oliver},
+           giveni={O\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Springer Nature Switzerland}%
+      }
+      \strng{namehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
+      \strng{fullhash}{f6767567140e4bbdcb89c16c5f396b3c}
+      \strng{bibnamehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
+      \strng{authorbibnamehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
+      \strng{authornamehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
+      \strng{authorfullhash}{f6767567140e4bbdcb89c16c5f396b3c}
+      \field{extraname}{1}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Machine Learning in Medical Imaging}
+      \field{isbn}{9783031456763}
+      \field{issn}{1611-3349}
+      \field{month}{10}
+      \field{title}{Precise Localization Within the GI Tract by Combining Classification of CNNs and Time-Series Analysis of HMMs}
+      \field{year}{2023}
+      \field{pages}{174\bibrangedash 183}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1007/978-3-031-45676-3_18
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.1007/978-3-031-45676-3_18
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.1007/978-3-031-45676-3_18
+      \endverb
+    \endentry
     \entry{bernardo25}{article}{}
       \name{author}{4}{}{%
         {{hash=2fa9c0f6a980cca5e24d6c543040cce2}{%
@@ -104,8 +164,8 @@
       \strng{authornamehash}{c5f1c02322502952d803934501353102}
       \strng{authorfullhash}{c808a1d1aed754cb13948933a12b647f}
       \field{extraname}{2}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{journaltitle}{EdgeSys '25}
@@ -132,8 +192,8 @@
       \strng{authorbibnamehash}{5dd8f729432078d4475585bfcf6c8d8e}
       \strng{authornamehash}{5dd8f729432078d4475585bfcf6c8d8e}
       \strng{authorfullhash}{5dd8f729432078d4475585bfcf6c8d8e}
-      \field{sortinit}{5}
-      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
       \field{labelnamesource}{author}
       \field{howpublished}{personal communication}
       \field{year}{2025}
@@ -155,8 +215,8 @@
       \strng{authorbibnamehash}{0eb08049c69f6c6bd9af2bca0f0b79f8}
       \strng{authornamehash}{0eb08049c69f6c6bd9af2bca0f0b79f8}
       \strng{authorfullhash}{0eb08049c69f6c6bd9af2bca0f0b79f8}
-      \field{sortinit}{6}
-      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{sortinit}{8}
+      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{booktitle}{Proceedings of the 2025 International Symposium on Artificial Intelligence and Computational Social Sciences}
@@ -226,8 +286,8 @@
       \strng{authorbibnamehash}{be1e8607db7344f1c8e395537c88d55a}
       \strng{authornamehash}{be1e8607db7344f1c8e395537c88d55a}
       \strng{authorfullhash}{3ad38e526037fc692f33aef3160b0293}
-      \field{sortinit}{7}
-      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{sortinit}{9}
+      \field{sortinithash}{0a5ebc79d83c96b6579069544c73c7d4}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{month}{06}
@@ -240,12 +300,83 @@
       \endverb
     \endentry
     \entry{pytorch_ptq}{misc}{}
-      \field{sortinit}{8}
-      \field{sortinithash}{a231b008ebf0ecbe0b4d96dcc159445f}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://docs.pytorch.org/{T}ensor{R}{T}/ts/ptq.html}}
       \field{note}{[Accessed 10-06-2026]}
       \field{title}{{P}ost {T}raining {Q}uantization ({P}{T}{Q}) \&\#x2014; {T}orch-{T}ensor{R}{T} --- docs.pytorch.org}
+    \endentry
+    \entry{blog_viterbi}{misc}{}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://crawlingrobotfortress.blogspot.com/2016/07/python-recipe-for-numerically-stable.html}}
+      \field{note}{[Accessed 20-06-2026]}
+      \field{title}{{N}umerically stable {V}iterbi algorithm in {P}ython for hidden markov model state inference --- crawlingrobotfortress.blogspot.com}
+    \endentry
+    \entry{werner25}{misc}{}
+      \name{author}{7}{}{%
+        {{hash=b1258645b8de9db51a640697d525be7b}{%
+           family={Werner},
+           familyi={W\bibinitperiod},
+           given={Julia},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ea9303ed41c64d47b988d2248709e6ec}{%
+           family={Bause},
+           familyi={B\bibinitperiod},
+           given={Oliver},
+           giveni={O\bibinitperiod}}}%
+        {{hash=bdec77bc903e3a994fcee6b20c33d53e}{%
+           family={Oexle},
+           familyi={O\bibinitperiod},
+           given={Julius},
+           giveni={J\bibinitperiod}}}%
+        {{hash=c6ec0d74b129445a427e49830a616fcc}{%
+           family={Floch},
+           familyi={F\bibinitperiod},
+           given={Maxime\bibnamedelima Le},
+           giveni={M\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=4baa39463a97ee9dadd9c97a1311e5fd}{%
+           family={Brinkmann},
+           familyi={B\bibinitperiod},
+           given={Franz},
+           giveni={F\bibinitperiod}}}%
+        {{hash=cc760d0052036670b732631496379091}{%
+           family={Hampe},
+           familyi={H\bibinitperiod},
+           given={Jochen},
+           giveni={J\bibinitperiod}}}%
+        {{hash=61b0a1a362ad8774b9230644fec9f028}{%
+           family={Bringmann},
+           familyi={B\bibinitperiod},
+           given={Oliver},
+           giveni={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
+      \strng{fullhash}{540ef003683174223916aa1715134e02}
+      \strng{bibnamehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
+      \strng{authorbibnamehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
+      \strng{authornamehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
+      \strng{authorfullhash}{540ef003683174223916aa1715134e02}
+      \field{extraname}{2}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.CV}
+      \field{eprinttype}{arXiv}
+      \field{title}{Seeing More with Less: Video Capsule Endoscopy with Multi-Task Learning}
+      \field{year}{2025}
+      \verb{eprint}
+      \verb 2507.23479
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2507.23479
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2507.23479
+      \endverb
     \endentry
     \entry{ri_dataset}{article}{}
       \name{author}{7}{}{%
@@ -306,145 +437,6 @@
       \verb 10.1038/s41597-022-01726-3
       \endverb
     \endentry
-    \entry{ekutesSearchSpaces}{misc}{}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://ekut-es.github.io/hannah/neural-architecture-search/nas/search\_spaces/}}
-      \field{note}{[Accessed 24-04-2026]}
-      \field{title}{{S}earch {S}paces - {H}{A}{N}{N}{A}{H} --- ekut-es.github.io}
-    \endentry
-    \entry{werner23}{inbook}{}
-      \name{author}{5}{}{%
-        {{hash=b1258645b8de9db51a640697d525be7b}{%
-           family={Werner},
-           familyi={W\bibinitperiod},
-           given={Julia},
-           giveni={J\bibinitperiod}}}%
-        {{hash=eac0abfdfac91098246395fd03dbbc02}{%
-           family={Gerum},
-           familyi={G\bibinitperiod},
-           given={Christoph},
-           giveni={C\bibinitperiod}}}%
-        {{hash=a10f00c5c4a491cc24c455b35ffb6d84}{%
-           family={Reiber},
-           familyi={R\bibinitperiod},
-           given={Moritz},
-           giveni={M\bibinitperiod}}}%
-        {{hash=7296607af7bd1f28c529bbd8f0e5564e}{%
-           family={Nick},
-           familyi={N\bibinitperiod},
-           given={Jörg},
-           giveni={J\bibinitperiod}}}%
-        {{hash=61b0a1a362ad8774b9230644fec9f028}{%
-           family={Bringmann},
-           familyi={B\bibinitperiod},
-           given={Oliver},
-           giveni={O\bibinitperiod}}}%
-      }
-      \list{publisher}{1}{%
-        {Springer Nature Switzerland}%
-      }
-      \strng{namehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
-      \strng{fullhash}{f6767567140e4bbdcb89c16c5f396b3c}
-      \strng{bibnamehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
-      \strng{authorbibnamehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
-      \strng{authornamehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
-      \strng{authorfullhash}{f6767567140e4bbdcb89c16c5f396b3c}
-      \field{extraname}{1}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{booktitle}{Machine Learning in Medical Imaging}
-      \field{isbn}{9783031456763}
-      \field{issn}{1611-3349}
-      \field{month}{10}
-      \field{title}{Precise Localization Within the GI Tract by Combining Classification of CNNs and Time-Series Analysis of HMMs}
-      \field{year}{2023}
-      \field{pages}{174\bibrangedash 183}
-      \range{pages}{10}
-      \verb{doi}
-      \verb 10.1007/978-3-031-45676-3_18
-      \endverb
-      \verb{urlraw}
-      \verb http://dx.doi.org/10.1007/978-3-031-45676-3_18
-      \endverb
-      \verb{url}
-      \verb http://dx.doi.org/10.1007/978-3-031-45676-3_18
-      \endverb
-    \endentry
-    \entry{blog_viterbi}{misc}{}
-      \field{sortinit}{1}
-      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
-      \field{labeltitlesource}{title}
-      \field{howpublished}{\url{https://crawlingrobotfortress.blogspot.com/2016/07/python-recipe-for-numerically-stable.html}}
-      \field{note}{[Accessed 20-06-2026]}
-      \field{title}{{N}umerically stable {V}iterbi algorithm in {P}ython for hidden markov model state inference --- crawlingrobotfortress.blogspot.com}
-    \endentry
-    \entry{werner25}{misc}{}
-      \name{author}{7}{}{%
-        {{hash=b1258645b8de9db51a640697d525be7b}{%
-           family={Werner},
-           familyi={W\bibinitperiod},
-           given={Julia},
-           giveni={J\bibinitperiod}}}%
-        {{hash=ea9303ed41c64d47b988d2248709e6ec}{%
-           family={Bause},
-           familyi={B\bibinitperiod},
-           given={Oliver},
-           giveni={O\bibinitperiod}}}%
-        {{hash=bdec77bc903e3a994fcee6b20c33d53e}{%
-           family={Oexle},
-           familyi={O\bibinitperiod},
-           given={Julius},
-           giveni={J\bibinitperiod}}}%
-        {{hash=c6ec0d74b129445a427e49830a616fcc}{%
-           family={Floch},
-           familyi={F\bibinitperiod},
-           given={Maxime\bibnamedelima Le},
-           giveni={M\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
-        {{hash=4baa39463a97ee9dadd9c97a1311e5fd}{%
-           family={Brinkmann},
-           familyi={B\bibinitperiod},
-           given={Franz},
-           giveni={F\bibinitperiod}}}%
-        {{hash=cc760d0052036670b732631496379091}{%
-           family={Hampe},
-           familyi={H\bibinitperiod},
-           given={Jochen},
-           giveni={J\bibinitperiod}}}%
-        {{hash=61b0a1a362ad8774b9230644fec9f028}{%
-           family={Bringmann},
-           familyi={B\bibinitperiod},
-           given={Oliver},
-           giveni={O\bibinitperiod}}}%
-      }
-      \strng{namehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
-      \strng{fullhash}{540ef003683174223916aa1715134e02}
-      \strng{bibnamehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
-      \strng{authorbibnamehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
-      \strng{authornamehash}{974d8ba5cf377bfe0b4852cf6e1dda25}
-      \strng{authorfullhash}{540ef003683174223916aa1715134e02}
-      \field{extraname}{2}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
-      \field{labelnamesource}{author}
-      \field{labeltitlesource}{title}
-      \field{eprintclass}{cs.CV}
-      \field{eprinttype}{arXiv}
-      \field{title}{Seeing More with Less: Video Capsule Endoscopy with Multi-Task Learning}
-      \field{year}{2025}
-      \verb{eprint}
-      \verb 2507.23479
-      \endverb
-      \verb{urlraw}
-      \verb https://arxiv.org/abs/2507.23479
-      \endverb
-      \verb{url}
-      \verb https://arxiv.org/abs/2507.23479
-      \endverb
-    \endentry
     \entry{bause25}{inproceedings}{}
       \name{author}{4}{}{%
         {{hash=ea9303ed41c64d47b988d2248709e6ec}{%
@@ -501,9 +493,96 @@
       \endverb
       \keyw{Wireless Capsule Endoscopy,Bayer Image Classification,Smart Edge Devices}
     \endentry
-    \entry{geeksBN}{misc}{}
+    \entry{elsken19}{article}{}
+      \name{author}{3}{}{%
+        {{hash=17831398c93648de0ce8c5bcfbbc9784}{%
+           family={Elsken},
+           familyi={E\bibinitperiod},
+           given={Thomas},
+           giveni={T\bibinitperiod}}}%
+        {{hash=21923fb486ef4c63bad4c8fcac6cc124}{%
+           family={Metzen},
+           familyi={M\bibinitperiod},
+           given={Jan\bibnamedelima Hendrik},
+           giveni={J\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=528d4af87fd2ecf5fb8a22db913ce088}{%
+           family={Hutter},
+           familyi={H\bibinitperiod},
+           given={Frank},
+           giveni={F\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {JMLR.org}%
+      }
+      \strng{namehash}{ed1f11ecdd12a620b5f6316dbe235ed3}
+      \strng{fullhash}{ed1f11ecdd12a620b5f6316dbe235ed3}
+      \strng{bibnamehash}{ed1f11ecdd12a620b5f6316dbe235ed3}
+      \strng{authorbibnamehash}{ed1f11ecdd12a620b5f6316dbe235ed3}
+      \strng{authornamehash}{ed1f11ecdd12a620b5f6316dbe235ed3}
+      \strng{authorfullhash}{ed1f11ecdd12a620b5f6316dbe235ed3}
       \field{sortinit}{2}
       \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1532-4435}
+      \field{month}{1}
+      \field{number}{1}
+      \field{title}{Neural architecture search: a survey}
+      \field{volume}{20}
+      \field{year}{2019}
+      \field{pages}{1997\bibrangedash 2017}
+      \range{pages}{21}
+      \keyw{search strategy,search space design,performance estimation strategy,neural architecture search,autoML,autoDL}
+    \endentry
+    \entry{reiber26}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=a10f00c5c4a491cc24c455b35ffb6d84}{%
+           family={Reiber},
+           familyi={R\bibinitperiod},
+           given={Moritz},
+           giveni={M\bibinitperiod}}}%
+        {{hash=eac0abfdfac91098246395fd03dbbc02}{%
+           family={Gerum},
+           familyi={G\bibinitperiod},
+           given={Christoph},
+           giveni={C\bibinitperiod}}}%
+        {{hash=61b0a1a362ad8774b9230644fec9f028}{%
+           family={Bringmann},
+           familyi={B\bibinitperiod},
+           given={Oliver},
+           giveni={O\bibinitperiod}}}%
+      }
+      \strng{namehash}{6fb5e0d4681e6ba4f8eb28716ed19cd3}
+      \strng{fullhash}{6fb5e0d4681e6ba4f8eb28716ed19cd3}
+      \strng{bibnamehash}{6fb5e0d4681e6ba4f8eb28716ed19cd3}
+      \strng{authorbibnamehash}{6fb5e0d4681e6ba4f8eb28716ed19cd3}
+      \strng{authornamehash}{6fb5e0d4681e6ba4f8eb28716ed19cd3}
+      \strng{authorfullhash}{6fb5e0d4681e6ba4f8eb28716ed19cd3}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{2026 31st Asia and South Pacific Design Automation Conference (ASP-DAC)}
+      \field{title}{Constrained NAS via Symbolic Expressions in Declarative Hierarchical Search Spaces}
+      \field{year}{2026}
+      \field{pages}{1013\bibrangedash 1020}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1109/ASP-DAC66049.2026.11420479
+      \endverb
+      \keyw{Design automation;Accuracy;Architecture;Memory management;Buildings;Asia;Hardware;Robustness;Topology;Neural architecture search;NAS;Search Space;Design Space;Modular;Hierarchical}
+    \endentry
+    \entry{ekutesSearchSpaces}{misc}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://ekut-es.github.io/hannah/neural-architecture-search/nas/search\_spaces/}}
+      \field{note}{[Accessed 24-04-2026]}
+      \field{title}{{S}earch {S}paces - {H}{A}{N}{N}{A}{H} --- ekut-es.github.io}
+    \endentry
+    \entry{geeksBN}{misc}{}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://www.geeksforgeeks.org/deep-learning/what-is-batch-normalization-in-deep-learning/}}
       \field{note}{[Accessed 07-06-2026]}
@@ -511,8 +590,8 @@
       \field{year}{2025}
     \endentry
     \entry{torchAAP1d}{misc}{}
-      \field{sortinit}{2}
-      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://docs.pytorch.org/docs/2.12/generated/torch.nn.{A}daptive{A}vg{P}ool1d.html\#torch.nn.{A}daptive{A}vg{P}ool1d}}
       \field{note}{[Accessed 07-06-2026]}
@@ -535,8 +614,8 @@
       \field{title}{{C}ustom {P}ython {O}perators \&\#x2014; {P}y{T}orch {T}utorials 2.12.0+cu130 documentation --- docs.pytorch.org}
     \endentry
     \entry{torch_lib}{misc}{}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://docs.pytorch.org/docs/2.12/library.html\#torch.library.custom\_op}}
       \field{note}{[Accessed 18-06-2026]}
@@ -556,8 +635,8 @@
       \strng{authorbibnamehash}{35f1a7bc88916938dc7eb55fae761594}
       \strng{authornamehash}{35f1a7bc88916938dc7eb55fae761594}
       \strng{authorfullhash}{35f1a7bc88916938dc7eb55fae761594}
-      \field{sortinit}{3}
-      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{howpublished}{\url{https://leimao.github.io/blog/{P}y{T}orch-{C}ustom-{O}peration/}}

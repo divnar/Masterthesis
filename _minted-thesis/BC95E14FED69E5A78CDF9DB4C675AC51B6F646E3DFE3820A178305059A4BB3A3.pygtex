@@ -1,6 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-	\PYG{k}{class} \PYG{n+nc}{UltraTrailSTEQuantize}\PYG{p}{(}\PYG{n}{Requantize}\PYG{p}{):}
-	\PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{):}
-	\PYG{n+nb}{super}\PYG{p}{()}\PYG{o}{.}\PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{()}
-	\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{quantize} \PYG{o}{=} \PYG{n}{UltraTrailQuantizer}\PYG{p}{()}
-\end{Verbatim}

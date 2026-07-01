@@ -1,9 +1,9 @@
 \begin{Verbatim}[commandchars=\\\{\}]
 \PYG{k}{class} \PYG{n+nc}{UltraTrailQuantizer}\PYG{p}{(}\PYG{n}{nn}\PYG{o}{.}\PYG{n}{Module}\PYG{p}{):}
 \PYG{k}{def} \PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{num\PYGZus{}bits}\PYG{o}{=}\PYG{l+m+mi}{8}\PYG{p}{):}
-\PYG{n+nb}{super}\PYG{p}{()}\PYG{o}{.}\PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{()}
-\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{num\PYGZus{}bits} \PYG{o}{=} \PYG{n}{num\PYGZus{}bits}
+	\PYG{n+nb}{super}\PYG{p}{()}\PYG{o}{.}\PYG{n+nf+fm}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{()}
+	\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{num\PYGZus{}bits} \PYG{o}{=} \PYG{n}{num\PYGZus{}bits}
 
 \PYG{k}{def} \PYG{n+nf}{forward}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n+nb}{input}\PYG{p}{):}
-\PYG{k}{return} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{ops}\PYG{o}{.}\PYG{n}{ekut}\PYG{o}{.}\PYG{n}{quantize}\PYG{p}{(}\PYG{n+nb}{input}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{num\PYGZus{}bits}\PYG{p}{)}
+	\PYG{k}{return} \PYG{n}{torch}\PYG{o}{.}\PYG{n}{ops}\PYG{o}{.}\PYG{n}{ekut}\PYG{o}{.}\PYG{n}{quantize}\PYG{p}{(}\PYG{n+nb}{input}\PYG{p}{,} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{num\PYGZus{}bits}\PYG{p}{)}
 \end{Verbatim}

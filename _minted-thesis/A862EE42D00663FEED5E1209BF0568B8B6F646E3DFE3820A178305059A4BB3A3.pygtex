@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+		\PYG{n+nd}{@scope}
+		\PYG{k}{def} \PYG{n+nf}{batch\PYGZus{}norm}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{layer\PYGZus{}input}\PYG{p}{):}
+			\PYG{c+c1}{\PYGZsh{} https://stackoverflow.com/questions/4488744/}
+			\PYG{c+c1}{\PYGZsh{} pytorch\PYGZhy{}nn\PYGZhy{}functional\PYGZhy{}batch\PYGZhy{}norm\PYGZhy{}for\PYGZhy{}2d\PYGZhy{}input}
+			\PYG{n}{n\PYGZus{}channels} \PYG{o}{=} \PYG{n}{layer\PYGZus{}input}\PYG{o}{.}\PYG{n}{shape}\PYG{p}{()[}\PYG{l+m+mi}{1}\PYG{p}{]}
+			\PYG{n}{running\PYGZus{}mu} \PYG{o}{=} \PYG{n}{Tensor}\PYG{p}{(}\PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}running\PYGZus{}mean\PYGZsq{}}\PYG{p}{,} 	\PYG{n}{shape}\PYG{o}{=}\PYG{p}{(}\PYG{n}{n\PYGZus{}channels}\PYG{p}{,),}
+			\PYG{n}{axis}\PYG{o}{=}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}C\PYGZsq{}}\PYG{p}{,))}
+			\PYG{n}{running\PYGZus{}std} \PYG{o}{=} \PYG{n}{Tensor}\PYG{p}{(}\PYG{n}{name}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}running\PYGZus{}std\PYGZsq{}}\PYG{p}{,} 	\PYG{n}{shape}\PYG{o}{=}\PYG{p}{(}\PYG{n}{n\PYGZus{}channels}\PYG{p}{,),}
+			\PYG{n}{axis}\PYG{o}{=}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}C\PYGZsq{}}\PYG{p}{,))}
+			\PYG{k}{return} \PYG{n}{BatchNorm}\PYG{p}{()(}\PYG{n}{layer\PYGZus{}input}\PYG{p}{,} \PYG{n}{running\PYGZus{}mu}\PYG{p}{,} \PYG{n}{running\PYGZus{}std}\PYG{p}{)}
+\end{Verbatim}

@@ -14,8 +14,10 @@
 % ------------------------------------------------
 \usepackage{booktabs}
 \usepackage{array}
+\usepackage{makecell}
+%\usepackage{arydshln}
 
-
+\renewcommand{\arraystretch}{1.2}
 % ------------------------------------------------
 % LANGUAGE & ENCODING
 % ------------------------------------------------
@@ -348,7 +350,7 @@
 \chapter{Introduction}\label{ch:intro}
 
 \chapter{Background}\label{ch:2}
-In this chapter, we examine the extant research on neural networks for capsule endoscopy, as well as existing tools and methodologies that have been developed to enhance the efficiency and accuracy of these networks in the specific context of edge devices such as the endoscopy capsule. We begin with a brief look at the relevant academic literature before moving on to an examination of the currently available hardware and software tools and techniques.
+In this chapter, we examine the extant research on neural networks for capsule endoscopy, as well as existing tools and methodologies that have been developed to enhance the efficiency and accuracy of these  networks in the specific context of edge devices such as the endoscopy capsule. We begin with a discussion of the target AI accelerator, since the choice of hardware at the deployment end influences our need for specific software devices as well as our use of efficiency-enhancing methodologies. Following this, we move on to discussing mechanisms such as quantisation and the use of Hidden Markov Models (HMM). Quantisation is necessary for efficient hardware deployment \cite[3]{bernardo20} and HMMs are useful in enhancing the prediction accuracy of capsule endoscopy CNNs \cite{werner23}. We shall also touch upon the Rhode Island (RI) dataset and describe the extant capsule endoscopy models that use this dataset. Finally, we end with a discussion of the existing software framework, HANNAH, which we will use as a base to conduct NAS for capsule endoscopy.
 
 
 \section{The Target Hardware}
@@ -446,21 +448,204 @@ Finally, the dequantise operation is applied to $q$:
 
 In the backward pass, STE is employed to ensure a smooth flow of gradients.
 
+\section{Hidden Markov Models and The Viterbi Algorithm}
+Recent work by Werner et al. \cite{werner23} has proposed using Hidden Markov Models (HMM) in combination with the Viterbi algorithm to improve CNN prediction of organs labels based on capsule endoscopy images. The classification of capsule endoscopy images should ordinarily obey the order in which the endoscopy capsule moves through the GI tract. Thus, images of the oesophagus should ordinarily appear first, followed by images of the stomach, then of the small intestine (small bowel) and finally, of the large intestine (colon). But CNNs make predictions based on each image they see, and they have no concept of order or temporality. This inability of CNNs to recognise temporal order is a frequent cause of noise in capsule endoscopy image prediction. This is where HMMs can help.
+
+\subsection{What is an HMM?}
+An HMM is a finite state machine that can be defined as follows:
+
+\begin{definition}\label{def:hmm}
+	An HMM is a 4-tuple
+	\[
+	M = \{H,A,B,\pi\}
+	\] with:\\
+	H: a finite, non-empty set of hidden states\\
+	A: a matrix such that element $a_{ij} \in A$ is the transition probability from $h_i\in H$ to $h_j \in H$\\
+	B: a sequence of emission probabilities such that  $b_i(o_t)$ is the probability of the hidden state being $h_i \in H$ given observation $o_t$\\
+	$\pi$: A sequence of initial probabilities such that $\pi_i$ is the probability of $h_i \in H$ being the initial state
+\end{definition}
+
+In simpler terms an HMM is a probabilistic finite-state machine that represents the relationship between unknown, independent hidden states and known, dependent observations. Given an HMM and a sequence of dependent observations, we should be able to compute the most likely sequence of hidden states.
+
+\subsection{The Viterbi Algorithm}
+Computing the most likely sequence of hidden states naïvely is computationally expensive. But the Viterbi algorithm makes this computation much more efficient. Furthermore, the algorithm can be made computationally more stable and economical if we work in logarithmic space \cite{blog_viterbi}, since this allows us to replace multiplying probabilities with adding their logarithms instead. The algorithm is presented below in pseudocode (adapted from \cite{blog_viterbi}).
+
+\begin{spacing}{1.1}
+	\begin{algorithm}[H]
+		\caption{Logarithmic Viterbi Decoder}
+		\label{alg:viterbi}
+		\KwIn{\\$Y$: observations, logP: priors, logA: transition matrix, logB: emission matrix}
+		\KwOut{\\Most likely sequence of hidden states}
+		\vspace{1em}
+		
+		
+		$N\gets |\text{logP}|$\\
+		$M\gets |Y|$\\
+		logT1 $\gets N\times M\text{matrix}$ \tcp{Store probabilities of likely path}
+		bestStates $\gets$ $N\times M$ matrix\\
+		result $\gets$ sequence of length $M$
+		\vspace*{1em}
+		
+		\tcp{Initialisation}
+		\For{$1\leq i \leq N$}
+		{logT1[$i$, 1] $\gets$ logP[$i$] + logB[$i, Y[1]]$}
+		\vspace*{1em}	
+		
+		\tcp{Forward phase (Recursion)}
+		\For {$2 \leq i \leq M$}{
+			\For{$1 \leq j \leq N$}{
+				%\vspace*{0.25em}
+				bestStates[$j,i$] $\gets \argmax_{1 \leq k \leq N}$
+				(
+				logT1[$k, i-1$] + logA[$k,j$]
+				)\\
+				logT1[$j,i$] $\gets \max_{1 \leq k \leq N}$ 
+				(
+				logT1[$k,i-1$] + logA[$k,j$]
+				) + logB[$j, Y[i]$]
+			}
+		}
+		\vspace*{1em}
+		\tcp{Backward phase (Retracing)}
+		\For{M $\geq i \geq 2$}
+		{
+			\If{$i = M$}
+			{result[M] $\gets \argmax_{1 \leq k \leq N}\text{logT1}[k,M]$}
+			\Else{
+				currentState $\gets$ result[$i$]\\
+				result[$i-1$] $\gets$ bestStates[currentState, $i$]
+			}
+		}
+		
+		\Return{result}
+	\end{algorithm}
+\end{spacing}
+
+A typical study (images from a single patient) in the Rhode Island dataset often contains thousands of images. Feeding the entire image set as the observation sequence would defeat the very purpose of image prediction, which is to detect when the capsule device enters the patient's small intestine so that images do not need to be transferred at a high frame-rate before this time. To solve this problem, Werner et al. propose feeding a sliding window of images as the input observation sequence to the HMM, thus economising on memory, energy consumption and delay in the detection of the small intestine. An appropriate window size is one that maximises accuracy while minimising energy consumption and reducing delay \cite[43]{werner25}.
+
+
+The mechanism by which using an HMM with predictions computed using the sliding-window  version of the Viterbi algorithm can be demonstrated with the help of a toy example.
+
+Assume the following mapping of organs to integer labels:
+
+\begin{align*}
+	\text{oesophagus} \leftrightarrow 0\\
+	\text{stomach} \leftrightarrow 1\\
+	\text{small intestine} \leftrightarrow 2\\
+	\text{large intestine} \leftrightarrow 3
+\end{align*}
+
+Based on this mapping, assume the following hypothetical sequence $s$ of CNN organ predictions given a window size of 15:
+
+
+\[
+s = \big[0,0,1,0,0,1,0,1,1,1,2,1,1,2,2\big]
+\]
+
+We assign our HMM a transition matrix with a miniscule probability of moving to a previous state, so as to make this virtually impossible. For instance, moving from the stomach to the small intestine should be all but impossible. We also bias it towards staying in the same state, by assigning a high probability $p_\text{self}$ of a self-transition. The probability of moving to the next state may then be set to $1-p_\text{self}$. We also set the prior of state 0 at the starting time-step to be 1, meaning that we always start with the oesophagus. Assume also, that we have computed a suitable emission matrix. Then, when $s$ is passed to our HMM, it might output the following revised sequence:
+
+\[
+s^\prime = \big[0,0,0,1,1,1,1,1,1,1,1,1,1,1,1\big] 
+\]
+
+There is no guarantee that $s^\prime$ is closer to the true predictions than $s$ is. For instance, the true sequence of predictions could have been $\big[0,0,0,0,0,1,1,1,1,1,1,1,1,1,2\big]$. But the predictions produced by the HMM are nevertheless biologically more plausible, less noisy and more likely to be accurate. Predictions \textit{within} a window frame are guaranteed to be a monotonically rising function when plotted against time-steps in ascending order. However, this monotonicity can be broken during transitions from one window to the next, as the HMM has no memory of predictions it made in a previous window.
+
+\section{Current Capsule Endoscopy Models}
+Since this thesis is concerned specifically with NAS for capsule endoscopy organ classification using the Rhode Island dataset, we restrict our discussion in this section to models designed for this purpose and using the same dataset. In the very paper that published the RI dataset, Charoen et al. trained and tested the ResNet V2 model and the trained model achieved an accuracy of 97.1\% \cite[4]{ri_dataset}.
+
+However, it must be noted that ResNet V2 is a very heavy model with around 56 million parameters and is thus unsuitable for a low-energy edge device such as the endoscopy capsule. Werner et al. proposed using HMMs to improve CNN accuracy and tested the MobileNetV3-Small model, which has around 1 million parameters. This model achieved an accuracy of 96.95\% on its own and 98.04\% with an HMM attachment using a window size of 300. 
+
+The endoscopy capsule is fitted with a camera that, like most digital cameras, is equipped with a Bayer filter. Images captured by such a camera need to be converted to RGB format before being fed as inputs to a CNN.  Bause et al. propose using raw Bayer (RGGB format) images as inputs to the CNN instead, thus saving on the energy and memory required for the conversion of RGGB images to RGB images. The raw Bayer images can instead be converted to RGB images outside the capsule, so that they can be properly evaluated and analysed by qualified medical professionals. Furthermore, Bause et al. propose a modified version of the capsule endoscopy model put forward by Palomero Bernardo et al. \cite{bernardo25}. In the modified version, the input is reshaped to a dimension of $320\times 40$ with 8 channels. The first convolutional layer downsamples this input to $40 \times 40$ with 8 out-channels by applying an $8\times 1$ kernel with a stride of 8. To the best of our knowledge, this is the best performing model so far. Performance metrics of the models discussed in this section are presented below in tabular form.
+
+
+\arrayrulecolor{thesisblue}
+\begin{tabular}{l*{5}{c}}
+	\toprule 
+	%\rowcolors{2}{white}{thesisblue!3}
+	%\rowcolor{thesisblue!20}
+	Model & \# Parameters & \% Accuracy & \% Recall & \% Precision & \% F1-Score\\
+	\midrule 
+	
+	\rowcolor{thesisblue!7}
+	ResNet V2 \cite{ri_dataset} & 56M & 97.1 & 97.93 & 99.39 & 98.65\\
+	
+	
+	MobileNetV3 \cite{werner23} & 1M & 96.95 & - & - & -\\
+	
+	\rowcolor{thesisblue!7}
+	\begin{tabular}[t]{@{}l@{}}
+		MobileNetV3 + HMM \cite{werner23}\\
+		(window size = 300)
+	\end{tabular}  & 1M & 98.04 & - & - & -\\
+	
+	
+	\begin{tabular}[t]{@{}l@{}}
+		MobileNetV3 + HMM \cite{bause25}\\
+		(window size = 50)
+	\end{tabular} & 1M & 97.14 & 95.74 & 87.25 & 90.89\\
+	
+	\rowcolor{thesisblue!7}
+	\begin{tabular}[t]{@{}l@{}}
+		MobileNetV3 + HMM \cite{bause25}\\ 	
+		(HMM window size = 50,\\  
+		RGGB input)
+	\end{tabular} & 1M & 96.20 & 94.30 & 83.92 & 88.12\\
+	
+	
+	\begin{tabular}[t]{@{}l@{}}
+		Localization Net\\
+		(RGGB input)
+	\end{tabular} & 62976 & 90.61 & 83.98 & 71.49 & 75.81\\
+	
+	\rowcolor{thesisblue!7}
+	\begin{tabular}[t]{@{}l@{}}
+		Localization Net + HMM\\
+		(HMM window size = 50,\\
+		RGGB input)
+	\end{tabular} & 62976 & 93.06 & 89.55 & 80.65 & 84.08\\
+	\bottomrule
+\end{tabular}
+
+
 \section{The Rhode Island Dataset}
 We have already been introduced to capsule endoscopy as well as to the basics of neural networks in the Chapter \ref{ch:intro}. We have seen that the efficient use of the limited battery capacity of the endoscopy capsule is key to ensuring that high-quality images of the entire small intestine can be captured during the VCE procedure. Neural networks can aid in identifying landmarks in the progress of the capsule through the GI tract, which in turn enables the isolation of key regions that need to be scrutinised by medical experts, particularly the small intestine. The Rhode Island dataset has been specifically curated by Charoen et al. for the purpose of GI tract localisation of capsule endoscopy images \cite{ri_dataset}.
 
 This is a large dataset consisting of over 5 million image frames extracted from a total of 424 capsule endoscopy videos. A single video corresponds to a procedure conducted on a de-identified patient, and images extracted from it are collected together as a single study folder \cite[2-4]{ri_dataset}. We shall henceforth refer to such a set of image frames collected from a single capsule endoscopy procedure conducted on a patient as a `study'. Within each study, image frames are sorted into sub-folders labelled according to the four organs of the GI tract (oesophagus, stomach, small intestine and large intestine).
 
-Furthermore, 80\% of the 424 studies, totalling,339 studies, were set aside by Charoen et al. as training/validation data, with the remaining 20\% (totalling 85 studies) being reserved for the test set. Since the number of images of the oesophagus in the original training/validation set was relatively small, the the image set corresponding to the other organs was downsampled by Charoen et al. to maintain a representative balance between the various image classes. While the image frames of the training/validation set are randomised, test set samples are left as they are, i.e. sorted per study as well as maintaining the order in which they were filmed \cite[4]{ri_dataset}. The training vs. validation splits that we used in our experiments will be discussed in more detail in the next chapter.
+Furthermore, 80\% of the 424 studies, totalling 339 studies, were set aside by Charoen et al. as training/validation data, with the remaining 20\% (totalling 85 studies) being reserved for the test set. Since the number of images of the oesophagus in the original training/validation set was relatively small, the the image set corresponding to the other organs was downsampled by Charoen et al. to maintain a representative balance between the various image classes. While the image frames of the training/validation set are randomised, test set samples are left as they are, i.e. sorted per study as well as maintaining the order in which they were filmed \cite[4]{ri_dataset}. The training vs. validation splits that we used in our experiments will be discussed in more detail in the next chapter.
+
+\section{NAS Theory and Methods}
+Neural Architecture Search attempts to find optimal and efficient models for given tasks by automating the sampling and evaluation of models within a specified search space. Three elements are crucial to conducting a NAS:
+\begin{itemize}
+	\item A search space
+	\item A search strategy, and
+	\item A performance estimation strategy
+\end{itemize}
+
+Let us examine each of these in some more detail.
+
+\subsection{Search Space}
+A search space defines the design bounds within which we wish models to be sampled. For instance, we may specify a set of pre-designed network blocks (also known as \textit{cells}) that the NAS sampler may use to build networks. Alternatively, we could define the number of network layers along with a hierarchy of layer types (such as 2d-convolution, 2d average-pooling, linear layers etc.) as well as possible kernel sizes, strides and dilation choices that may be used to construct the layers. This is also known as a \textit{chain-structured} neural network search space. Search spaces may also incorporate branches that enable the specification of alternative structures or paths \cite[2-5]{elsken19}.
+
+\subsubsection{Search space constraints}
+A significant issue encountered during NAS is the constraining of search spaces so that time and resources are not spent sampling large numbers of highly inefficient or invalid network structures or models that are incompatible with the requirements of the target hardware. This problem has been conventionally dealt with by manually curtailing and adjusting search spaces to make the sampling of undesirable networks less likely. Another common approach has been to use reward functions as a means to penalise unwanted network structures and features. Both these methods are inefficient and often cumbersome, besides not being foolproof. Recently, however, Reiber et al. have suggested an approach that uses symbolic expressions to parametrise search spaces with tunable operations. A constraint solver accesses the constraints defined within the search space and attempts to find solutions that obey all constraints. This approach has several advantages: it is efficient, it allows flexibility in the construction of search spaces, and it \textit{guarantees} the exclusion of models that disobey the given constraints. \cite{reiber26}. This system of constraint modelling via the use of symbolic expressions is built into the HANNAH framework and will be used in this thesis.
+
+\subsection{Search Strategy}
+An algorithm used to sample networks from a given search space is called a search strategy. Common strategies include random search, evolutionary search, Bayesian optimisation and reinforcement learning \cite[5-8]{elsken19}. The choice of a suitable strategy typically requires balancing several parameters, including speed, computational efficiency, memory requirements, implementational complexity and efficacy. For the purpose of this thesis, we use an ageing-evolutionary algorithm, which is fast and efficient, besides being already implemented within HANNAH's NAS framework.
+
+\subsection{Performance Estimation Strategy}
+This refers to the strategy used to assess the performance of individual models during NAS. It includes the choice of the performance estimation measure, fixing the number of training epochs per model, as well as deciding on size of the training and validation sets. Typically, each model is trained for a limited number of epochs, during which the model may be tested on a validation set at a specified periodicity using the performance estimation measure. Based on the assessed performance, the search strategy algorithm updates its current state and chooses the next model or models \cite[8-12]{elsken19}.
+
+In the next section we shall look take a closer look at HANNAH, which contains the actual NAS framework and tools that we will be using in this thesis.
 
 
-\section{The Previously existing Software Framework}
+\section{The Previously Existing Software Framework}
 \subsection{HANNAH}
 HANNAH (Hardware Accelerator and Neural Network searcH) is a Python-based coding framework for hardware accelerator design and hardware-aware neural networks developed at the Chair of Embedded Systems at the University of Tübingen, Germany. HANNAH contains a sub-framework for supporting Neural Architecture Searches. In this section, a few of the most salient aspects of the NAS sub-framework as well as other relevant portions of HANNAH will be briefly described. The tools and code discussed in this section have been programmed previously by members of the Chair of Embedded Systems, and not by the author of this thesis.
 
 \subsection{The NAS Sub-Framework}
-\subsubsection{Defining Search Spaces}
-A Neural Architecture Search begins with creating a \textbf{search space}. A search space is a Directed Acyclic Graph consisting of nodes that represent input or weight tensors as well as operations conducted on these tensors such as 2D-Convolution, ReLU or quantization. The directed edges between these nodes represent the flow of data. \cite{ekutesSearchSpaces}. Functionally, the construction of search spaces enables us to define the range of possible values the hyperparameters of the target neural networks may assume. Specifically, these hyperparameters include the number of layers in the network, possible kernel sizes, stride lengths and channel dimensions. 
+\subsubsection{Defining search spaces}
+In HANNAH, a search space is a Directed Acyclic Graph consisting of nodes that represent input or weight tensors as well as operations conducted on these tensors such as 2D-Convolution, ReLU or quantization. The directed edges between these nodes represent the flow of data. \cite{ekutesSearchSpaces}. Functionally, the construction of search spaces enables us to define the range of possible values the hyperparameters of the target neural networks may assume. Specifically, these hyperparameters include the number of layers in the network, possible kernel sizes, stride lengths and channel dimensions. 
 
 HANNAH's NAS framework supports the definition of valid hyperparameter values for search spaces via various kinds of parameter expressions. Two of the most important of these are \py{IntScalarParameter} and \py{CatagoricalParameter}. The former is used to define ranges of integer values and has the following signature:
 
@@ -508,29 +693,29 @@ The parameterisation tools described thus far enable the definition of node-leve
 	min=3,
 	max=8, 
 	name='num_internal_blocks').max:
-	int_layer = capsule_net.conv_relu(layer_input=layer,
-	out_channels=out_channels.new(),
-	kernel_size=kernel_size.new(),
-	stride=stride.new(),
-	groups=groups.new())
+		int_layer = capsule_net.conv_relu(layer_input=layer,
+		out_channels=out_channels.new(),
+		kernel_size=kernel_size.new(),
+		stride=stride.new(),
+		groups=groups.new())
 	
-	exits.append(int_layer)
-	layer = int_layer
+		exits.append(int_layer)
+		layer = int_layer
 	
 	out = ChoiceOp(*exits, switch=num_internal_blocks)()
 \end{minted}
-
-\subsubsection{Constraining Search Spaces}\label{subsec:con}
+%\vspace{-1.5cm}
+\subsubsection{Constraining search spaces}\label{subsec:con}
 Even carefully designed search spaces may allow for the creation of networks with parameters that could lead to incorrect or inefficient behaviour, or that may be incompatible with the target hardware platform. Weeding out such networks after search completion is cumbersome, computationally wasteful and error-prone. Instead, we need a mechanism to build constraints into our search space, so that every network explored conforms to our requirements.
 
 HANNAH's NAS framework provides a random-walk constraint solver that enables us to do exactly this. The \py{init} method, which defines the construction of an object belonging to the\\ \py{RandomWalkConstraintSolver} class, is as follows:
 
 \begin{minted}{python}
 	class RandomWalkConstraintSolver:
-	def __init__(self, max_iterations=5000) -> None:
-	self.max_iterations = max_iterations
-	self.constraints = None
-	self.solution = None
+		def __init__(self, max_iterations=5000) -> None:
+			self.max_iterations = max_iterations
+			self.constraints = None
+			self.solution = None
 \end{minted}
 
 The random-walk constraint solver is a greedy solver that uses random jumps to improve its search space exploration. It thus employs a simple solving mechanism that may not be suitable for very complex constraint spaces, but is usually sufficient for our purposes.
@@ -547,134 +732,21 @@ Constraints can be defined using the \py{cond()} method for the hyperparameters 
 
 All the constraints pertaining to the same operator are collected into a list and passed on to the \py{RandomWalkConstraintSolver}, which then attempts to find a solution that satisfies all these constraints.
 
+\subsubsection{The ageing evolution sampler}
+The NAS framework is equipped with an ageing evolutionary sampler for the implementation of an evolution-based search strategy for NAS. The sampler contains a callable class \py{FitnessFunction} which returns a fitness score using specified set of bounds. The bounds $\mathbf{b}$ are model performance measures that we wish to optimise during a NAS run. Let $N$ be the number of bounds $\in \mathbf{b}$, and $\lambda_i$ a weight randomly sampled from a standard normal distribution for each key. Then, the fitness score computed by \py{FitnessFunction} for an input $\mathbf{x}$ is as follows \cite{reiber26}:
 
-\section{Hidden Markov Models and The Viterbi Algorithm}
-Recent work by Werner et al. \cite{werner23} has proposed using Hidden Markov Models (HMM) in combination with the Viterbi algorithm to improve CNN prediction of organs labels based on capsule endoscopy images. The classification of capsule endoscopy images should ordinarily obey the order in which the endoscopy capsule moves through the GI tract. Thus, images of the oesophagus should ordinarily appear first, followed by images of the stomach, then of the small intestine (small bowel) and finally, of the large intestine (colon). But CNNs make predictions based on each image they see, and they have no concept of order or temporality. This inability of CNNs to recognise temporal order is a frequent cause of noise in capsule endoscopy image prediction. This is where HMMs can help.
+\begin{equation}
+	f(\mathbf{x}) = 
+	\sqrt{\sum_{i=1}^{N}
+		\left(\lambda_i \frac{x_i}{b_i}
+			\right)^2}
+\end{equation}
 
-\subsection{What is an HMM?}
-An HMM is a finite state machine that can be defined as follows:
+A current population of $n \in \mathbb{N}_{ \geqslant 1}$ models is maintained. The first $n$ models are randomly generated. Once the population has reached the size of $n$, the following selection procedure is followed. With a certain small probability (say 10\%), a random model is generated. This small injection of randomness lends an element of dynamism to the algorithm and can potentially help it get out of local minima. However, in most cases, a parent model is selected from among a group of $m\in \mathbb{N}_{\geqslant 1} \leqslant n$ candidates randomly chosen from the current population. The fitness score is computed for all these candidates and the model with the highest score is chosen to be the parent of the next model. The tunable parameters of the parent model are mutated to create a new model, and at the same time, the oldest member of the current population is deleted. This process is continued until the NAS \texttt{budget} has been reached, at which point the NAS is terminated.
 
-\begin{definition}\label{def:hmm}
-	An HMM is a 4-tuple
-	\[
-		M = \{H,A,B,\pi\}
-	\] with:\\
-	H: a finite, non-empty set of hidden states\\
-	A: a matrix such that element $a_{ij} \in A$ is the transition probability from $h_i\in H$ to $h_j \in H$\\
-	B: a sequence of emission probabilities such that  $b_i(o_t)$ is the probability of the hidden state being $h_i \in H$ given observation $o_t$\\
-	$\pi$: A sequence of initial probabilities such that $\pi_i$ is the probability of $h_i \in H$ being the initial state
-\end{definition}
-
-In simpler terms an HMM is a probabilistic finite-state machine that represents the relationship between unknown, independent hidden states and known, dependent observations. Given an HMM and a sequence of dependent observations, we should be able to compute the most likely sequence of hidden states.
-
-\subsection{The Viterbi Algorithm}
-Computing the most likely sequence of hidden states naïvely is computationally expensive. But the Viterbi algorithm makes this computation much more efficient. Furthermore, the algorithm can be made computationally more stable and economical if we work in logarithmic space \cite{blog_viterbi}, since this allows us to replace multiplying probabilities with adding their logarithms instead. The algorithm is presented below in pseudocode (adapted from \cite{blog_viterbi}).
-
-\begin{spacing}{1.1}
-  \begin{algorithm}[H]
-	\caption{Logarithmic Viterbi Decoder}
-	\label{alg:viterbi}
-	\KwIn{\\$Y$: observations, logP: priors, logA: transition matrix, logB: emission matrix}
-	\KwOut{\\Most likely sequence of hidden states}
-	\vspace{1em}
-	
-	
-	$N\gets |\text{logP}|$\\
-	$M\gets |Y|$\\
-	logT1 $\gets N\times M\text{matrix}$ \tcp{Store probabilities of likely path}
-	bestStates $\gets$ $N\times M$ matrix\\
-	result $\gets$ sequence of length $M$
-	\vspace*{1em}
-
-	\tcp{Initialisation}
-	\For{$1\leq i \leq N$}
-		{logT1[$i$, 1] $\gets$ logP[$i$] + logB[$i, Y[1]]$}
-	\vspace*{1em}	
-
-	\tcp{Forward phase (Recursion)}
-	\For {$2 \leq i \leq M$}{
-		\For{$1 \leq j \leq N$}{
-		 %\vspace*{0.25em}
-        	bestStates[$j,i$] $\gets \argmax_{1 \leq k \leq N}$
-        	(
-        		logT1[$k, i-1$] + logA[$k,j$]
-        	)\\
-          logT1[$j,i$] $\gets \max_{1 \leq k \leq N}$ 
-          (
-          	logT1[$k,i-1$] + logA[$k,j$]
-          ) + logB[$j, Y[i]$]
-        }
-    }
-    \vspace*{1em}
-    \tcp{Backward phase (Retracing)}
-    \For{M $\geq i \geq 2$}
-    	{
-    		\If{$i = M$}
-    		{result[M] $\gets \argmax_{1 \leq k \leq N}\text{logT1}[k,M]$}
-    		\Else{
-    			currentState $\gets$ result[$i$]\\
-    			result[$i-1$] $\gets$ bestStates[currentState, $i$]
-    		}
-    	}
-    	
-    \Return{result}
-  \end{algorithm}
-\end{spacing}
-
-A typical study (images from a single patient) in the Rhode Island dataset often contains thousands of images. Feeding the entire image set as the observation sequence would defeat the very purpose of image prediction, which is to detect when the capsule device enters the patient's small intestine so that images do not need to be transferred at a high frame-rate before this time. To solve this problem, Werner et al. propose feeding a sliding window of images as the input observation sequence to the HMM, thus economising on memory, energy consumption and delay in the detection of the small intestine. An appropriate window size is one that maximises accuracy while minimising energy consumption and reducing delay \cite[43]{werner25}.
-
-
-The mechanism by which using an HMM with predictions computed using the sliding-window  version of the Viterbi algorithm can be demonstrated with the help of a toy example.
-
-Assume the following mapping of organs to integer labels:
-
-\begin{align*}
-	\text{oesophagus} \leftrightarrow 0\\
-	\text{stomach} \leftrightarrow 1\\
-	\text{small intestine} \leftrightarrow 2\\
-	\text{large intestine} \leftrightarrow 3
-\end{align*}
-
-Based on this mapping, assume the following hypothetical sequence $s$ of CNN organ predictions given a window size of 15:
-
-
-	\[
-		s = \big[0,0,1,0,0,1,0,1,1,1,2,1,1,2,2\big]
-	\]
-	
-We assign our HMM a transition matrix with a miniscule probability of moving to a previous state, so as to make this virtually impossible. For instance, moving from the stomach to the small intestine should be all but impossible. We also bias it towards staying in the same state, by assigning a high probability $p_\text{self}$ of a self-transition. The probability of moving to the next state may then be set to $1-p_\text{self}$. We also set the prior of state 0 at the starting time-step to be 1, meaning that we always start with the oesophagus. Assume also, that we have computed a suitable emission matrix. Then, when $s$ is passed to our HMM, it might output the following revised sequence:
-
-	\[
-		s^\prime = \big[0,0,0,1,1,1,1,1,1,1,1,1,1,1,1\big] 
-	\]
-	
-There is no guarantee that $s^\prime$ is closer to the true predictions than $s$ is. For instance, the true sequence of predictions could have been $\big[0,0,0,0,0,1,1,1,1,1,1,1,1,1,2\big]$. But the predictions produced by the HMM are nevertheless biologically more plausible, less noisy and more likely to be accurate. Predictions \textit{within} a window frame are guaranteed to be a monotonically rising function when plotted against time-steps in ascending order. However, this monotonicity can be broken during transitions from one window to the next, as the HMM has no memory of predictions it made in a previous window.
-
-\section{Current Capsule Endoscopy Models}
-Since this thesis is concerned specifically with NAS for capsule endoscopy organ classification using the Rhode Island dataset, we restrict our discussion in this section to models designed for this purpose and using the same dataset. In the very paper that published the RI dataset, Charoen et al. trained and tested the ResNet V2 model and the trained model achieved an accuracy of 97.1\% \cite[4]{ri_dataset}.
-
-However, it must be noted that ResNet V2 is a very heavy model with around 56 million parameters and is thus unsuitable for a low-energy edge device such as the endoscopy capsule. Werner et al. proposed using HMMs to improve CNN accuracy and tested the MobileNetV3-Small model, which has around 1 million parameters. This model achieved an accuracy of 96.95\% on its own and 98.04\% with an HMM attachment using a window size of 300. 
-
-The endoscopy capsule is fitted with a camera that, like most digital cameras, is equipped with a Bayer filter. Images captured by such a camera need to be converted to RGB format before being fed as inputs to a CNN.  Bause et al. propose using raw Bayer (RGGB format) images as inputs to the CNN instead, thus saving on the energy and memory required for the conversion of RGGB images to RGB images. The raw Bayer images can instead be converted to RGB images outside the capsule, so that they can be properly evaluated and analysed by qualified medical professionals. Furthermore, Bause et al. propose a modified version of the capsule endoscopy model put forward by Palomero Bernardo et al. \cite{bernardo25}. In the modified version, the input is reshaped to a dimension of $320\times 40$ with 8 channels. The first convolutional layer downsamples this input to $40 \times 40$ with 8 out-channels by applying an $8\times 1$ kernel with a stride of 8. To the best of our knowledge, this is the best performing model so far. Performance metrics of the models discussed in this section are presented below in tabular form.
-
-
-\begin{center}
-  \arrayrulecolor{thesisblue}
-  \begin{tabular}{ccccccc}
-  	\toprule
-  	\rowcolor{thesisblue!10}
-  	Model & Input & \# Parameters & \% Accuracy & \% Recall & \% Precision & \% F1-Score\\
-  	\midrule
-   ResNet V2 \cite{ri_dataset} & RGB & 56M & 97.1 & 97.93 & 99.39 & 98.65\\
-   MobileNetV3 \cite{werner23} & RGB & 1M & 96.95 & - & - & -\\
-   MobileNetV3 \cite{bause25} & RGB & 1M & 97.14 & 95.74 & 87.25 & 90.89\\
-   MobileNetV3 \cite{bause25} & RGGB & 1M & 96.20 & 94.30 & 83.92 & 88.12\\	
-  	\bottomrule
-  \end{tabular}
-\end{center}
 
 \section{Conclusion}
-In this chapter, we examined existing research, tools and concepts related to the topic of neural architectures for capsule endoscopy. The tools include hardware, specifically the UltraTrail AI accelerator, as well as the HANNAH software framework. Key concepts include QAT and HMMs in combination with the Viterbi Algorithm, which research by Werner et al. has shown to be useful in improving the accuracy of predictions produced by a CNN. In the next chapter, we build on these tools and techniques to build a framework that will enable efficient neural architecture searches for UltraTrail-based edge devices, as well as develop methods and strategies for conducting NAS specifically for capsule endoscopy.
+In this chapter, we examined existing research, tools and concepts related to the topic of neural architectures for capsule endoscopy. The tools include hardware, specifically the UltraTrail AI accelerator, as well as the HANNAH software framework. Key concepts include QAT and HMMs in combination with the Viterbi Algorithm, which research by Werner et al. has shown to be useful in improving the accuracy of predictions produced by a CNN. We also looked at the Rhode Island dataset and the existing models for organ labelling in capsule endoscopy that use this dataset. In the next chapter, we build on these tools and techniques to construct a framework that will enable efficient neural architecture searches for UltraTrail-based edge devices. We shall also outline a few key methods for search space design, apart from discussing strategies for conducting NAS for capsule endoscopy.
 
 \chapter{Methods and Tools}
 
@@ -687,10 +759,10 @@ The constructor (\py{init} method) of the \py{UltraTrailNet} class is as follows
 	DIMS = {1,2,4,8,16} # MAC-array dimension = 2^k, k <= 4
 	
 	class UltraTrailNet:
-	def __init__(self, initial_input, hardware_dim=8):
-	self.initial_input = initial_input
-	self.hardware_dim = hardware_dim
-	assert hardware_dim in DIMS, "hardware_dim must be in DIMS = {1,2,4,8,16}"	
+		def __init__(self, initial_input, hardware_dim=8):
+			self.initial_input = initial_input
+			self.hardware_dim = hardware_dim
+			assert hardware_dim in DIMS, "hardware_dim must be in DIMS = {1,2,4,8,16}"	
 \end{minted}
 
 As can be seen, an \py{UltraTrailNet} instance can be defined with an initial input (\py{initial_input}) and a hardware dimension (\py{hardware_dim}). The former enables us to enforce conditions specific to the input layer. For example:
@@ -698,7 +770,7 @@ As can be seen, an \py{UltraTrailNet} instance can be defined with an initial in
 \begin{minted}{python}
 	is_original_input = layer_input is self.initial_input
 	if is_original_input:
-	groups = 1
+		groups = 1
 \end{minted}
 
 The other argument \py{hardware_dim} represents a single row or column dimension of a square MAC (Multiply-and-Accumulate) array. This is necessary for compatibility with the target hardware platform. The requirements of the target hardware and the implementation of constraints required for compliance with it will be discussed in greater detail in the next chapter.
@@ -715,12 +787,10 @@ The \py{UltraTrailNet} class also contains the following methods:\py{adaptive_av
 	\item \py{_quantize}: This method is intended for internal use and calls the \py{ULtraTrailSTEQuantize()} class, which inherits from the \py{Requantize} class of \py{hannah.nas.functional_operators.py} and implements a fake quantiser.
 	
 	\begin{minted}{python}
-		# import at the top of ultra_trail.py:	
 		from hannah.nas.ultra_trail.qat import UltraTrailSTEQuantize
 		
-		# method within UltraTrailNet class:
 		def _quantize(self, input):
-		return UltraTrailSTEQuantize()(input)
+			return UltraTrailSTEQuantize()(input)
 	\end{minted}
 
 	
@@ -743,14 +813,14 @@ The \py{UltraTrailNet} class also contains the following methods:\py{adaptive_av
 	\begin{minted}{python}
 		@scope
 		def batch_norm(self, layer_input):
-		# https://stackoverflow.com/questions/4488744/ 
-		# pytorch-nn-functional-batch-norm-for-2d-input
-		n_channels = layer_input.shape()[1]
-		running_mu = Tensor(name='running_mean', shape=(n_channels,),
-		axis=('C',))
-		running_std = Tensor(name='running_std', shape=(n_channels,),
-		axis=('C',))
-		return BatchNorm()(layer_input, running_mu, running_std)
+			# https://stackoverflow.com/questions/4488744/ 
+			# pytorch-nn-functional-batch-norm-for-2d-input
+			n_channels = layer_input.shape()[1]
+			running_mu = Tensor(name='running_mean', 	shape=(n_channels,),
+			axis=('C',))
+			running_std = Tensor(name='running_std', 	shape=(n_channels,),
+			axis=('C',))
+			return BatchNorm()(layer_input, running_mu, running_std)
 	\end{minted}
 	
 	
@@ -775,8 +845,8 @@ The \py{UltraTrailNet} class also contains the following methods:\py{adaptive_av
 	
 	\begin{minted}{python}
 		if not is_last:
-		warnings.warn("WARNING: Either a linear layer is not the\
-		last layer or the is_last flag is incorrectly set.")
+			warnings.warn("WARNING: Either a linear layer is not the\
+			last layer or the is_last flag is incorrectly set.")
 	\end{minted}
 	
 	As we shall see in the following section, knowing the position of a layer is essential for the correct application of constraints, both in the case of regular convolutional layers as well as for linear layers.
@@ -871,7 +941,7 @@ Once we ensure that the number of \texttt{out-channels} from layer $l$ is a mult
 	in_channels = layer_input.shape()[1]
 	
 	if not is_original_input:
-	conv.cond(in_channels % self.hardware_dim == 0)
+		conv.cond(in_channels % self.hardware_dim == 0)
 \end{minted}
 
 
@@ -895,7 +965,7 @@ The target UltraTrail accelerator realises depthwise layers by iterating over th
 
 \begin{minted}{python}
 	if depthwise:
-	conv.cond(groups % self.hardware_dim == 0)	
+		conv.cond(groups % self.hardware_dim == 0)	
 \end{minted} 
 
 Here we encounter another instance of an additional or redundant constraint acting as a sanity check. We already ensure that \texttt{in\_channels = out\_channels} are multiples of $DIM$, so setting \py{groups} as equal to \py{in_channels} should automatically ensure that \texttt{|groups|} is a multiple of $DIM$. But the constraint enforced via \py{conv.cond()} acts as a computationally cheap \py{assert} statement.
@@ -915,13 +985,13 @@ Pytorch offers a package called \py{torch.library} that contains tools for creat
 	
 	@torch.library.custom_op(name="ekut::quantize", mutates_args=())
 	def quantize(x: torch.Tensor, num_bits: int) -> torch.Tensor:
-	scale = 2 ** (num_bits - 1)
-	scaled_val = torch.round(x * scale)
-	q_min = -2 ** (num_bits - 1)
-	q_max = (2 ** (num_bits - 1)) - 1
-	clamped_val = torch.clamp(scaled_val, q_min, q_max)
-	
-	return clamped_val / scale
+		scale = 2 ** (num_bits - 1)
+		scaled_val = torch.round(x * scale)
+		q_min = -2 ** (num_bits - 1)
+		q_max = (2 ** (num_bits - 1)) - 1
+		clamped_val = torch.clamp(scaled_val, q_min, q_max)
+		
+		return clamped_val / scale
 \end{minted}
 
 The argument \py{name} passed to the wrapper consists of a namespace (\texttt{ekut}) followed by the function name (\texttt{quantize}). The \py{name} serves as an identifier for pytorch packages such as \py{torch.fx} and \py{torch.export}. The second argument \py{mutates_args} is is a list of arguments that the function directly mutates. In our case, this is an empty list, since we do not reassign a value to the input \py{x}, and \py{num_bits} is used to compute the scale, but is not mutated itself \cite{torch_custom}.
@@ -931,14 +1001,14 @@ Next, we need to register a \textit{fake tensor} implementation for our new cust
 \begin{minted}{python}
 	@quantize.register_fake
 	def _(x: torch.Tensor, num_bits: int) -> torch.Tensor:
-	return torch.zeros_like(x)
+		return torch.zeros_like(x)
 \end{minted}
 
 Finally, we need a function that defines the custom operator's behaviour in the backward pass, and register this function using \py{torch.library.register_autograd}. In order to realise STE, the \py{backward} function simply returns the upstream gradient  \py{grad} unchanged for the input \py{x} that is passed to the \py{quantize} function. \py{None} is returned as the gradient of \py{quantize}'s second argument, \py{num_bits}.  
 
 \begin{minted}{python}
 	def backward(ctx, grad):
-	return grad, None
+		return grad, None
 	
 	torch.library.register_autograd("ekut::quantize", backward, setup_context=None)
 \end{minted}
@@ -952,20 +1022,20 @@ and returns the custom quantiser in its forward method.
 \begin{minted}{python}
 class UltraTrailQuantizer(nn.Module):
 def __init__(self, num_bits=8):
-super().__init__()
-self.num_bits = num_bits
+	super().__init__()
+	self.num_bits = num_bits
 
 def forward(self, input):
-return torch.ops.ekut.quantize(input, self.num_bits)
+	return torch.ops.ekut.quantize(input, self.num_bits)
 \end{minted} 
 
 Additionally, we create a class \py{UltraTrailSTEQuantize} that inherits from \py{Requantize} in\\ \py{hannah.nas.functional_operators}, which in turn inherits from \py{Op}. \py{UltraTrailSTEQuantize} is initialised with  \py{UltraTrailQuantizer()} and \py{Requantize} calls \py{self.quantize} in its forward method:
 
 \begin{minted}{python}
 	class UltraTrailSTEQuantize(Requantize):
-	def __init__(self):
-	super().__init__()
-	self.quantize = UltraTrailQuantizer()
+		def __init__(self):
+			super().__init__()
+			self.quantize = UltraTrailQuantizer()
 \end{minted}
 
 \begin{minted}{python}
