@@ -1,0 +1,11 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{if} \PYG{n}{nas}\PYG{p}{:}
+	\PYG{n}{path\PYGZus{}train} \PYG{o}{=} \PYG{n}{cnn\PYGZus{}output\PYGZus{}dir} \PYG{o}{+} \PYG{l+s+s1}{\PYGZsq{}\PYGZus{}cnn\PYGZus{}train\PYGZus{}output\PYGZsq{}}
+	\PYG{n}{path\PYGZus{}val} \PYG{o}{=} \PYG{n}{cnn\PYGZus{}output\PYGZus{}dir} \PYG{o}{+} \PYG{l+s+s1}{\PYGZsq{}\PYGZus{}cnn\PYGZus{}val\PYGZus{}output\PYGZsq{}}
+	
+	\PYG{n}{df\PYGZus{}train} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{n}{path\PYGZus{}train}\PYG{p}{)}
+	\PYG{n}{df} \PYG{o}{=} \PYG{n}{pd}\PYG{o}{.}\PYG{n}{read\PYGZus{}csv}\PYG{p}{(}\PYG{n}{path\PYGZus{}val}\PYG{p}{)}
+\PYG{k}{else}\PYG{p}{:}
+	\PYG{n}{path\PYGZus{}train} \PYG{o}{=} \PYG{n}{cnn\PYGZus{}output\PYGZus{}dir} \PYG{o}{+} \PYG{l+s+s1}{\PYGZsq{}\PYGZus{}cnn\PYGZus{}train\PYGZus{}output\PYGZsq{}}
+	\PYG{n}{path\PYGZus{}test} \PYG{o}{=} \PYG{n}{cnn\PYGZus{}output\PYGZus{}dir} \PYG{o}{+} \PYG{l+s+s1}{\PYGZsq{}\PYGZus{}cnn\PYGZus{}test\PYGZus{}output\PYGZsq{}}
+\end{Verbatim}

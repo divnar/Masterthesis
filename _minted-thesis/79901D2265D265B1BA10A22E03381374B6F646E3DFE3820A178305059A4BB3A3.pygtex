@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{	}\PYG{l+s+sd}{\PYGZsq{}\PYGZsq{}\PYGZsq{}NAS\PYGZhy{}HMM Integration\PYGZsq{}\PYGZsq{}\PYGZsq{}}
+	
+	\PYG{k}{if} \PYG{n}{config}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}hmm\PYGZdq{}}\PYG{p}{,} \PYG{k+kc}{None}\PYG{p}{)} \PYG{o+ow}{is} \PYG{o+ow}{not} \PYG{k+kc}{None}\PYG{p}{:}
+		\PYG{n}{hmm\PYGZus{}metrics} \PYG{o}{=} \PYG{n}{run\PYGZus{}hmm}\PYG{p}{(}\PYG{n}{cnn\PYGZus{}output\PYGZus{}dir}\PYG{o}{=}\PYG{n}{os}\PYG{o}{.}\PYG{n}{getcwd}\PYG{p}{(),}
+				\PYG{n}{window\PYGZus{}size}\PYG{o}{=}\PYG{n}{config}\PYG{o}{.}\PYG{n}{hmm}\PYG{o}{.}\PYG{n}{window\PYGZus{}size}\PYG{p}{,}
+				\PYG{n}{class\PYGZus{}of\PYGZus{}interest}\PYG{o}{=}\PYG{n}{config}\PYG{o}{.}\PYG{n}{hmm}\PYG{o}{.}\PYG{n}{class\PYGZus{}of\PYGZus{}interest}\PYG{p}{,}
+				\PYG{n}{quantization}\PYG{o}{=}\PYG{n}{config}\PYG{o}{.}\PYG{n}{hmm}\PYG{o}{.}\PYG{n}{quantization}\PYG{p}{,}
+				\PYG{n}{nas}\PYG{o}{=}\PYG{k+kc}{True} \PYG{k}{if} \PYG{n}{config}\PYG{o}{.}\PYG{n}{get}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}nas\PYGZdq{}}\PYG{p}{,} \PYG{k+kc}{None}\PYG{p}{)} \PYG{o+ow}{is} \PYG{o+ow}{not} \PYG{k+kc}{None} \PYG{k}{else} \PYG{k+kc}{False}
+	\PYG{p}{)}
+	
+		\PYG{n}{res}\PYG{o}{.}\PYG{n}{update}\PYG{p}{(}\PYG{n}{hmm\PYGZus{}metrics}\PYG{p}{)}
+\end{Verbatim}

@@ -643,6 +643,29 @@
       \field{note}{[Accessed 18-06-2026]}
       \field{title}{{P}y{T}orch {C}ustom {O}peration --- leimao.github.io}
     \endentry
+    \entry{atoms}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=271195de85928ab32b37c0924ff9921b}{%
+           family={Helmenstine},
+           familyi={H\bibinitperiod},
+           given={Anne\bibnamedelima Marie},
+           giveni={A\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{271195de85928ab32b37c0924ff9921b}
+      \strng{fullhash}{271195de85928ab32b37c0924ff9921b}
+      \strng{bibnamehash}{271195de85928ab32b37c0924ff9921b}
+      \strng{authorbibnamehash}{271195de85928ab32b37c0924ff9921b}
+      \strng{authornamehash}{271195de85928ab32b37c0924ff9921b}
+      \strng{authorfullhash}{271195de85928ab32b37c0924ff9921b}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://www.thoughtco.com/number-of-atoms-in-the-universe-603795}}
+      \field{note}{[Accessed 02-07-2026]}
+      \field{title}{How Many Atoms Exist in the Universe?}
+      \field{year}{2025}
+    \endentry
   \enddatalist
 \endrefsection
 \endinput

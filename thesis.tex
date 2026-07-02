@@ -557,55 +557,58 @@ However, it must be noted that ResNet V2 is a very heavy model with around 56 mi
 
 The endoscopy capsule is fitted with a camera that, like most digital cameras, is equipped with a Bayer filter. Images captured by such a camera need to be converted to RGB format before being fed as inputs to a CNN.  Bause et al. propose using raw Bayer (RGGB format) images as inputs to the CNN instead, thus saving on the energy and memory required for the conversion of RGGB images to RGB images. The raw Bayer images can instead be converted to RGB images outside the capsule, so that they can be properly evaluated and analysed by qualified medical professionals. Furthermore, Bause et al. propose a modified version of the capsule endoscopy model put forward by Palomero Bernardo et al. \cite{bernardo25}. In the modified version, the input is reshaped to a dimension of $320\times 40$ with 8 channels. The first convolutional layer downsamples this input to $40 \times 40$ with 8 out-channels by applying an $8\times 1$ kernel with a stride of 8. To the best of our knowledge, this is the best performing model so far. Performance metrics of the models discussed in this section are presented below in tabular form.
 
-
-\arrayrulecolor{thesisblue}
-\begin{tabular}{l*{5}{c}}
-	\toprule 
-	%\rowcolors{2}{white}{thesisblue!3}
-	%\rowcolor{thesisblue!20}
-	Model & \# Parameters & \% Accuracy & \% Recall & \% Precision & \% F1-Score\\
-	\midrule 
-	
-	\rowcolor{thesisblue!7}
-	ResNet V2 \cite{ri_dataset} & 56M & 97.1 & 97.93 & 99.39 & 98.65\\
-	
-	
-	MobileNetV3 \cite{werner23} & 1M & 96.95 & - & - & -\\
-	
-	\rowcolor{thesisblue!7}
-	\begin{tabular}[t]{@{}l@{}}
-		MobileNetV3 + HMM \cite{werner23}\\
-		(window size = 300)
-	\end{tabular}  & 1M & 98.04 & - & - & -\\
-	
-	
-	\begin{tabular}[t]{@{}l@{}}
-		MobileNetV3 + HMM \cite{bause25}\\
-		(window size = 50)
-	\end{tabular} & 1M & 97.14 & 95.74 & 87.25 & 90.89\\
-	
-	\rowcolor{thesisblue!7}
-	\begin{tabular}[t]{@{}l@{}}
-		MobileNetV3 + HMM \cite{bause25}\\ 	
-		(HMM window size = 50,\\  
-		RGGB input)
-	\end{tabular} & 1M & 96.20 & 94.30 & 83.92 & 88.12\\
-	
-	
-	\begin{tabular}[t]{@{}l@{}}
-		Localization Net\\
-		(RGGB input)
-	\end{tabular} & 62976 & 90.61 & 83.98 & 71.49 & 75.81\\
-	
-	\rowcolor{thesisblue!7}
-	\begin{tabular}[t]{@{}l@{}}
-		Localization Net + HMM\\
-		(HMM window size = 50,\\
-		RGGB input)
-	\end{tabular} & 62976 & 93.06 & 89.55 & 80.65 & 84.08\\
-	\bottomrule
-\end{tabular}
-
+\begin{table}
+ \centering
+ \arrayrulecolor{thesisblue}
+ \begin{tabular}{l*{5}{c}}
+ 	\toprule 
+ 	%\rowcolors{2}{white}{thesisblue!3}
+ 	%\rowcolor{thesisblue!20}
+ 	Model & \# Parameters & \% Accuracy & \% Recall & \% Precision & \% F1-Score\\
+ 	\midrule 
+ 	
+ 	\rowcolor{thesisblue!7}
+ 	ResNet V2 \cite{ri_dataset} & 56M & 97.1 & 97.93 & 99.39 & 98.65\\
+ 	
+ 	
+ 	MobileNetV3 \cite{werner23} & 1M & 96.95 & - & - & -\\
+ 	
+ 	\rowcolor{thesisblue!7}
+ 	\begin{tabular}[t]{@{}l@{}}
+ 		MobileNetV3 + HMM \cite{werner23}\\
+ 		(window size = 300)
+ 	\end{tabular}  & 1M & 98.04 & - & - & -\\
+ 	
+ 	
+ 	\begin{tabular}[t]{@{}l@{}}
+ 		MobileNetV3 + HMM \cite{bause25}\\
+ 		(window size = 50)
+ 	\end{tabular} & 1M & 97.14 & 95.74 & 87.25 & 90.89\\
+ 	
+ 	\rowcolor{thesisblue!7}
+ 	\begin{tabular}[t]{@{}l@{}}
+ 		MobileNetV3 + HMM \cite{bause25}\\ 	
+ 		(HMM window size = 50,\\  
+ 		RGGB input)
+ 	\end{tabular} & 1M & 96.20 & 94.30 & 83.92 & 88.12\\
+ 	
+ 	
+ 	\begin{tabular}[t]{@{}l@{}}
+ 		Localization Net\\
+ 		(RGGB input)
+ 	\end{tabular} & 62976 & 90.61 & 83.98 & 71.49 & 75.81\\
+ 	
+ 	\rowcolor{thesisblue!7}
+ 	\begin{tabular}[t]{@{}l@{}}
+ 		Localization Net + HMM\\
+ 		(HMM window size = 50,\\
+ 		RGGB input)
+ 	\end{tabular} & 62976 & 93.06 & 89.55 & 80.65 & 84.08\\
+ 	\bottomrule
+ \end{tabular}
+ \caption{Extant models for capsule endoscopy organ labelling using the RI dataset}
+ \label{tab:models}
+\end{table}
 
 \section{The Rhode Island Dataset}
 We have already been introduced to capsule endoscopy as well as to the basics of neural networks in the Chapter \ref{ch:intro}. We have seen that the efficient use of the limited battery capacity of the endoscopy capsule is key to ensuring that high-quality images of the entire small intestine can be captured during the VCE procedure. Neural networks can aid in identifying landmarks in the progress of the capsule through the GI tract, which in turn enables the isolation of key regions that need to be scrutinised by medical experts, particularly the small intestine. The Rhode Island dataset has been specifically curated by Charoen et al. for the purpose of GI tract localisation of capsule endoscopy images \cite{ri_dataset}.
@@ -742,7 +745,7 @@ The NAS framework is equipped with an ageing evolutionary sampler for the implem
 			\right)^2}
 \end{equation}
 
-A current population of $n \in \mathbb{N}_{ \geqslant 1}$ models is maintained. The first $n$ models are randomly generated. Once the population has reached the size of $n$, the following selection procedure is followed. With a certain small probability (say 10\%), a random model is generated. This small injection of randomness lends an element of dynamism to the algorithm and can potentially help it get out of local minima. However, in most cases, a parent model is selected from among a group of $m\in \mathbb{N}_{\geqslant 1} \leqslant n$ candidates randomly chosen from the current population. The fitness score is computed for all these candidates and the model with the highest score is chosen to be the parent of the next model. The tunable parameters of the parent model are mutated to create a new model, and at the same time, the oldest member of the current population is deleted. This process is continued until the NAS \texttt{budget} has been reached, at which point the NAS is terminated.
+A current population of $n \in \mathbb{N}_{\geqslant 1}$ models is maintained. The first $n$ models are randomly generated. Once the population has reached the size of $n$, the following selection procedure is followed. With a certain small probability $p$ (say $p=0.1$), a random model is generated. This small injection of randomness lends an element of dynamism to the algorithm and can potentially help it get out of local minima. With a probability of $1-p$, a parent model is selected from among a group of $m\in \mathbb{N}_{\geqslant 1} \leqslant n$ candidates randomly chosen from the current population. The fitness score is computed for all these candidates and the model with the highest score is chosen to be the parent of the next model. The tunable parameters of the parent model are mutated to create a new model, and at the same time, the oldest member of the current population is deleted. This process is continued until the NAS \texttt{budget} has been reached, at which point the NAS is terminated.
 
 
 \section{Conclusion}
@@ -1049,23 +1052,77 @@ Finally, \py{UltraTrailSTEQuantize} is called by \py{UltraTrailNet}'s \py{_quant
 By using HANNAH's in-built \py{RandomWalkConstraintSolver}, we are able to apply constraints so that all search space layers constructed as members of the \py{UltraTrailNet} class are automatically guaranteed to adhere to these constraints. Ultra-Trail compatible QAT is also automatically applied in all convolution and linear layers. This, in turn, ensures that all models produced by a NAS, whose networks are instantiated as objects of the \py{UltraTrailNet} class are compatible with the UltraTrail AI accelerator.
 
 \section{Search Space Design and Strategy}
-Now that we have the tools ready, we can begin the task of constructing search spaces and evolving search strategies. We begin by examining the best available model proposed by Bause et al. \cite{bause25}. 
+Now that we have the tools ready, we can begin the task of constructing search spaces and evolving search strategies. We begin by selecting a model to serve as a point of departure for our search space design. For this purpose, we chose the model proposed by Palomero Bernardo et al. \cite[34]{bernardo25}, which was later modified by Bause et al. with a modified hardware reshaping of the input as well as an additional first convolutional layer with an $8\times 1$ that converts the dimensions of the input into a square shape, since their new hardware reshaping delivers a rectangular input to the CNN \cite[37]{bause25}. The reason that we do not use Localization Net (the model proposed by Bause et al.) model, despite its superior performance (see Table \ref{tab:models}). This is because the current version of HANNAH's NAS framework does not support asymmetric kernels, which would be necessary to construct structures such as Localization Net's first convolutional layer. The early search spaces that we built used the same parameters used by Palomero Bernardo et al. for their model: 
 
-%1. Drafting an initial search space strategy based on earlier models
-%
-%2. Constructing the search space
-%
-%3. Choose search hyperparameters
-%
-%4. After search, refine search space strategy and design based on results
+\begin{minted}{python}
+	out_channels = IntScalarParameter(min=32, max=256, step_size=16,
+	name='out_channels')
+	kernel_size = CategoricalParameter(name='kernel_size', choices=[1, 3])
+	stride = CategoricalParameter(name='stride', choices=[1, 2])
+	groups = CategoricalParameter(name="groups", choices=[1, 4, 8, 16])	
+\end{minted} 
 
+We also chose the number of layers to be between 6 and 8, closely matching the original model of Palomero Bernardo et al \cite[37]{bernardo25}. When this did not achieve satisfactory results, we modified, we broadened our parameter choices as follows:
+
+\begin{minted}{python}
+	out_channels = IntScalarParameter(min=16, max=256, step_size=16,
+	name='out_channels')
+	kernel_size = CategoricalParameter(name='kernel_size', choices=[1, 3, 5])
+	stride = CategoricalParameter(name='stride', choices=[1, 2])
+	groups = CategoricalParameter(name="groups", choices=[1, 4, 8, 16])	
+\end{minted} 
+
+We also added a constraint to our search design: \py{conv.cond(out_channels >= in_channels)}, so that the number of channels in every sampled network represent a monotonically rising function. Additionally, we introduced weight constraints within our search space. Ideally, it would have been better to introduce one change at a time and run a sufficiently long NAS to observe the effect of each singular change. However, given the paucity of time and the fact that our first priority is to find good models, we had to make multiple co-terminus modifications to our search design and strategy.
+
+Another important aspect of search strategy has to do with NAS hyperparameters. Since NAS is time-consuming, we limited the training of each model to 10 epochs, typically with 10\% of the training set, although we have reduced this further for some searches. We also limited the validation set for some of our searches. Eventually, we settled on the following strategy: use the full validation set, but validate only once per model, i.e. we set \texttt{check\_val\_every\_n\_epoch: 10} in the configs. Additional details on the configurations used for our experiments can be found in Chapter \ref{ch:results}.
+
+We conducted multiple neural architecture searches with different search space designs and NAS hyperparameter configurations instead of one long NAS. The reason is that the number of models in even a relatively constrained search space can easily exceed the number of atoms in the known universe \cite{atoms}, \cite{reiber26}. The number of bad and inefficient models within such a huge search space will inevitable be very large. Such a NAS would take a long time and consume an enormous amount of computational resources and still have a fairly low probability of delivering a good model. And since we had no \textit{a priori} knowledge of a more limited design space that would deliver good results, we had to settle for a process of trial and error.
+
+Our initial experiments were classical CNN-based searches. Later we integrated HMMs into our NAS to find a CNN that delivers good predictions that can be effectively improved on by NAS. For this, we had to integrate the existing HMM machinery into our NAS framework. The implementation of this HMM-NAS integration is described in the next section.
 
 
 \section{Integrating HMM into the NAS Framework}
+A Command-Line Interface- or CLI-based HMM programme already exists in HANNAH that can be applied to an already trained and tested CNN. But not all CNNs deliver predictions that can be improved upon by an HMM. For instance, if the predictions of a CNN are very noisy, the HMM will often struggle to correct the prediction sequence and may even deliver results with \textit{worse} accuracy. This is because a CNN can, at any time, move from an incorrect prediction of a later organ to predict the correct, earlier organ at a subsequent timestep. The HMM can only do this between window transitions. HMM predictions therefore tend to be much smoother, but can  be led astray by noisy CNN predictions.
+
+We want to test the hypothesis that conducting NAS with an integrated HMM framework and using an HMM performance measure as our optimising objective will likely produce CNN models that make less noisy predictions. These can then be more effectively improved upon by the HMM, thus delivering predictions that are both more accurate \textit{and} less noisy.
+
+In order to accomplish this, we first created a separate python programme file called \py{hmm_nas.py} with a callable function \py{run_hmm}. This function runs the original HMM programme and returns the revised performance metrics produced by it after application of the HMM programme on the input CNN predictions. We call this function from the NAS framework's model trainer, using the experiment configurations to allow the user to pass values for key HMM parameters, such as \py{window_size} and \py{quantization}. We then update the NAS results with the HMM metrics returned by \py{run_hmm}.
+
+\begin{minted}{python}
+	'''NAS-HMM Integration'''
+	
+	if config.get("hmm", None) is not None:
+		hmm_metrics = run_hmm(cnn_output_dir=os.getcwd(),
+				window_size=config.hmm.window_size,
+				class_of_interest=config.hmm.class_of_interest,
+				quantization=config.hmm.quantization,
+				nas=True if config.get("nas", None) is not None else False
+	)
+	
+		res.update(hmm_metrics)
+\end{minted}
+
+We insert the same integration code in HANNAH's general training module, so that the HMM programme can be automatically run after retraining and testing a model derived from a NAS experiment. Note that the boolean \py{nas} is used to access the correct CNN output files depending on whether we are running a NAS or retraining and testing a NAS model.
+
+
+\begin{minted}{python}
+if nas:
+	path_train = cnn_output_dir + '_cnn_train_output'
+	path_val = cnn_output_dir + '_cnn_val_output'
+	
+	df_train = pd.read_csv(path_train)
+	df = pd.read_csv(path_val)
+else:
+	path_train = cnn_output_dir + '_cnn_train_output'
+	path_test = cnn_output_dir + '_cnn_test_output'
+\end{minted}
+
+The results of NAS experiments run both with and without the integrated HMM framework are discussed in the next chapter.
+
 
 \section{Conclusion}
 
-\chapter{Result Exploration and Analysis}
+\chapter{Result Exploration and Analysis}\label{ch:results}
 
 \chapter{Conclusion}
 

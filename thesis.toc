@@ -15,15 +15,15 @@
 \contentsline {section}{\numberline {2.5}The Rhode Island Dataset}{10}{section.2.5}%
 \contentsline {section}{\numberline {2.6}NAS Theory and Methods}{11}{section.2.6}%
 \contentsline {subsection}{\numberline {2.6.1}Search Space}{11}{subsection.2.6.1}%
-\contentsline {subsubsection}{\nonumberline Search space constraints}{11}{subsubsection*.7}%
+\contentsline {subsubsection}{\nonumberline Search space constraints}{11}{subsubsection*.8}%
 \contentsline {subsection}{\numberline {2.6.2}Search Strategy}{12}{subsection.2.6.2}%
 \contentsline {subsection}{\numberline {2.6.3}Performance Estimation Strategy}{12}{subsection.2.6.3}%
 \contentsline {section}{\numberline {2.7}The Previously Existing Software Framework}{12}{section.2.7}%
 \contentsline {subsection}{\numberline {2.7.1}HANNAH}{12}{subsection.2.7.1}%
 \contentsline {subsection}{\numberline {2.7.2}The NAS Sub-Framework}{12}{subsection.2.7.2}%
-\contentsline {subsubsection}{\nonumberline Defining search spaces}{12}{subsubsection*.9}%
-\contentsline {subsubsection}{\nonumberline Constraining search spaces}{14}{subsubsection*.11}%
-\contentsline {subsubsection}{\nonumberline The ageing evolution sampler}{14}{subsubsection*.13}%
+\contentsline {subsubsection}{\nonumberline Defining search spaces}{12}{subsubsection*.10}%
+\contentsline {subsubsection}{\nonumberline Constraining search spaces}{14}{subsubsection*.12}%
+\contentsline {subsubsection}{\nonumberline The ageing evolution sampler}{14}{subsubsection*.14}%
 \contentsline {section}{\numberline {2.8}Conclusion}{15}{section.2.8}%
 \contentsline {chapter}{\numberline {3}Methods and Tools}{16}{chapter.3}%
 \contentsline {section}{\numberline {3.1}The UltraTrailNet class}{16}{section.3.1}%
@@ -33,13 +33,13 @@
 \contentsline {subsection}{\numberline {3.2.3}Handling of Padding}{21}{subsection.3.2.3}%
 \contentsline {subsection}{\numberline {3.2.4}Handling of Depthwise Layers}{21}{subsection.3.2.4}%
 \contentsline {subsection}{\numberline {3.2.5}Implementing UltraTrail QAT}{22}{subsection.3.2.5}%
-\contentsline {subsubsection}{\nonumberline What is a custom operator?}{22}{subsubsection*.15}%
-\contentsline {subsubsection}{\nonumberline Creating a custom quantise operator}{22}{subsubsection*.17}%
-\contentsline {subsubsection}{\nonumberline Wiring up UltraTrail QAT}{23}{subsubsection*.19}%
+\contentsline {subsubsection}{\nonumberline What is a custom operator?}{22}{subsubsection*.16}%
+\contentsline {subsubsection}{\nonumberline Creating a custom quantise operator}{22}{subsubsection*.18}%
+\contentsline {subsubsection}{\nonumberline Wiring up UltraTrail QAT}{23}{subsubsection*.20}%
 \contentsline {subsection}{\numberline {3.2.6}Significance of UltraTrailNet}{23}{subsection.3.2.6}%
 \contentsline {section}{\numberline {3.3}Search Space Design and Strategy}{24}{section.3.3}%
-\contentsline {section}{\numberline {3.4}Integrating HMM into the NAS Framework}{24}{section.3.4}%
-\contentsline {section}{\numberline {3.5}Conclusion}{24}{section.3.5}%
-\contentsline {chapter}{\numberline {4}Result Exploration and Analysis}{25}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Conclusion}{26}{chapter.5}%
+\contentsline {section}{\numberline {3.4}Integrating HMM into the NAS Framework}{25}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Conclusion}{26}{section.3.5}%
+\contentsline {chapter}{\numberline {4}Result Exploration and Analysis}{27}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Conclusion}{28}{chapter.5}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

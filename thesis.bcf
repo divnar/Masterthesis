@@ -2403,7 +2403,11 @@
     <bcf:citekey order="40" intorder="1">torch_lib</bcf:citekey>
     <bcf:citekey order="41" intorder="1">torch_custom</bcf:citekey>
     <bcf:citekey order="42" intorder="1">leimao_custom</bcf:citekey>
-    <bcf:citekey order="43" intorder="1">bause25</bcf:citekey>
+    <bcf:citekey order="43" intorder="1">bernardo25</bcf:citekey>
+    <bcf:citekey order="44" intorder="1">bause25</bcf:citekey>
+    <bcf:citekey order="45" intorder="1">bernardo25</bcf:citekey>
+    <bcf:citekey order="46" intorder="1">atoms</bcf:citekey>
+    <bcf:citekey order="47" intorder="1">reiber26</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->
   <bcf:sortingtemplate name="none">
